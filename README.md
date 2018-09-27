@@ -6,3 +6,4 @@ Stéphane Hughier
 
 ## Contributeurs
 - Adrien Horgnies
+- Pierre Legrand
