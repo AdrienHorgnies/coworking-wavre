@@ -8,3 +8,4 @@ Stéphane Hughier
 - Adrien Horgnies
 - Stéphane Thiry
 - Phirum Chan
+- Katia Baran
