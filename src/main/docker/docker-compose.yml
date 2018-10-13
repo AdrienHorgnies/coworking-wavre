@@ -1,13 +1,18 @@
 mysql-coworking:
-  image: mysql:latest
+  image: mysql
+  volumes:
+  - ./mysql/my-custom.cnf:/etc/mysql/conf.d/custom.cnf
+  - ./mysql/script.sql:/docker-entrypoint-initdb.d/script.sql
   environment:
     MYSQL_ROOT_PASSWORD: password
     MYSQL_DATABASE: coworking
+  ports:
+  - 3306:3306
 pma:
   image: phpmyadmin/phpmyadmin
   links:
   - mysql-coworking
   ports:
-    - 80:80
+  - 80:80
   environment:
     PMA_HOST: mysql-coworking
