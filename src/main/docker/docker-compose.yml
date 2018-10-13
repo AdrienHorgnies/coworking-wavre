@@ -1,0 +1,13 @@
+mysql-coworking:
+  image: mysql:latest
+  environment:
+    MYSQL_ROOT_PASSWORD: password
+    MYSQL_DATABASE: coworking
+pma:
+  image: phpmyadmin/phpmyadmin
+  links:
+  - mysql-coworking
+  ports:
+    - 80:80
+  environment:
+    PMA_HOST: mysql-coworking
