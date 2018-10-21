@@ -140,3 +140,18 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+
+######################
+# Compiled Output
+######################
+/dist
+/out-tsc
+
+######################
+# Angular Misc
+######################
+/connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
