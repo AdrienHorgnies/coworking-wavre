@@ -1,34 +1,33 @@
 package com.ifosup.coworking.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long id;
 
-    private String email;
+    public String email;
 
     @Column(length = 60)
-    private String password;
+    public String password;
 
     @Column(length = 100)
-    private String lastName;
+    public String lastName;
 
     @Column(length = 100)
-    private String firstName;
+    public String firstName;
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                '}';
+            "id=" + id +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", firstName='" + firstName + '\'' +
+            '}';
     }
 }
