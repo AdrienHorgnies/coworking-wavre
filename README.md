@@ -1,14 +1,15 @@
 # coworking-wavres
-> For a business view of this project, please consult the wiki of this Github repository.
+> For a business view of this project, please consult the [wiki] of this Github repository.
 
 Responsive web application to manage renting of coworking spaces at Wavres.
 Conducted as part of the "Integration and Development Project" and "E-Business" courses at IFOSUP Wavres, academic year 2018-19.
 
-## Lecturers
+## Stakeholders
+### Lecturers
 - Stéphane Hughier: "Integration and Development Project"
 - Xavier Jeunejean: "E-Business"
 
-## Contributors
+### Contributors
 - Adrien Horgnies: technical & project lead
 - Stéphane Thiry: back-end, functional analysis & business analysis
 - Phirum Chan: front-end, database architect & business analysis
@@ -17,7 +18,7 @@ Conducted as part of the "Integration and Development Project" and "E-Business" 
 
 ## Front end with Angular
 
-The front end use the javascript framework Angular.
+The front end has been built upon the javascript framework Angular.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.1.
 
@@ -44,3 +45,36 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Back end with Spring Boot
+
+The back end use the java framework Spring Boot.
+
+### Testing
+
+To launch your application's tests, run:
+
+    mvn clean test
+
+### Using docker to simplify development (optional)
+
+You can use Docker to improve your development experience. A docker-compose configuration is available in the [src/main/docker](src/main/docker) folder to launch required third party services.
+For example, to start a mysql database in a docker container, run:
+
+    docker-compose -f src/main/docker/docker-compose.yml up -d mysql-coworking
+
+To stop it: 
+
+    docker-compose -f src/main/docker/docker-compose.yml stop mysql-coworking
+
+and remove the container, run:
+
+    docker-compose -f src/main/docker/docker-compose.yml kill mysql-coworking
+
+### Running the application
+
+After the database has boot up, you can start the spring-boot application:
+
+    mvn spring-boot:run
+
+[wiki]: https://github.com/AdrienHorgnies/coworking-wavres/wiki
