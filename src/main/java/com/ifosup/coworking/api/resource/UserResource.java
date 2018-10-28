@@ -1,7 +1,8 @@
-package com.ifosup.coworking.resource;
+package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.repository.UserRepository;
+import com.ifosup.coworking.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +15,11 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    public UserResource(UserRepository userRepository) {
+    private final UserService userService;
+
+    public UserResource(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("")
