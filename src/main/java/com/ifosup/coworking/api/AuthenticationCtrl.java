@@ -1,9 +1,12 @@
 package com.ifosup.coworking.api;
 
-import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.RegistrationDto;
+import com.ifosup.coworking.dto.UserDto;
+import com.ifosup.coworking.service.AuthenticationService;
 import com.ifosup.coworking.service.UserService;
-import org.springframework.data.authentication.UserCredentials;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,20 +20,26 @@ public class AuthenticationCtrl {
 
     private final UserService userService;
 
-    public AuthenticationCtrl(UserService userService) {
+    private final AuthenticationService authenticationService;
+
+    private final Logger logger = LoggerFactory.getLogger(AuthenticationCtrl.class);
+
+    public AuthenticationCtrl(UserService userService, AuthenticationService authenticationService) {
         this.userService = userService;
+        this.authenticationService = authenticationService;
     }
 
     @PostMapping("register")
-    public User register(@RequestBody @Valid RegistrationDto registrationDto) {
-        // todo it should return 201 CREATED when successful
-        return userService.registerNewUser(registrationDto);
+    public UserDto register(@RequestBody @Valid RegistrationDto registrationDto) {
+        // todo check what a REST endpoint should return
+        logger.debug("Trying to register {}", registrationDto);
+        return new UserDto(userService.registerNewUser(registrationDto));
     }
 
     @PostMapping("authenticate")
-    public User authenticate(@Valid UserCredentials credentials) {
-        // todo I am not sure I want to use org.springframework.data.authentication.UserCredentials
-        // todo it should return 204 NO CONTENT when successful ??? At least is should return something
-        return null;
+    public Authentication authenticate(@RequestBody @Valid Authentication authentication) {
+        // todo check what a REST endpoint should return
+        // todo use a valid parameter, Authentication is an abstract type and cannot be used
+        return authenticationService.authenticate(authentication);
     }
 }

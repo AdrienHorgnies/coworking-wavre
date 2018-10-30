@@ -16,4 +16,12 @@ public class RegistrationDto {
     @NotBlank
     public String firstName;
 
+    @Override
+    public String toString() {
+        return "RegistrationDto{" +
+            "email='" + email + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", firstName='" + firstName + '\'' +
+            '}';
+    }
 }

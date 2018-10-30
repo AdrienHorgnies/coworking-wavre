@@ -19,3 +19,9 @@ spring:
         url: jdbc:mysql://localhost:3306/coworking?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: springuser
         password: springpassword
+    jpa:
+        hibernate:
+            #            should only use that for development mode
+            ddl-auto: create
+        #        again, this could be dangerous as it could expose passwords
+        show-sql: true
