@@ -2,7 +2,7 @@ package com.ifosup.coworking.dto;
 
 //import javax.validation.constraints.NotBlank;
 
-public class RegistrationDto {
+public class CredentialsDto {
 
     //    @NotBlank
     public String email;
@@ -10,18 +10,13 @@ public class RegistrationDto {
     //    @NotBlank
     public String password;
 
-    //    @NotBlank
-    public String lastName;
-
-    //    @NotBlank
-    public String firstName;
+    public Boolean rememberMe;
 
     @Override
     public String toString() {
-        return "RegistrationDto{" +
+        return "CredentialsDto{" +
             "email='" + email + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", firstName='" + firstName + '\'' +
+            ", rememberMe=" + rememberMe +
             '}';
     }
 }

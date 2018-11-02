@@ -1,35 +1,34 @@
 package com.ifosup.coworking.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
+    @Column(length = 100)
     public String email;
 
     @Column(length = 60)
-    public String password;
+    public String passwordHash;
 
-    @Column(length = 100)
+    @Column(length = 50)
     public String lastName;
 
-    @Column(length = 100)
+    @Column(length = 50)
     public String firstName;
 
     @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> roles;
+    @JoinTable(
+        name = "user_authority",
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
+    public Set<Authority> authorities = new HashSet<>();
 
     @Override
     public String toString() {
@@ -38,48 +37,7 @@ public class User implements UserDetails {
             ", email='" + email + '\'' +
             ", lastName='" + lastName + '\'' +
             ", firstName='" + firstName + '\'' +
-            ", roles=" + roles +
+            ", authorities=" + authorities +
             '}';
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-
-        for (Role role : roles) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.name));
-        }
-
-        return grantedAuthorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

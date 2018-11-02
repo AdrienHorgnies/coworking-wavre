@@ -25,3 +25,4 @@ spring:
             ddl-auto: create
         #        again, this could be dangerous as it could expose passwords
         show-sql: true
+        database-platform: org.hibernate.dialect.MySQLDialect

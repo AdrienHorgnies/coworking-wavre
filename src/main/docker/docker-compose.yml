@@ -1,5 +1,5 @@
 mysql-coworking:
-    image: mysql
+    image: mysql:5.7.18
     volumes:
     - ./mysql/my-custom.cnf:/etc/mysql/conf.d/custom.cnf
     - ./mysql/script.sql:/docker-entrypoint-initdb.d/script.sql
