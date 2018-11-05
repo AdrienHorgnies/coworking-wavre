@@ -13,6 +13,6 @@ public interface SpaceRepository extends JpaRepository<Space,Long>{
 
     //@Query("select s from space inner join cp on cp.id=space.cp_id where cp.code= :code")
     //public List<Cp> finByCode(@Param("code") int code);
-    @Query("select s from Space s join s.cp p with p.code=:code")
+    @Query("select s from Space s join s.cp p where p.code=:code")
     public List<Space> findByCode(@Param("code") int code);
 }
