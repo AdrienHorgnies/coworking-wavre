@@ -1,5 +1,6 @@
 mysql-coworking:
     image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
     - ./mysql/my-custom.cnf:/etc/mysql/conf.d/custom.cnf
     - ./mysql/script.sql:/docker-entrypoint-initdb.d/script.sql
