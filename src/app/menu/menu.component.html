@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"> <!-- navbar-dark  texte dans le menu en clair -- bg_dark  barre demenu en foncé-->
+    <a class="navbar-brand">Coworking de Wavre</a>
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbar" class="navbar-collapse" [class.collapse]="navbarCollapsed">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link">Nos espaces partagés</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Nos bureaux</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Nos salles de réunion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Tarifs</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav  navbar-right">
+            <li class="nav-item">
+                <a class="nav-link">Une question? Tél: 010.84.00.00 Mail: info@cowow.be</a>
+            </li>
+            <li class="nav-item">
+                <a type="buton" class="btn btn-primary" [routerLink]="['/login']" routerLinkActive="active">Se connecter</a>
+            </li>
+            <li>&nbsp;</li>
+        </ul>
+    <a type="buton" class="btn btn-primary" [routerLink]="['/register']" routerLinkActive="active">S'inscrire</a>
+
+    </div>
+
+</nav>
+
