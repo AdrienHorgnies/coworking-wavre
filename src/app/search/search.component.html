@@ -1,0 +1,160 @@
+<!-- Outil de recherche simplifié d'un bureau ou d'une salle de réunion-->
+<!-- Voir les scripts ajax et jquery à ajouter? https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_pills_dynamic&stacked=h -->
+
+
+<!--Filtrer avec Angular : selon les disponibilités-->
+
+
+<div class="container" style="margin-top: 70px;">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="office-tab" data-toggle="tab" href="#office" role="tab" aria-controls="office" aria-selected="true">BUREAU</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="meeting-tab" data-toggle="tab" href="#meeting" role="tab" aria-controls="meeting" aria-selected="false">SALLE DE REUNION</a>
+    </li>
+
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="office" role="tabpanel" aria-labelledby="office-tab">
+        <div class="container">
+            <form class="form-inline">
+                <div style="margin-top: 20px;" class="form-group">
+
+                    <select style="margin-left: 5px;" class="form-control" id="sel1">
+                        <option>1 poste</option>
+                        <option>2 postes</option>
+                        <option>3 postes</option>
+                        <option>4 postes</option>
+                    </select>
+
+                    <select style="margin-left: 5px;" class="form-control" id="sel2 ">
+                        <option>espace partagé</option>
+                        <option>bureau privatif</option>
+                        <option>espace Bubble</option>
+                    </select>
+
+                    <select style="margin-left: 5px;" class="form-control" id="sel3">
+                        <option>au mois</option>
+                        <option>à la semaine</option>
+                        <option>à la journée</option>
+                    </select>
+                    <button style="margin-left: 5px;" type="button" class="btn btn-primary" router link="">Rechercher</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="tab-pane" id="meeting" role="tabpanel" aria-labelledby="meeting-tab">
+
+        <div class="container">
+            <form class="form-inline">
+                <div style="margin-top: 20px;" class="form-group">
+
+                    <select style="margin-left: 5px;" class="form-control" id="sel4">
+                        <option>1 place</option>
+                        <option>2 places</option>
+                        <option>3 places</option>
+                        <option>4 places</option>
+                    </select>
+
+                    <select style="margin-left: 5px;" class="form-control btn-primary btn-select-light" id="sel5">
+                        <option>à la journée</option>
+                        <option>à l'heure</option>
+                        <!--Date + heure début + heure fin -->
+                    </select>
+                    <button style="margin-left: 5px;" type="button" class="btn btn-primary" router link="">Rechercher</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+        <div class="row" style="margin-top: 70px;" id="ads">
+            <!-- Category Card -->
+            <div class="col-md-4">
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">Apd 0,00 €</span>
+                        <!--<span class="card-notify-year">4 pers.max</span>-->
+                        <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg" alt="Alternate Text" />
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div class="ad-title m-auto">
+                            <h5>BUBBLE PLACE</h5>
+                            <p> Superficie: 6m² - 3 pers. max </p>
+                            <p>
+                                <span class="tags" style="margin-left: 10px;" >Wifi gratuit</span>
+
+                            </p>
+                            <p>Espace semi-privé</p>
+                        </div>
+                        <a class="btn btn-primary" href="#">Réserver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">0,00 € HT/poste/jour</span>
+                        <!--<span class="card-notify-year">20 pers.max</span>-->
+                        <img class="img-fluid" src="http://wereso.com/wp-content/uploads/2017/05/bureau-privatif-1.jpg" alt="Alternate Text" />
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div class="ad-title m-auto">
+                            <h5>BUREAU PRIVATIF</h5>
+                            <p> Superficie: 12m² - 6 pers. max </p>
+                            <p>
+                                <span class="tags" style="margin-left: 10px;" >Wifi gratuit</span>
+
+                            </p>
+                            <p>Espace complètement privé</p>
+                        </div>
+                        <a class="btn btn-primary" href="#">Réserver</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">Apd 0,00 €</span>
+                        <!--<span class="card-notify-year">10 pers.max</span>-->
+                        <img class="img-fluid" src="https://zevillage.net/wp-content/uploads/2018/02/espace-de-coworking-e1518119249731.jpg" alt="Alternate Text" />
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div class="ad-title m-auto">
+                            <h5>ESPACE PARTAGE</h5>
+                            <p> Superficie: 12m² - 6 pers. max </p>
+                            <p>
+                                <span class="tags" style="margin-left: 10px;" >Wifi gratuit</span>
+
+                            </p>
+                            <p>Espace partagé dans un cadre convivial</p>
+                        </div>
+                        <a class="btn btn-primary" href="#">Réserver</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+</div>
+
+
+
+
+<script>
+    $(function () {
+        $('#myTab li:last-child a').tab('show')
+    })
+</script>
