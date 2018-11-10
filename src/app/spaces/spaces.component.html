@@ -1,5 +1,33 @@
+
+<!-- Boucle qui appelle la liste entière des espaces -->
 <div *ngFor="let space of spaces">
-    <h2>{{ space.name }}</h2>
+
+    <div class="row" style="margin-top: 70px;" id="ads">
+        <!-- Category Card -->
+        <div class="col-md-4">
+            <div class="card rounded">
+                <div class="card-image">
+                    <span class="card-notify-badge">Apd 0,00 €</span>
+                    <!--<span class="card-notify-year">4 pers.max</span>-->
+                    <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg" alt="Alternate Text" />
+                </div>
+
+                <div class="card-body text-center">
+                    <div class="ad-title m-auto">
+                        <h5>{{ space.name }}</h5>
+                        <p> Superficie: 6m² - 3 pers. max </p>
+                        <p>
+                            <span class="tags" style="margin-left: 10px;" >Wifi gratuit</span>
+
+                        </p>
+                        <p>Espace semi-privé</p>
+                    </div>
+                    <a class="btn btn-primary" href="#">Réserver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
