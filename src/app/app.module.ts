@@ -3,11 +3,13 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {SpacesComponent} from './spaces/spaces.component';
+import { SpaceComponent } from './space/space.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        SpacesComponent
+        SpacesComponent,
+        SpaceComponent
     ],
     imports: [
         BrowserModule

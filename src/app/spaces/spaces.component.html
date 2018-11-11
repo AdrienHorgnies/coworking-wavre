@@ -1,13 +1,14 @@
-
-<!-- Boucle qui appelle la liste entière des espaces -->
+<!--&lt;!&ndash; Boucle qui appelle la liste entière des espaces &ndash;&gt;-->
+<!--&lt;!&ndash; <div *ngFor="let space of spaces | slice: 0 : 2"> : si on ne veut afficher que les 2 premières &ndash;&gt;-->
 <div *ngFor="let space of spaces">
+    <cow-space [spaceModel]="space"></cow-space>
 
     <div class="row" style="margin-top: 70px;" id="ads">
         <!-- Category Card -->
         <div class="col-md-4">
             <div class="card rounded">
                 <div class="card-image">
-                    <span class="card-notify-badge">Apd 0,00 €</span>
+                    <span class="card-notify-badge">Apd {{ space.price }} €</span>
                     <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg" alt="Alternate Text" />
                 </div>
 
@@ -15,12 +16,12 @@
                     <div class="ad-title m-auto">
                         <!-- Récupère le nom de chaque espace -->
                         <h5>{{ space.name }}</h5>
-                        <p> Superficie: 6m² - 3 pers. max </p>
+                        <p> Superficie: {{ space.area }}m² - {{ space.capacity }} pers. max </p>
                         <p>
-                            <span class="tags" style="margin-left: 10px;" >Wifi gratuit</span>
+                            <span class="tags" style="margin-left: 10px;" >{{ space.category }}</span>
 
                         </p>
-                        <p>Espace semi-privé</p>
+                        <p>{{ space.resume }}</p>
                     </div>
                     <a class="btn btn-primary" href="#">Réserver</a>
                 </div>
