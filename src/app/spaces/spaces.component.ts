@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpaceModel } from '../models/space.model';
+import { SpaceService } from '../space.service';
 
 @Component({
   selector: 'cow-spaces',
@@ -11,10 +12,10 @@ import { SpaceModel } from '../models/space.model';
 export class SpacesComponent implements OnInit {
 
   spaces: Array<SpaceModel> = [];
-  constructor() { }
+  constructor(private spaceService: SpaceService) { }
 
   ngOnInit() {
-      this.spaces = [{ name: 'Bureau privatif' }, { name: 'Bureau partagé' }, { name: 'Bubble' }];
+      this.spaceService.list().subscribe (spaces => this.spaces = spaces);
   }
 
 }
