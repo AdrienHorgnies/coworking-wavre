@@ -25,3 +25,6 @@ spring:
         #        again, this could be dangerous as it could expose passwords
         show-sql: true
         database-platform: org.hibernate.dialect.MySQLDialect
+    jackson:
+        deserialization:
+            fail-on-unknown-properties: true

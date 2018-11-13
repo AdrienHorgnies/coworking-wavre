@@ -1,13 +1,13 @@
 package com.ifosup.coworking.dto;
 
-//import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class CredentialsDto {
 
-    //    @NotBlank
+    @NotBlank
     public String email;
 
-    //    @NotBlank
+    @NotBlank
     public String password;
 
     public Boolean rememberMe;
