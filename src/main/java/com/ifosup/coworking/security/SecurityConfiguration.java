@@ -57,8 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
-            // todo what does it do ???
-            .headers().frameOptions().disable()
+            .headers().frameOptions().sameOrigin()
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
