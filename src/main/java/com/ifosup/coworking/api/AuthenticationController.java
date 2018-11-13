@@ -8,9 +8,7 @@ import com.ifosup.coworking.security.jwt.TokenProvider;
 import com.ifosup.coworking.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,6 +38,9 @@ public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
 
+    // todo number should come from application.yml
+    private static final int maxPasswordLength = 8;
+
     public AuthenticationController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
         this.userService = userService;
         this.userRepository = userRepository;
@@ -48,42 +49,25 @@ public class AuthenticationController {
     }
 
     @PostMapping("register")
-    public ResponseEntity register(@RequestBody @Valid RegistrationDto registrationDto) {
-        // todo why text plain headers ?
-        HttpHeaders textPlainHeaders = new HttpHeaders();
-        textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
-
-        // todo use a method and get number from application.yml
-        if (registrationDto.password.length() < 8) {
-            // todo again, number should come from application.yml
-            return new ResponseEntity<>("Password length should be at least 8", HttpStatus.BAD_REQUEST);
+    public ResponseEntity register(@RequestBody @Valid RegistrationDto registrationDto, HttpServletResponse response) {
+        if (registrationDto.password.length() < maxPasswordLength) {
+            return new ResponseEntity<>("Password length should be at least " + maxPasswordLength, HttpStatus.BAD_REQUEST);
         }
 
         if (userRepository.findOneByEmail(registrationDto.email.toLowerCase()).isPresent()) {
-            return new ResponseEntity<>("email already in use", textPlainHeaders, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("email already in use", HttpStatus.BAD_REQUEST);
         }
 
         userService.registerNewUser(registrationDto);
+        setAuthorization(registrationDto.email, registrationDto.password, registrationDto.rememberMe, response);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("authenticate")
     public ResponseEntity authenticate(@RequestBody @Valid CredentialsDto credentialsDto, HttpServletResponse response) {
-        UsernamePasswordAuthenticationToken authenticationToken =
-            new UsernamePasswordAuthenticationToken(credentialsDto.email, credentialsDto.password);
-
         try {
-            Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            boolean rememberMe = false;
-            if (credentialsDto.rememberMe != null) {
-                rememberMe = credentialsDto.rememberMe;
-            }
-
-            String jwt = tokenProvider.createToken(authentication, rememberMe);
-            response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
+            setAuthorization(credentialsDto.email, credentialsDto.password, credentialsDto.rememberMe, response);
 
             return ResponseEntity.noContent().build();
         } catch (AuthenticationException e) {
@@ -91,5 +75,21 @@ public class AuthenticationController {
             return new ResponseEntity<>(Collections.singletonMap("AuthenticationException",
                 e.getLocalizedMessage()), HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    private void setAuthorization(String email, String password, Boolean rememberMe, HttpServletResponse response) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+            new UsernamePasswordAuthenticationToken(email, password);
+
+        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        boolean resolvedRememberMe = false;
+        if (rememberMe != null) {
+            resolvedRememberMe = rememberMe;
+        }
+
+        String jwt = tokenProvider.createToken(authentication, resolvedRememberMe);
+        response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
     }
 }

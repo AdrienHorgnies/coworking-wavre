@@ -16,12 +16,15 @@ public class RegistrationDto {
     @NotBlank
     public String firstName;
 
+    public Boolean rememberMe;
+
     @Override
     public String toString() {
         return "RegistrationDto{" +
             "email='" + email + '\'' +
             ", lastName='" + lastName + '\'' +
             ", firstName='" + firstName + '\'' +
+            ", rememberMe=" + rememberMe +
             '}';
     }
 }
