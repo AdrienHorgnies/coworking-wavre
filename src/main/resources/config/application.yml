@@ -21,8 +21,7 @@ spring:
         password: springpassword
     jpa:
         hibernate:
-            #            should only use that for development mode
-            ddl-auto: create
+            ddl-auto: none
         #        again, this could be dangerous as it could expose passwords
         show-sql: true
         database-platform: org.hibernate.dialect.MySQLDialect

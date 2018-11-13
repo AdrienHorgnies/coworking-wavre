@@ -47,7 +47,6 @@ public class AuthenticationController {
         this.tokenProvider = tokenProvider;
     }
 
-    // todo maybe I need to use "@PostMapping(path = "/register", produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})"
     @PostMapping("register")
     public ResponseEntity register(@RequestBody @Valid RegistrationDto registrationDto) {
         // todo why text plain headers ?
