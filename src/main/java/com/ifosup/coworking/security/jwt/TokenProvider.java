@@ -26,7 +26,7 @@ public class TokenProvider {
 
     private static final String AUTHORITIES_KEY = "auth";
 
-    private String secretKey;
+    private String base64EncodedSecret;
 
     private long jwtValidityInMilliSeconds;
 
@@ -42,7 +42,8 @@ public class TokenProvider {
 
     @PostConstruct
     public void init() {
-        this.secretKey = coworkingProperties.getSecurity().getSecret();
+        String secret = coworkingProperties.getSecurity().getSecret();
+        this.base64EncodedSecret = encoder.encodeToString(secret.getBytes(StandardCharsets.UTF_8));
         this.jwtValidityInMilliSeconds = 1000 * coworkingProperties.getSecurity().getJwtValidityInSeconds();
         this.jwtValidityInMilliSecondsForRememberMe = 1000 * coworkingProperties.getSecurity().getJwtValidityInSecondsForRememberMe();
     }
@@ -64,13 +65,13 @@ public class TokenProvider {
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
             .setExpiration(validity)
-            .signWith(SignatureAlgorithm.HS512, encoder.encodeToString(secretKey.getBytes(StandardCharsets.UTF_8)))
+            .signWith(SignatureAlgorithm.HS512, base64EncodedSecret)
             .compact();
     }
 
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts.parser()
-            .setSigningKey(secretKey)
+            .setSigningKey(base64EncodedSecret)
             .parseClaimsJws(token)
             .getBody();
 
@@ -86,7 +87,7 @@ public class TokenProvider {
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(base64EncodedSecret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
             log.info("Invalid JWT signature.");
