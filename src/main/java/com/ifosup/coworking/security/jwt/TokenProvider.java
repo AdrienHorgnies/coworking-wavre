@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -31,6 +33,8 @@ public class TokenProvider {
     private long jwtValidityInMilliSecondsForRememberMe;
 
     private final CoworkingProperties coworkingProperties;
+
+    private final Base64.Encoder encoder = Base64.getEncoder();
 
     public TokenProvider(CoworkingProperties coworkingProperties) {
         this.coworkingProperties = coworkingProperties;
@@ -59,8 +63,8 @@ public class TokenProvider {
         return Jwts.builder()
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
-            .signWith(SignatureAlgorithm.HS512, secretKey)
             .setExpiration(validity)
+            .signWith(SignatureAlgorithm.HS512, encoder.encodeToString(secretKey.getBytes(StandardCharsets.UTF_8)))
             .compact();
     }
 
