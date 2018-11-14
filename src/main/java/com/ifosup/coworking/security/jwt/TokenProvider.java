@@ -1,5 +1,6 @@
 package com.ifosup.coworking.security.jwt;
 
+import com.ifosup.coworking.CoworkingProperties;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,23 +26,21 @@ public class TokenProvider {
 
     private String secretKey;
 
-    private long tokenValidityInMilliseconds;
+    private long jwtValidityInMilliSeconds;
 
-    private long tokenValidityInMillisecondsForRememberMe;
+    private long jwtValidityInMilliSecondsForRememberMe;
+
+    private final CoworkingProperties coworkingProperties;
+
+    public TokenProvider(CoworkingProperties coworkingProperties) {
+        this.coworkingProperties = coworkingProperties;
+    }
 
     @PostConstruct
     public void init() {
-        // todo put that in application.yml
-        this.secretKey = "my-secret-token-to-change-in-production";
-
-        this.tokenValidityInMilliseconds =
-            // todo put that in application.yml
-            // todo 30 minutes
-            1800000L;
-        this.tokenValidityInMillisecondsForRememberMe =
-            // todo put that in application.yml
-            // todo 30 days
-            2592000000L;
+        this.secretKey = coworkingProperties.getSecurity().getSecret();
+        this.jwtValidityInMilliSeconds = 1000 * coworkingProperties.getSecurity().getJwtValidityInSeconds();
+        this.jwtValidityInMilliSecondsForRememberMe = 1000 * coworkingProperties.getSecurity().getJwtValidityInSecondsForRememberMe();
     }
 
     public String createToken(Authentication authentication, Boolean rememberMe) {
@@ -52,9 +51,9 @@ public class TokenProvider {
         long now = (new Date()).getTime();
         Date validity;
         if (rememberMe) {
-            validity = new Date(now + this.tokenValidityInMillisecondsForRememberMe);
+            validity = new Date(now + this.jwtValidityInMilliSecondsForRememberMe);
         } else {
-            validity = new Date(now + this.tokenValidityInMilliseconds);
+            validity = new Date(now + this.jwtValidityInMilliSeconds);
         }
 
         return Jwts.builder()

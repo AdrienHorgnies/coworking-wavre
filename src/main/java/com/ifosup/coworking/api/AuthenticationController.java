@@ -1,5 +1,6 @@
 package com.ifosup.coworking.api;
 
+import com.ifosup.coworking.CoworkingProperties;
 import com.ifosup.coworking.dto.CredentialsDto;
 import com.ifosup.coworking.dto.RegistrationDto;
 import com.ifosup.coworking.repository.UserRepository;
@@ -38,20 +39,20 @@ public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
 
-    // todo number should come from application.yml
-    private static final int maxPasswordLength = 8;
+    private final CoworkingProperties coworkingProperties;
 
-    public AuthenticationController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
+    public AuthenticationController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, TokenProvider tokenProvider, CoworkingProperties coworkingProperties) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
+        this.coworkingProperties = coworkingProperties;
     }
 
     @PostMapping("register")
     public ResponseEntity register(@RequestBody @Valid RegistrationDto registrationDto, HttpServletResponse response) {
-        if (registrationDto.password.length() < maxPasswordLength) {
-            return new ResponseEntity<>("Password length should be at least " + maxPasswordLength, HttpStatus.BAD_REQUEST);
+        if (registrationDto.password.length() < coworkingProperties.getSecurity().getMinPasswordLength()) {
+            return new ResponseEntity<>("Password length should be at least " + coworkingProperties.getSecurity().getMinPasswordLength(), HttpStatus.BAD_REQUEST);
         }
 
         if (userRepository.findOneByEmail(registrationDto.email.toLowerCase()).isPresent()) {
