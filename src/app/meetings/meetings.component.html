@@ -1,0 +1,31 @@
+
+<div  *ngFor="let meeting of meetings">
+    <!--todo don't forget to either use component cow-meeting or the template beneath but not both-->
+
+    <div class="row" style="margin-top: 70px;" id="ads">
+        <!-- Category Card -->
+        <div class="col-md-4">
+            <div class="card rounded">
+                <div class="card-image">
+                    <span class="card-notify-badge">Apd {{ meeting.price }} €</span>
+                    <img class="img-fluid" src="http://www.fr.science14.com/wp-content/uploads/2015/01/meet-meetingrooms-rome.jpg"
+                         alt="Alternate Text"/>
+                </div>
+
+                <div class="card-body text-center">
+                    <div class="ad-title m-auto">
+                        <!-- Récupère le nom de chaque espace -->
+                        <h5>{{ meeting.name }}</h5>
+                        <h6>{{ meeting.category }}</h6>
+                        <p style="color: #bf062d;"> {{ meeting.area }}m² - {{ meeting.capacity }} pers. max </p>
+                        <p>{{ meeting.resume }}</p>
+                    </div>
+
+
+                    <a class="btn btn-primary" href="#">Réserver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
