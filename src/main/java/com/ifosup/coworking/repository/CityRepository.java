@@ -16,4 +16,6 @@ public interface CityRepository extends JpaRepository<City, Long> {
     //public City addCity(City nameCity);
 
     void deleteCityBy(Long id);
+
+
 }

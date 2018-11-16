@@ -32,40 +32,40 @@ CREATE TABLE `user_authority` (
 
 
 CREATE TABLE `city` (
-  `id` int(11) NOT NULL,
+  `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name_city` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cp_city` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `building` (
-  `id` int(11) NOT NULL,
+  `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name_building` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address_building` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city_id` int(11) DEFAULT NULL,
+  `city_id` BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `space` (
-  `id` int(11) NOT NULL,
+  `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name_space` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type_space` enum('private','open','bubble') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `area_space` int(11) DEFAULT NULL,
   `capacity_space` int(11) DEFAULT NULL,
-  `building_id` int(11) DEFAULT NULL,
+  `building_id` BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `equipment_type` (
-  `id` int(11) NOT NULL,
+  `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name_equipment` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `service_type` (
-  `id` int(11) NOT NULL,
+  `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name_service` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;

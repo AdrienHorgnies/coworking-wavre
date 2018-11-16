@@ -1,13 +1,13 @@
 package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.domain.City;
-import com.ifosup.coworking.dto.CityDto;
 import com.ifosup.coworking.repository.CityRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cities")
@@ -32,12 +32,22 @@ public class CityResource {
     public List<City> findByNameCity(@PathVariable("name_city") String name_city) {
         return cityRepository.findByNameCity(name_city);}
 
-    @PostMapping("/add/{nameCity,cpCity}")
-    public CityDto createCity(@RequestBody CityDto cityDto){
-        City city = convertToEntity(cityDto);
-        City cityCreated = cityRepository.creatCity(city);
-        return convertToDto(cityCreated);
+    @PostMapping("/add")
+        City newcity (@RequestBody City newcity){
+        return cityRepository.save(newcity);
     }
+
+    @PutMapping("/update/{id}")
+        public ResponseEntity<Object> updateCity(@RequestBody City city, @PathVariable long id){
+        Optional<City> cityOptional = Optional.ofNullable(cityRepository.findOne(id));
+            if (!cityOptional.isPresent())
+                return ResponseEntity.notFound().build();
+            city.setId(id);
+            cityRepository.save(city);
+            return ResponseEntity.noContent().build();
+    }
+
+
 
     @DeleteMapping("/del/{id}")
     public ResponseEntity<City> deleteCity(@PathVariable("id") int id){
