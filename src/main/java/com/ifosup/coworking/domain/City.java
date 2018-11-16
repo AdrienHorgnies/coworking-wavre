@@ -1,6 +1,10 @@
 package com.ifosup.coworking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class City {
@@ -12,6 +16,10 @@ public class City {
     public String nameCity;
 
     public int cpCity;
+
+    @OneToMany(mappedBy = "city")
+    @JsonIgnore
+    public Set<Building> buildings = new HashSet<>();
 
     public void setId(Long id) {
         this.id = id;
