@@ -35,3 +35,10 @@ coworking:
         jwt-validity-in-seconds: 86400
         # Token is valid 30 days
         jwt-validity-in-seconds-for-remember-me: 2592000
+    cors:
+        allowed-origins: "*"
+        allowed-methods: POST, PUT, GET, DELETE, OPTIONS
+        allowed-headers: "*"
+        exposed-headers:
+        allow-credentials: true
+        max-age: 1800

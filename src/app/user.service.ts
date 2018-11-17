@@ -17,6 +17,4 @@ export class UserService {
         return this.http.post<UserModel>('http://localhost:8080/api/users', body);
     }
 
-
 }
-
