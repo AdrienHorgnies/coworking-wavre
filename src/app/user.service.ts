@@ -14,7 +14,7 @@ export class UserService {
 
     register(firstName: string, lastName: string, email: string, password: string): Observable<any> {
         const body = {firstName, lastName, email, password};
-        return this.http.post<UserModel>('http://localhost:8080/api/users', body);
+        return this.http.post<UserModel>('http://localhost:8080/api/register', body);
     }
 
 }
