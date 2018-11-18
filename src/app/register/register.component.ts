@@ -10,22 +10,23 @@ import { UserService } from "../user.service";
 })
 export class RegisterComponent implements OnInit {
 
-    registrationFailed : boolean;
+    registrationFailed: boolean;
     loginCtrl: FormControl;
     passwordCtrl: FormControl;
     passwordTestCtrl: FormControl;
     firstNameCtrl: FormControl;
     lastNameCtrl: FormControl;
+    rememberMeCtrl: FormControl;
     userForm: FormGroup;
-    passwordForm : FormGroup;
+    passwordForm: FormGroup;
+
+    constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+    }
 
     static passwordMatch(control: FormGroup) {
         const password = control.get('password').value;
-        const passwordtest = control.get('passwordtest').value;
-        return password !== passwordtest ? { matchingError: true } : null;
-    }
-
-    constructor(private fb: FormBuilder, private userService : UserService, private routeur: Router) {
+        const passwordTest = control.get('passwordTest').value;
+        return password !== passwordTest ? {matchingError: true} : null;
     }
 
     ngOnInit() {
@@ -38,7 +39,7 @@ export class RegisterComponent implements OnInit {
         (
             {
                 password: this.passwordCtrl,
-                passwordtest: this.passwordTestCtrl
+                passwordTest: this.passwordTestCtrl
             },
             {
                 validator: RegisterComponent.passwordMatch
@@ -48,21 +49,23 @@ export class RegisterComponent implements OnInit {
         this.userForm = this.fb.group
         (
             {
-            login: this.loginCtrl,
-            passwordForm: this.passwordForm,
-                firstname: this.firstNameCtrl,
-                lastname: this.lastNameCtrl
-        });
+                login: this.loginCtrl,
+                passwordForm: this.passwordForm,
+                firstName: this.firstNameCtrl,
+                lastName: this.lastNameCtrl,
+                rememberMe: this.rememberMeCtrl
+            });
     }
 
     register() {
         this.userService.register(
-            this.userForm.value.firstname,
-            this.userForm.value.lastname,
+            this.userForm.value.firstName,
+            this.userForm.value.lastName,
             this.userForm.value.login,
-            this.userForm.value.passwordForm.password
+            this.userForm.value.passwordForm.password,
+            this.userForm.value.rememberMe
         ).subscribe(
-            () => this.routeur.navigate(['/']),
+            () => this.router.navigate(['/']),
             () => this.registrationFailed = true,
         );
     }

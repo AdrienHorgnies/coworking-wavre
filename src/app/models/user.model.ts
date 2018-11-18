@@ -1,8 +1,8 @@
 export interface UserModel
 {
     id : number,
-    firstname : string,
-    lastname : string,
+    firstName: string,
+    lastName: string,
     email : string,
     Password : string;
 

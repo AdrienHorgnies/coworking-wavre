@@ -3,7 +3,8 @@
         <h1>Sign up</h1>
 
         <div id="registration-error" class="alert alert-danger" *ngIf="registrationFailed">
-            <button type="button" class="close" aria-label="Close" (click)="registrationFailed = false"><span aria-hidden="true">&#215;</span></button>
+            <button type="button" class="close" aria-label="Close" (click)="registrationFailed = false"><span
+                aria-hidden="true">&#215;</span></button>
             Veuillez recommencer avec un autre email.
         </div>
 
@@ -26,14 +27,16 @@
             <div class="form-group">
                 <label for="login" id="login-label">Email</label>
                 <input id="login" class="form-control" formControlName="login">
-                <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')" id="login-warning"> <strong>L'email est obligatoire </strong></div>
+                <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')" id="login-warning"><strong>L'email est
+                    obligatoire </strong></div>
             </div>
 
             <div formGroupName="passwordForm">
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
                     <input id="password" class="form-control" type="password" formControlName="password">
-                    <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')"> <strong>Le mot de passe est obligatoire </strong></div>
+                    <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')"><strong>Le mot de passe est
+                        obligatoire </strong></div>
                 </div>
 
                 <div class="form-group">
@@ -48,11 +51,10 @@
             </div>
 
             <div class="form-group">
+                <input id="rememberMe" type="checkbox" formControlName="rememberMe">
                 <label for="rememberMe">Se souvenir de moi</label>
-                <input id="rememberMe" type="checkbox">
             </div>
 
-            <!--todo shouldn't use submit in single page application but a routerLink-->
             <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Inscription</button>
         </form>
     </div>
