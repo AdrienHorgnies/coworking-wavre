@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../user.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'cow-login',
@@ -9,17 +11,22 @@ export class LoginComponent implements OnInit {
 
     credentials = {
         login: '',
-        password: ''
+        password: '',
+        rememberMe: false
     };
     authenticationFailed = false;
 
-    constructor() {
+    constructor(private userService: UserService, private router: Router) {
     }
 
     ngOnInit() {
     }
 
     authenticate() {
+        this.userService.authenticate(this.credentials.login, this.credentials.password, this.credentials.rememberMe).subscribe(
+            success => this.router.navigate(['/']),
+            error => this.authenticationFailed = true
+        );
     }
 
 }

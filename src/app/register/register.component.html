@@ -50,9 +50,10 @@
                     <strong>Vos mots de passe ne correspondent pas</strong></div>
             </div>
 
-            <div class="form-group">
-                <input id="rememberMe" type="checkbox" formControlName="rememberMe">
-                <label for="rememberMe">Se souvenir de moi</label>
+            <div class="form-check">
+                <input id="rememberMe" class="form-check-input" type="checkbox" name="rememberMe"
+                       formControlName="rememberMe">
+                <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
             </div>
 
             <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Inscription</button>

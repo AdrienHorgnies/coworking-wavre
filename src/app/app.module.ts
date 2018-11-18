@@ -8,12 +8,14 @@ import { ROUTES } from "./app.routes";
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { JwtInterceptorService } from "./jwt-interceptor.service";
+import { LoginComponent } from "./login/login.component";
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        RegisterComponent
+        RegisterComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
