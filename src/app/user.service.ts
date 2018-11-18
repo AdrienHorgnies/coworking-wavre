@@ -26,6 +26,18 @@ export class UserService {
         );
     }
 
+    authenticate(email: string, password: string, rememberMe: boolean) {
+        const body = {email, password, rememberMe};
+        return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/authenticate', body, {observe: 'response'}).pipe(
+            tap(resp => {
+                const jwt = resp.headers.get('Authorization');
+                if (jwt) {
+                    this.storeAuthenticationToken(jwt, rememberMe);
+                }
+            })
+        );
+    }
+
     storeAuthenticationToken(jwt, rememberMe) {
         this.jwtInterceptorService.setJwtToken(jwt);
         if (rememberMe) {
