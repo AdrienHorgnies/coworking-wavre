@@ -33,15 +33,15 @@ CREATE TABLE `user_authority` (
 
 CREATE TABLE `city` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name_city` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cp_city` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `building` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name_building` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address_building` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `city_id` BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
@@ -49,10 +49,10 @@ CREATE TABLE `building` (
 
 CREATE TABLE `space` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name_space` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type_space` enum('private','open','bubble') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area_space` int(11) DEFAULT NULL,
-  `capacity_space` int(11) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` enum('private','open','bubble') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `area` int(11) DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
   `building_id` BIGINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)
@@ -60,13 +60,13 @@ CREATE TABLE `space` (
 
 CREATE TABLE `equipment_type` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name_equipment` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `service_type` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name_service` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -92,19 +92,19 @@ VALUES (1, 'ROLE_ADMIN'),
        (2, 'ROLE_USER'),
        (3, 'ROLE_USER');
 
-INSERT INTO `city` (`id`, `name_city`, `cp_city`) VALUES
+INSERT INTO `city` (`id`, `name`, `cp_city`) VALUES
 (1, 'Wavre', 1300),
 (2, 'Perwez', 1360),
 (3, 'Waterloo', 1410),
 (4, 'Bierges', 1301);
 
-INSERT INTO `building` (`id`, `name_building`, `address_building`, `city_id`) VALUES
+INSERT INTO `building` (`id`, `name`, `address`, `city_id`) VALUES
 (1, 'Quatre Sapins', 'Clos des 4 sapins, 18', 1),
 (2, 'Les Mimosas', 'Chaussée de Charleroi, 1', 2),
 (3, 'Cinq Sapins', 'Rue des 5 sapins, 20', 1),
 (4, 'La Sucrerie', 'Chaussée de Tervuren, 198', 3);
 
-INSERT INTO `space` (`id`, `name_space`, `type_space`, `area_space`, `capacity_space`, `building_id`) VALUES
+INSERT INTO `space` (`id`, `name`, `type`, `area`, `capacity`, `building_id`) VALUES
 (1, 'sapin1', 'private', 20, 2, 1),
 (2, 'sapin2', 'open', 120, 10, 1),
 (3, 'spain3', 'bubble', 5, 1, 1),
@@ -117,13 +117,13 @@ INSERT INTO `space` (`id`, `name_space`, `type_space`, `area_space`, `capacity_s
 (10, 'sucre3', 'open', 120, 10, 4),
 (11, 'sucre4', 'bubble', 5, 1, 4);
 
-INSERT INTO `equipment_type` (`id`, `name_equipment`) VALUES
+INSERT INTO `equipment_type` (`id`, `name`) VALUES
 (1, 'moniteur'),
 (2, 'pc'),
 (3, 'armoire'),
 (4, 'téléphone');
 
-INSERT INTO `service_type` (`id`, `name_service`) VALUES
+INSERT INTO `service_type` (`id`, `name`) VALUES
 (1, 'domiciliation'),
 (2, 'mailing'),
 (3, 'marketing'),
