@@ -25,11 +25,8 @@
                     <div class="ad-title m-auto">
                         <!-- Récupère le nom de chaque espace -->
                         <h5>{{ space.name }}</h5>
-                        <p> Superficie: {{ space.area }}m² - {{ space.capacity }} pers. max </p>
-                        <p>
-                            <span class="tags" style="margin-left: 10px;">{{ space.category }}</span>
-
-                        </p>
+                        <h6>{{ space.category }}</h6>
+                        <p style="color: #bf062d;">{{ space.area }}m² - {{ space.capacity }} pers. max </p>
                         <p>{{ space.resume }}</p>
                     </div>
                     <a class="btn btn-primary" href="#">Réserver</a>
