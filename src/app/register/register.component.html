@@ -1,24 +1,26 @@
-<div class="row"> <!-- div row -->
-    <div class="col-md-4 offset-md-4">           <!-- div col-md -->
+<div class="row">
+    <div class="col-md-4 offset-md-4">
         <h1>Sign up</h1>
 
-        <div id="registration-error" class="alert alert-danger" *ngIf="registrationFailed"> <!-- div register failed -->
+        <div id="registration-error" class="alert alert-danger" *ngIf="registrationFailed">
             <button type="button" class="close" aria-label="Close" (click)="registrationFailed = false"><span aria-hidden="true">&#215;</span></button>
             Veuillez recommencer avec un autre email.
-        </div> <!-- div register failed -->
+        </div>
 
-        <form (ngSubmit)="register()" [formGroup]="userForm" > <!-- Form register() -->
+        <form (ngSubmit)="register()" [formGroup]="userForm">
 
             <div class="form-group">
-                <label for="firstname">Prenom</label>
-                <input id="firstname" class="form-control" formControlName="firstname">
-                <div *ngIf="firstnameCtrl.dirty && firstnameCtrl.hasError('required')" id="firstname-warning"> <strong>Le prenom est obligatoire </strong></div>
+                <label for="firstName">Prénom</label>
+                <input id="firstName" class="form-control" formControlName="firstName">
+                <div *ngIf="firstNameCtrl.dirty && firstNameCtrl.hasError('required')" id="firstName-warning"><strong>Le
+                    prénom est obligatoire</strong></div>
             </div>
 
             <div class="form-group">
-                <label for="lastname">Nom</label>
-                <input id="lastname" class="form-control" formControlName="lastname">
-                <div *ngIf="lastnameCtrl.dirty && lastnameCtrl.hasError('required')" id="lastname-warning"> <strong>Le nom est obligatoire </strong></div>
+                <label for="lastName">Nom</label>
+                <input id="lastName" class="form-control" formControlName="lastName">
+                <div *ngIf="lastNameCtrl.dirty && lastNameCtrl.hasError('required')" id="lastName-warning"><strong>Le
+                    nom est obligatoire</strong></div>
             </div>
 
             <div class="form-group">
@@ -35,15 +37,23 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="passwordtest">Confirmer le mot de passe</label>
-                    <input id="passwordtest" class="form-control" type="password" formControlName="passwordtest">
-                    <div *ngIf="passwordtestCtrl.dirty && passwordtestCtrl.hasError('required')"> <strong>Confirmer le mot de passe ! </strong></div>
+                    <label for="passwordTest">Confirmez le mot de passe</label>
+                    <input id="passwordTest" class="form-control" type="password" formControlName="passwordTest">
+                    <div *ngIf="passwordTestCtrl.dirty && passwordTestCtrl.hasError('required')"><strong>Confirmez le
+                        mot de passe !</strong></div>
                 </div>
 
-                <div id="password-matching-error" *ngIf="passwordForm.dirty && passwordForm.hasError('matchingError')"><strong>Votre mot de passe ne corresponde pas</strong></div>
+                <div id="password-matching-error" *ngIf="passwordForm.dirty && passwordForm.hasError('matchingError')">
+                    <strong>Vos mots de passe ne correspondent pas</strong></div>
             </div>
 
+            <div class="form-group">
+                <label for="rememberMe">Se souvenir de moi</label>
+                <input id="rememberMe" type="checkbox">
+            </div>
+
+            <!--todo shouldn't use submit in single page application but a routerLink-->
             <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Inscription</button>
-     </form>       <!-- Form register() -->
-    </div>         <!-- div col-md -->
-</div>               <!-- div row -->
+        </form>
+    </div>
+</div>

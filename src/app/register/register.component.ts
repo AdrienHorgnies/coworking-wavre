@@ -13,9 +13,9 @@ export class RegisterComponent implements OnInit {
     registrationFailed : boolean;
     loginCtrl: FormControl;
     passwordCtrl: FormControl;
-    passwordtestCtrl: FormControl;
-    firstnameCtrl: FormControl;
-    lastnameCtrl: FormControl;
+    passwordTestCtrl: FormControl;
+    firstNameCtrl: FormControl;
+    lastNameCtrl: FormControl;
     userForm: FormGroup;
     passwordForm : FormGroup;
 
@@ -30,15 +30,15 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.loginCtrl = this.fb.control('', Validators.required);
-        this.firstnameCtrl = this.fb.control('', Validators.required);
-        this.lastnameCtrl = this.fb.control('', Validators.required);
+        this.firstNameCtrl = this.fb.control('', Validators.required);
+        this.lastNameCtrl = this.fb.control('', Validators.required);
         this.passwordCtrl = this.fb.control('', Validators.required);
-        this.passwordtestCtrl = this.fb.control('', Validators.required);
+        this.passwordTestCtrl = this.fb.control('', Validators.required);
         this.passwordForm = this.fb.group
         (
             {
                 password: this.passwordCtrl,
-                    passwordtest: this.passwordtestCtrl
+                passwordtest: this.passwordTestCtrl
             },
             {
                 validator: RegisterComponent.passwordMatch
@@ -50,8 +50,8 @@ export class RegisterComponent implements OnInit {
             {
             login: this.loginCtrl,
             passwordForm: this.passwordForm,
-            firstname: this.firstnameCtrl,
-            lastname: this.lastnameCtrl
+                firstname: this.firstNameCtrl,
+                lastname: this.lastNameCtrl
         });
     }
 
