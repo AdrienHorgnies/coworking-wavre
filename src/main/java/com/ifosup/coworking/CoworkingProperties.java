@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.cors.CorsConfiguration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -23,8 +24,14 @@ public class CoworkingProperties {
     @Valid
     private final Security security = new Security();
 
+    private final CorsConfiguration cors = new CorsConfiguration();
+
     public Security getSecurity() {
         return security;
+    }
+
+    public CorsConfiguration getCors() {
+        return cors;
     }
 
     public static class Security {

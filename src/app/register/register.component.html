@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Sign up</h1>
+
+        <div id="registration-error" class="alert alert-danger" *ngIf="registrationFailed">
+            <button type="button" class="close" aria-label="Close" (click)="registrationFailed = false"><span
+                aria-hidden="true">&#215;</span></button>
+            Veuillez recommencer avec un autre email.
+        </div>
+
+        <form (ngSubmit)="register()" [formGroup]="userForm">
+
+            <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input id="firstName" class="form-control" formControlName="firstName">
+                <div *ngIf="firstNameCtrl.dirty && firstNameCtrl.hasError('required')" id="firstName-warning"><strong>Le
+                    prénom est obligatoire</strong></div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Nom</label>
+                <input id="lastName" class="form-control" formControlName="lastName">
+                <div *ngIf="lastNameCtrl.dirty && lastNameCtrl.hasError('required')" id="lastName-warning"><strong>Le
+                    nom est obligatoire</strong></div>
+            </div>
+
+            <div class="form-group">
+                <label for="login" id="login-label">Email</label>
+                <input id="login" class="form-control" formControlName="login">
+                <div *ngIf="loginCtrl.dirty && loginCtrl.hasError('required')" id="login-warning"><strong>L'email est
+                    obligatoire </strong></div>
+            </div>
+
+            <div formGroupName="passwordForm">
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input id="password" class="form-control" type="password" formControlName="password">
+                    <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')"><strong>Le mot de passe est
+                        obligatoire </strong></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="passwordTest">Confirmez le mot de passe</label>
+                    <input id="passwordTest" class="form-control" type="password" formControlName="passwordTest">
+                    <div *ngIf="passwordTestCtrl.dirty && passwordTestCtrl.hasError('required')"><strong>Confirmez le
+                        mot de passe !</strong></div>
+                </div>
+
+                <div id="password-matching-error" *ngIf="passwordForm.dirty && passwordForm.hasError('matchingError')">
+                    <strong>Vos mots de passe ne correspondent pas</strong></div>
+            </div>
+
+            <div class="form-group">
+                <input id="rememberMe" type="checkbox" formControlName="rememberMe">
+                <label for="rememberMe">Se souvenir de moi</label>
+            </div>
+
+            <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Inscription</button>
+        </form>
+    </div>
+</div>
