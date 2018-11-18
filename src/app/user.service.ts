@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { UserModel } from "./models/user.model";
+import { tap } from "rxjs/operators";
+import { JwtInterceptorService } from "./jwt-interceptor.service";
 
 @Injectable({
     providedIn: 'root'
@@ -9,12 +10,28 @@ import { UserModel } from "./models/user.model";
 
 export class UserService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private jwtInterceptorService: JwtInterceptorService) {
     }
 
     register(firstName: string, lastName: string, email: string, password: string, rememberMe: boolean): Observable<any> {
         const body = {firstName, lastName, email, password, rememberMe};
-        return this.http.post<UserModel>('http://localhost:8080/api/register', body);
+        return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/register', body, {observe: 'response'}).pipe(
+            tap(resp => {
+                const jwt = resp.headers.get('Authorization');
+                if (jwt) {
+                    this.storeAuthenticationToken(jwt, rememberMe);
+                }
+            })
+        );
     }
 
+    storeAuthenticationToken(jwt, rememberMe) {
+        this.jwtInterceptorService.setJwtToken(jwt);
+        if (rememberMe) {
+            window.localStorage.setItem('jwt', jwt);
+        } else {
+            window.sessionStorage.setItem('jwt', jwt);
+        }
+    }
 }
