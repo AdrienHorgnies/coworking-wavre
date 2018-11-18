@@ -14,25 +14,20 @@ export class UserService {
 
     constructor(private http: HttpClient,
                 private jwtInterceptorService: JwtInterceptorService) {
+        this.retrieveJwt();
     }
 
     register(firstName: string, lastName: string, email: string, password: string, rememberMe: boolean): Observable<any> {
         const body = {firstName, lastName, email, password, rememberMe};
         return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/register', body, {observe: 'response'}).pipe(
-            tap(resp => {
-                this.storeAuthenticationToken(resp, rememberMe);
-                this.$isUserLoggedIn.next(true);
-            })
+            tap(resp => this.storeAuthenticationToken(resp, rememberMe))
         );
     }
 
     authenticate(email: string, password: string, rememberMe: boolean) {
         const body = {email, password, rememberMe};
         return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/authenticate', body, {observe: 'response'}).pipe(
-            tap(resp => {
-                this.storeAuthenticationToken(resp, rememberMe);
-                this.$isUserLoggedIn.next(true);
-            })
+            tap(resp => this.storeAuthenticationToken(resp, rememberMe))
         );
     }
 
@@ -45,6 +40,22 @@ export class UserService {
             } else {
                 window.sessionStorage.setItem('jwt', jwt);
             }
+        }
+        this.$isUserLoggedIn.next(true);
+    }
+
+    logout() {
+        this.$isUserLoggedIn.next(false);
+        window.sessionStorage.removeItem('jwt');
+        window.localStorage.removeItem('jwt');
+    }
+
+    retrieveJwt() {
+        const jwt = window.sessionStorage.getItem('jwt') || window.localStorage.getItem('jwt');
+        // todo should verify jwt validity
+        if (jwt) {
+            this.jwtInterceptorService.setJwtToken(jwt);
+            this.$isUserLoggedIn.next(true);
         }
     }
 }
