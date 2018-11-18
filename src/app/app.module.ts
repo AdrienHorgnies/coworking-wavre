@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { JwtInterceptorService } from "./jwt-interceptor.service";
 import { LoginComponent } from "./login/login.component";
+import { MenuComponent } from './menu/menu.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         RegisterComponent,
-        LoginComponent
+        LoginComponent,
+        MenuComponent
     ],
     imports: [
         BrowserModule,

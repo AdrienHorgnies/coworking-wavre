@@ -1,0 +1,14 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" routerLink="/">Coworking Wavres</a>
+    <button type="button" class="navbar-toggler navbar-toggler-right" (click)="toggleNavbar()">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbar" class="navbar-collapse" [class.collapse]="navbarCollapsed">
+        <div *ngIf="isUserLoggedIn" class="nav navbar-nav">
+            <a class="nav-item nav-link" (click)="logout($event)">
+                Se déconnecter
+                <span class="fa fa-power-off"></span>
+            </a>
+        </div>
+    </div>
+</nav>
