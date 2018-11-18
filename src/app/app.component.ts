@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserModel } from "./models/user.model";
 import { Subscription } from "rxjs";
 import { UserService } from "./user.service";
 
@@ -10,19 +9,19 @@ import { UserService } from "./user.service";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-    user: UserModel;
-    userEventsSubscription: Subscription;
+    isUserLoggedIn: boolean;
+    isUserLoggedInSubscription: Subscription;
 
     constructor(private userService: UserService) {
     }
 
     ngOnInit() {
-        this.userEventsSubscription = this.userService.$userEvents.subscribe(user => this.user = user);
+        this.isUserLoggedInSubscription = this.userService.$isUserLoggedIn.subscribe(isUserLoggedIn => this.isUserLoggedIn = isUserLoggedIn);
     }
 
     ngOnDestroy() {
-        if (this.userEventsSubscription) {
-            this.userEventsSubscription.unsubscribe();
+        if (this.isUserLoggedInSubscription) {
+            this.isUserLoggedInSubscription.unsubscribe();
         }
     }
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, mapTo, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { JwtInterceptorService } from "./jwt-interceptor.service";
-import { UserModel } from "./models/user.model";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +10,7 @@ import { UserModel } from "./models/user.model";
 
 export class UserService {
 
-    public $userEvents = new BehaviorSubject<UserModel>(undefined);
+    public $isUserLoggedIn = new BehaviorSubject<boolean>(false);
 
     constructor(private http: HttpClient,
                 private jwtInterceptorService: JwtInterceptorService) {
@@ -20,8 +19,10 @@ export class UserService {
     register(firstName: string, lastName: string, email: string, password: string, rememberMe: boolean): Observable<any> {
         const body = {firstName, lastName, email, password, rememberMe};
         return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/register', body, {observe: 'response'}).pipe(
-            tap(resp => this.storeAuthenticationToken(resp, rememberMe)),
-            mapTo(() => this.http.get<UserModel>('http://localhost:8080/api/users/self').subscribe(user => this.$userEvents.next(user)))
+            tap(resp => {
+                this.storeAuthenticationToken(resp, rememberMe);
+                this.$isUserLoggedIn.next(true);
+            })
         );
     }
 
@@ -30,12 +31,8 @@ export class UserService {
         return this.http.post<HttpResponse<Object>>('http://localhost:8080/api/authenticate', body, {observe: 'response'}).pipe(
             tap(resp => {
                 this.storeAuthenticationToken(resp, rememberMe);
-                console.log("stored jwt")
-            }),
-            map(() => this.http.get<UserModel>('http://localhost:8080/api/users/self').subscribe(user => {
-                console.log("emitting user " + user);
-                this.$userEvents.next(user)
-            }))
+                this.$isUserLoggedIn.next(true);
+            })
         );
     }
 
