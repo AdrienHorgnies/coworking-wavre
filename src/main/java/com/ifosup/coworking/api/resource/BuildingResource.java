@@ -1,7 +1,9 @@
 package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.domain.Building;
+import com.ifosup.coworking.dto.BuildingDto;
 import com.ifosup.coworking.repository.BuildingRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,30 +30,36 @@ public class BuildingResource {
     public List<Building> findByCpCity(@PathVariable("code") int code) {
         return buildingRepository.findByCity(code);}
 
-    @PostMapping("/add")
-    Building newbuilding (@RequestBody Building newbuilding){
-        return buildingRepository.save(newbuilding);
+    @PostMapping("")
+    public BuildingDto newbuilding (@RequestBody BuildingDto buildingDto){
+        BuildingDto returnValue= new BuildingDto();
+        Building building = new Building();
+        BeanUtils.copyProperties(buildingDto, building,"id");
+        buildingRepository.save(building);
+        BeanUtils.copyProperties(building,returnValue);
+        return returnValue;
     }
 
-    @PutMapping("/update/{id}")
-        public ResponseEntity<Object> updateBuilding(@RequestBody Building building, @PathVariable long id){
+    @PutMapping("{id}")
+        public ResponseEntity<Object> updateBuilding(@RequestBody BuildingDto buildingDto, @PathVariable long id){
         Optional<Building> buildingOptional = Optional.ofNullable(buildingRepository.findOne(id));
+        Building building= new Building();
             if (!buildingOptional.isPresent())
                 return ResponseEntity.notFound().build();
-            building.setId(id);
+            buildingDto.setId(id);
+            BeanUtils.copyProperties(buildingDto, building);
             buildingRepository.save(building);
             return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/del/{id}")
-    public ResponseEntity<Building> deleteCity(@PathVariable("id") int id){
+    @DeleteMapping("{id}")
+    public ResponseEntity<Building> deleteBuilding(@PathVariable("id") int id){
         Building building = buildingRepository.findOne((long) id);
         if (building==null){
-            System.out.println("Building avec id "+id+" non trouvée");
-            return new ResponseEntity<Building>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         buildingRepository.delete((long) id);
-        return new ResponseEntity<Building>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 

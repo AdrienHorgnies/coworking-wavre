@@ -1,7 +1,9 @@
 package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.domain.City;
+import com.ifosup.coworking.dto.CityDto;
 import com.ifosup.coworking.repository.CityRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,41 +26,42 @@ public class CityResource {
         return cityRepository.findAll();
     }
 
-    @GetMapping("/code/{code}")
-    public List<City> findByCpCity(@PathVariable("code") int code) {
-        return cityRepository.findByCpCity(code);}
+    @GetMapping("{id}")
+    public City findByOne(@PathVariable("id") long id) {
+        return cityRepository.findOne(id);}
 
-    @GetMapping("/city/{name_city}")
-    public List<City> findByNameCity(@PathVariable("name_city") String name_city) {
-        return cityRepository.findByNameCity(name_city);}
+    @GetMapping("/city/{name}")
+    public List<City> findByNameCity(@PathVariable("name") String name) {
+        return cityRepository.findByName(name);}
 
-    @PostMapping("/add")
-        City newcity (@RequestBody City newcity){
-        return cityRepository.save(newcity);
-    }
+    @PostMapping("")
+    public CityDto newcity (@RequestBody CityDto cityDto){
+        CityDto returnValue=new CityDto();
+        City city= new City();
+        BeanUtils.copyProperties(cityDto, city,"id");
+        cityRepository.save(city);
+        BeanUtils.copyProperties(city, returnValue);
+        return returnValue; }
 
-    @PutMapping("/update/{id}")
-        public ResponseEntity<Object> updateCity(@RequestBody City city, @PathVariable long id){
+    @PutMapping("{id}")
+        public ResponseEntity<Object> updateCity(@RequestBody CityDto cityDto, @PathVariable long id){
         Optional<City> cityOptional = Optional.ofNullable(cityRepository.findOne(id));
+        City city= new City();
             if (!cityOptional.isPresent())
                 return ResponseEntity.notFound().build();
-            city.setId(id);
+            cityDto.id=id;
+            BeanUtils.copyProperties(cityDto,city);
             cityRepository.save(city);
-            return ResponseEntity.noContent().build();
-    }
+            return ResponseEntity.ok().body(city);  }
 
-
-
-    @DeleteMapping("/del/{id}")
-    public ResponseEntity<City> deleteCity(@PathVariable("id") int id){
+    @DeleteMapping("{id}")
+        public ResponseEntity<City> deleteCity(@PathVariable("id") int id){
         City city = cityRepository.findOne((long) id);
         if (city==null){
-            System.out.println("Ville avec id "+id+" non trouvée");
-            return new ResponseEntity<City>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         cityRepository.delete((long) id);
-        return new ResponseEntity<City>(HttpStatus.NO_CONTENT);
-
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

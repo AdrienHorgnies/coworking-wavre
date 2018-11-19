@@ -9,13 +9,10 @@ import java.util.List;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
-    public List<City> findByCpCity(int cpCity);
+    List<City> findByCpCity(int cpCity);
 
-    public List<City> findByNameCity(String nameCity);
-
-    //public City addCity(City nameCity);
+    List<City> findByName(String name);
 
     void deleteCityBy(Long id);
-
 
 }
