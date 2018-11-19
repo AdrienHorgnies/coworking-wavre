@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cities")
@@ -45,15 +44,13 @@ public class CityResource {
         return returnValue;
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity updateCity(@RequestBody CityDto cityDto, @PathVariable long id) {
-        Optional<City> cityOptional = Optional.ofNullable(cityRepository.findOne(id));
-        City city = new City();
-        if (!cityOptional.isPresent()) {
+    @PutMapping("")
+    public ResponseEntity updateCity(@RequestBody CityDto cityDto) {
+        City city = cityRepository.findOne(cityDto.id);
+        if (city == null) {
             return ResponseEntity.notFound().build();
         }
 
-        cityDto.id = id;
         BeanUtils.copyProperties(cityDto, city);
         cityRepository.save(city);
         return ResponseEntity.ok().body(city);
