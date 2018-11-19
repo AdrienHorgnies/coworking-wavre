@@ -30,43 +30,10 @@ CREATE TABLE `user_authority` (
 )
     ENGINE = InnoDB;
 
-
 CREATE TABLE `city` (
   `id` SERIAL NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cp_city` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `building` (
-  `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city_id` BIGINT UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`city_id`) REFERENCES `city` (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `space` (
-  `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('private','open','bubble') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area` int(11) DEFAULT NULL,
-  `capacity` int(11) DEFAULT NULL,
-  `building_id` BIGINT UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `equipment_type` (
-  `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
-CREATE TABLE `service_type` (
-  `id` SERIAL NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
@@ -97,34 +64,3 @@ INSERT INTO `city` (`id`, `name`, `cp_city`) VALUES
 (2, 'Perwez', 1360),
 (3, 'Waterloo', 1410),
 (4, 'Bierges', 1301);
-
-INSERT INTO `building` (`id`, `name`, `address`, `city_id`) VALUES
-(1, 'Quatre Sapins', 'Clos des 4 sapins, 18', 1),
-(2, 'Les Mimosas', 'Chaussée de Charleroi, 1', 2),
-(3, 'Cinq Sapins', 'Rue des 5 sapins, 20', 1),
-(4, 'La Sucrerie', 'Chaussée de Tervuren, 198', 3);
-
-INSERT INTO `space` (`id`, `name`, `type`, `area`, `capacity`, `building_id`) VALUES
-(1, 'sapin1', 'private', 20, 2, 1),
-(2, 'sapin2', 'open', 120, 10, 1),
-(3, 'spain3', 'bubble', 5, 1, 1),
-(4, 'fleur1', 'private', 25, 2, 2),
-(5, 'fleur2', 'open', 80, 7, 2),
-(6, 'sapin21', 'private', 20, 2, 3),
-(7, 'sapin22', 'open', 120, 10, 3),
-(8, 'sucre1', 'private', 20, 2, 4),
-(9, 'sucre2', 'private', 30, 2, 4),
-(10, 'sucre3', 'open', 120, 10, 4),
-(11, 'sucre4', 'bubble', 5, 1, 4);
-
-INSERT INTO `equipment_type` (`id`, `name`) VALUES
-(1, 'moniteur'),
-(2, 'pc'),
-(3, 'armoire'),
-(4, 'téléphone');
-
-INSERT INTO `service_type` (`id`, `name`) VALUES
-(1, 'domiciliation'),
-(2, 'mailing'),
-(3, 'marketing'),
-(4, 'comptabilité');
