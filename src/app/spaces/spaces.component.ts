@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {SpaceModel} from '../models/space.model';
 import {SpaceService} from '../space.service';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgModel} from '@angular/forms';
+
+
 @Component({
     selector: 'cow-spaces',
     templateUrl: './spaces.component.html',

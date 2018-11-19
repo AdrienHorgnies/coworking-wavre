@@ -5,9 +5,11 @@
     <!--<Label> Filter</Label>-->
     <!--<input type="text"/>-->
 <!--</form>-->
+<div>
+<input type="text" [(ngModel)]="term">
+</div>
 
-
-<div *ngFor="let space of spaces">
+<div *ngFor="let space of spaces |filter:term">
     <!--todo don't forget to either use component cow-space or the template beneath but not both-->
     <!--<cow-space [spaceModel]="space"></cow-space>-->
 
