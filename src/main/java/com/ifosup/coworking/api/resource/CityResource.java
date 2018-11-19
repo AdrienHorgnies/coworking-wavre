@@ -1,5 +1,6 @@
 package com.ifosup.coworking.api.resource;
 
+import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.domain.City;
 import com.ifosup.coworking.dto.CityDto;
 import com.ifosup.coworking.repository.CityRepository;
@@ -7,11 +8,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/cities")
 public class CityResource {
+
+    private static final String ENTITY_NAME = "city";
 
     private final CityRepository cityRepository;
 
@@ -35,17 +41,27 @@ public class CityResource {
     }
 
     @PostMapping("")
-    public CityDto newCity(@RequestBody CityDto cityDto) {
-        CityDto returnValue = new CityDto();
+    public ResponseEntity<CityDto> newCity(@RequestBody @Valid CityDto cityDto) throws URISyntaxException {
+        CityDto result = new CityDto();
+        if (cityDto.id != null) {
+            return ResponseEntity
+                .badRequest()
+                .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "id_exists", "A new city cannot already have an ID"))
+                .build();
+        }
+
         City city = new City();
-        BeanUtils.copyProperties(cityDto, city, "id");
+        BeanUtils.copyProperties(cityDto, city);
         cityRepository.save(city);
-        BeanUtils.copyProperties(city, returnValue);
-        return returnValue;
+        BeanUtils.copyProperties(city, result);
+        return ResponseEntity
+            .created(new URI("/api/cities" + result.id.toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.id.toString()))
+            .body(result);
     }
 
     @PutMapping("")
-    public ResponseEntity updateCity(@RequestBody CityDto cityDto) {
+    public ResponseEntity updateCity(@RequestBody @Valid CityDto cityDto) {
         City city = cityRepository.findOne(cityDto.id);
         if (city == null) {
             return ResponseEntity.notFound().build();
