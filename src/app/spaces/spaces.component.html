@@ -9,6 +9,18 @@
 <input type="text" [(ngModel)]="term">
 </div>
 
+<div class="form-check">
+
+    <div *ngFor="let space of spaces">
+    <input class="form-check-input" type="checkbox" name="exampleRadios" id="{{ space.category }}" value="{{ space.category }}" [(ngModel)]="term"  ng-checked="expression">
+
+        <label class="form-check-label" for="{{ space.category }}">
+            {{ space.category }}
+    </label>
+</div>
+</div>
+
+
 <div *ngFor="let space of spaces |filter:term">
     <!--todo don't forget to either use component cow-space or the template beneath but not both-->
     <!--<cow-space [spaceModel]="space"></cow-space>-->
