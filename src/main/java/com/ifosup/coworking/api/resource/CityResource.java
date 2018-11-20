@@ -4,7 +4,7 @@ import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.domain.City;
 import com.ifosup.coworking.dto.CityDto;
 import com.ifosup.coworking.repository.CityRepository;
-import org.springframework.beans.BeanUtils;
+import com.ifosup.coworking.service.mapper.CityMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +21,11 @@ public class CityResource {
 
     private final CityRepository cityRepository;
 
-    public CityResource(CityRepository cityRepository) {
+    private final CityMapper cityMapper;
+
+    public CityResource(CityRepository cityRepository, CityMapper cityMapper) {
         this.cityRepository = cityRepository;
+        this.cityMapper = cityMapper;
     }
 
     @GetMapping("")
@@ -31,8 +34,12 @@ public class CityResource {
     }
 
     @GetMapping("{id}")
-    public City findByOne(@PathVariable("id") long id) {
-        return cityRepository.findOne(id);
+    public ResponseEntity<CityDto> findByOne(@PathVariable("id") long id) {
+        City city = cityRepository.findOne(id);
+        if (city.id == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(cityMapper.toDto(city));
     }
 
     @GetMapping("/city/{name}")
@@ -42,7 +49,6 @@ public class CityResource {
 
     @PostMapping("")
     public ResponseEntity<CityDto> newCity(@RequestBody @Valid CityDto cityDto) throws URISyntaxException {
-        CityDto result = new CityDto();
         if (cityDto.id != null) {
             return ResponseEntity
                 .badRequest()
@@ -50,37 +56,36 @@ public class CityResource {
                 .build();
         }
 
-        City city = new City();
-        BeanUtils.copyProperties(cityDto, city);
-        cityRepository.save(city);
-        BeanUtils.copyProperties(city, result);
+        City city = cityRepository.save(cityMapper.toEntity(cityDto));
         return ResponseEntity
-            .created(new URI("/api/cities" + result.id.toString()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.id.toString()))
-            .body(result);
+            .created(new URI("/api/cities/" + city.id.toString()))
+            .body(cityMapper.toDto(city));
     }
 
     @PutMapping("")
-    public ResponseEntity updateCity(@RequestBody @Valid CityDto cityDto) {
+    public ResponseEntity<CityDto> updateCity(@RequestBody @Valid CityDto cityDto) {
         City city = cityRepository.findOne(cityDto.id);
         if (city == null) {
             return ResponseEntity.notFound().build();
         }
 
-        BeanUtils.copyProperties(cityDto, city);
-        cityRepository.save(city);
-        return ResponseEntity.ok().body(city);
+        City savedCity = cityRepository.save(cityMapper.toEntity(cityDto));
+        return ResponseEntity
+            .ok()
+            .body(cityMapper.toDto(savedCity));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity deleteCity(@PathVariable("id") long id) {
+    public ResponseEntity deleteCity(@PathVariable("id") Long id) {
         City city = cityRepository.findOne(id);
         if (city == null) {
             return ResponseEntity.notFound().build();
         }
 
         cityRepository.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+            .noContent()
+            .build();
     }
 
 }
