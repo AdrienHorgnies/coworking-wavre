@@ -9,13 +9,15 @@ import { SpaceComponent } from './space/space.component';
 
 import {FormsModule, NgModel} from '@angular/forms';
 import {BookingmeetingComponent} from './bookingmeeting/bookingmeeting.component';
+import { BookingspaceComponent } from './bookingspace/bookingspace.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         SpacesComponent,
         SpaceComponent,
-        BookingmeetingComponent
+        BookingmeetingComponent,
+        BookingspaceComponent
     ],
     imports: [
         BrowserModule,  FormsModule
