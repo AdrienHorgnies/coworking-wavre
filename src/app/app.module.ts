@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { JwtInterceptorService } from "./jwt-interceptor.service";
 import { LoginComponent } from "./login/login.component";
 import { MenuComponent } from './menu/menu.component';
+import { SpacesListComponent } from './spaces-list/spaces-list.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { MenuComponent } from './menu/menu.component';
         AppComponent,
         RegisterComponent,
         LoginComponent,
-        MenuComponent
+        MenuComponent,
+        SpacesListComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
