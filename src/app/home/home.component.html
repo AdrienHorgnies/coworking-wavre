@@ -1,0 +1,17 @@
+<div class="jumbotron text-center">
+    <div class="container text-center" style="margin-top: 70px;">
+        <h1>Coworking Wavre</h1>
+        <h2>Partage & Location de bureaux</h2>
+        <p>Louer un bureau en ligne, c'est simple!</p>
+
+        <div *ngIf="!isUserLoggedIn" class="container" style="margin-top: 50px;">
+            <button class="btn btn-primary" routerLink="/login" style="margin-left: 10px;" type="button">Se connecter
+                !
+            </button>
+            <button class="btn btn-primary" routerLink="/register" style="margin-left: 10px;" type="button">S'inscrire
+            </button>
+        </div>
+
+    </div>
+</div>
+<cow-spaces-list></cow-spaces-list>
