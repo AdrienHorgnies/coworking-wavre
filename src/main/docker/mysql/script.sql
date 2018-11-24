@@ -43,6 +43,17 @@ CREATE TABLE `building` (
 )
     ENGINE = InnoDB;
 
+CREATE TABLE `space` (
+    `id`              SERIAL                             NOT NULL AUTO_INCREMENT,
+    `name`            VARCHAR(25)                        NOT NULL,
+    `type`            ENUM ('PRIVATE', 'OPEN', 'BUBBLE') NOT NULL,
+    `people_capacity` INTEGER                            NOT NULL,
+    `area`            INTEGER                            NOT NULL,
+    `building_id`     BIGINT UNSIGNED                    NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`building_id`) REFERENCES `building`(`id`)
+);
+
 INSERT INTO `user`(`id`, `email`, `password_hash`, `last_name`, `first_name`)
 VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQnumlMmCpVdNZm', 'System', 'System'),
 (2,
@@ -216,3 +227,31 @@ VALUES (1, 'IFOSUP', 'Rue de la limite 16', 120),
     (23, 'Le Dauphin', 'Rue du clavier 98', 64),
     (24, 'Le Bloc Rouge', 'Avenue de la Mésopotamie 2', 47),
     (25, 'Le Berceau', 'Rue de l\'Encyclopédie', 48);
+
+INSERT INTO `space` (`id`, `name`, `type`, `people_capacity`, `area`, `building_id`)
+VALUES (1, 'Salon', 'PRIVATE', 4, 20, 5),
+    (2, 'Véranda', 'BUBBLE', 2, 16, 5),
+    (3, 'All Start Nest', 'OPEN', 12, 25, 6),
+    (4, 'Salle 1', 'OPEN', 60, 100, 8),
+    (5, 'Salle 2', 'OPEN', 80, 120, 8),
+    (6, 'L104', 'PRIVATE', 20, 40, 1),
+    (7, 'L108', 'PRIVATE', 20, 45, 1),
+    (8, 'Chambre d\'Adrien', 'BUBBLE', 2, 20, 5),
+    (9, 'Nid Douillet', 'BUBBLE', 3, 12, 15),
+    (10, 'B-Rocket Launch Pad', 'OPEN', 20, 60, 6),
+    (11, 'Lieu d\'aisance', 'BUBBLE', 1, 2, 7),
+    (12, 'Aile de Paillettes', 'PRIVATE', 6, 14, 10),
+    (13, 'QG', 'PRIVATE', 6, 18, 12),
+    (14, 'War Room', 'PRIVATE', 10, 20, 2),
+    (15, 'Salle des tatamis', 'OPEN', 40, 60, 1),
+    (16, 'Concentration', 'BUBBLE', 1, 3, 6),
+    (17, 'La Tonte', 'OPEN', 10, 28, 9),
+    (18, 'L\'enjambée', 'OPEN', 16, 34, 7),
+    (19, 'Les guichets', 'PRIVATE', 4, 8, 8),
+    (20, 'L\'ossature', 'OPEN', 8, 20, 4),
+    (21, 'Le massage', 'OPEN', 8, 20, 4),
+    (22, 'Le hamam', 'OPEN', 4, 10, 4),
+    (23, 'Le sauna', 'OPEN', 10, 20, 4),
+    (24, 'L\'aquarium A', 'PRIVATE', 8, 22, 6),
+    (25, 'L\'aquarium B', 'PRIVATE', 8, 22, 6),
+    (26, 'Le bureau de Nicobo', 'BUBBLE', 1, 20, 6);

@@ -34,7 +34,7 @@ public class Space implements Serializable {
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "jhi_type", nullable = false)
+    @Column(name = "type", nullable = false)
     private SpaceType type;
 
     @NotNull
