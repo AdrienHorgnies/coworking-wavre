@@ -9,7 +9,9 @@ import { SpaceComponent } from './space/space.component';
 
 import {FormsModule, NgModel} from '@angular/forms';
 import {BookingmeetingComponent} from './bookingmeeting/bookingmeeting.component';
-import { BookingspaceComponent } from './bookingspace/bookingspace.component';
+import { BookingspaceComponent } from './bookingspaceprivate/bookingspace.component';
+import { BookingspaceopenComponent } from './bookingspaceopen/bookingspaceopen.component';
+import { BookingspacebubbleComponent } from './bookingspacebubble/bookingspacebubble.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +19,9 @@ import { BookingspaceComponent } from './bookingspace/bookingspace.component';
         SpacesComponent,
         SpaceComponent,
         BookingmeetingComponent,
-        BookingspaceComponent
+        BookingspaceComponent,
+        BookingspaceopenComponent,
+        BookingspacebubbleComponent
     ],
     imports: [
         BrowserModule,  FormsModule
