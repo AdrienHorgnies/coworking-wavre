@@ -1196,7 +1196,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
     box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
 }
 .btn.btn-primary, .btn.btn-primary:hover, .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary.active, .btn.btn-primary:active:focus, .btn.btn-primary:active:hover, .btn.btn-primary.active:focus, .btn.btn-primary.active:hover, .open > .btn.btn-primary.dropdown-toggle, .open > .btn.btn-primary.dropdown-toggle:focus, .open > .btn.btn-primary.dropdown-toggle:hover {
-    background-color: #9c27b0;
+    background-color: blue;
     color: #FFFFFF;
 }
 .btn.btn-primary:focus, .btn.btn-primary:active, .btn.btn-primary:hover {
@@ -1218,7 +1218,7 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
     box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
 }
 .btn.btn-info, .btn.btn-info:hover, .btn.btn-info:focus, .btn.btn-info:active, .btn.btn-info.active, .btn.btn-info:active:focus, .btn.btn-info:active:hover, .btn.btn-info.active:focus, .btn.btn-info.active:hover, .open > .btn.btn-info.dropdown-toggle, .open > .btn.btn-info.dropdown-toggle:focus, .open > .btn.btn-info.dropdown-toggle:hover {
-    background-color: #00bcd4;
+    background-color: #9c27b0;
     color: #FFFFFF;
 }
 .btn.btn-info:focus, .btn.btn-info:active, .btn.btn-info:hover {
@@ -1229,12 +1229,12 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
 }
 .btn.btn-info.btn-simple {
     background-color: transparent;
-    color: #00bcd4;
+    color: #9c27b0;
     box-shadow: none;
 }
 .btn.btn-info.btn-simple:hover, .btn.btn-info.btn-simple:focus, .btn.btn-info.btn-simple:active {
     background-color: transparent;
-    color: #00bcd4;
+    color: #9c27b0;
 }
 .btn.btn-success {
     box-shadow: 0 2px 2px 0 rgba(76, 175, 80, 0.14), 0 3px 1px -2px rgba(76, 175, 80, 0.2), 0 1px 5px 0 rgba(76, 175, 80, 0.12);

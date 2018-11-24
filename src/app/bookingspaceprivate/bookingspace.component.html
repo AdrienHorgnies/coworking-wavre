@@ -11,26 +11,27 @@
                 <div class="card wizard-card" data-color="red" id="wizard">
                     <form action="" method="">
                         <div>
-                            <h4 class="info-text" style="color: blue;">BUREAU PRIVATIF</h4>
+                            <h3 class="info-text" style="color: darkblue;">NOM DE LA SALLE</h3>
+                            <h4 class="info-text" style="color: #9c27b0;">BUREAU PRIVATIF</h4>
                         </div>
 
                         <div class="tab-content">
 
                             <div>
-                                <h5 class="info-text">Choisissez vos options de réservation </h5>
+                                <!--<h5 class="info-text">Choisissez vos options de réservation </h5>-->
 
 
                                 <span class="form-label">Date de début</span>
                                 <input class="form-control " type="date" [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" value="{{date1}}" required>
 
                                 <span class="form-label">Date de fin</span>
-                                <input class="form-control" type="date" [(ngModel)]="date2" [ngModelOptions]="{standalone: true}" required>
+                                <input class="form-control" type="date" [(ngModel)]="date2"  [ngModelOptions]="{standalone: true}" required>
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
-                                <input class="form-control" type="number" min="1" max="10" [(ngModel)]="content"  [ngModelOptions]="{standalone: true}" required>
+                                <input class="form-control" type="number" min="1" max="10" value="1" [(ngModel)]="content"  [ngModelOptions]="{standalone: true}" required>
                             </div>
-                                <br><span class="form-label">Prix forfaitaire : {{total("30,00")}} €</span>
+                                <br><span class="form-label" style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
                                 <br><span class="form-label">Du {{date1}} au {{date2}}</span>
 
                         <div class="container">
@@ -117,7 +118,7 @@
 
                             </div>
                         </div>
-
+                                <a style="float:left;" class="btn btn-info" href="#">Back</a>
                         <a style="float:right;" class="btn btn-primary" href="#">Réserver</a>
                 </div>
             </div>
