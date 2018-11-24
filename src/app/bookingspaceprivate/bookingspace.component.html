@@ -21,15 +21,17 @@
 
 
                                 <span class="form-label">Date de début</span>
-                                <input class="form-control" type="date" required>
+                                <input class="form-control " type="date" [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" value="{{date1}}" required>
 
                                 <span class="form-label">Date de fin</span>
-                                <input class="form-control" type="date" required>
+                                <input class="form-control" type="date" [(ngModel)]="date2" [ngModelOptions]="{standalone: true}" required>
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
-                                <input class="form-control" type="number" min="1" max="10" [(ngModel)]="content" [ngModelOptions]="{standalone: true}" required>
+                                <input class="form-control" type="number" min="1" max="10" [(ngModel)]="content"  [ngModelOptions]="{standalone: true}" required>
                             </div>
+                                <br><span class="form-label">Prix forfaitaire : {{total("30,00")}} €</span>
+                                <br><span class="form-label">Du {{date1}} au {{date2}}</span>
 
                         <div class="container">
                             <div class="row">
@@ -40,16 +42,16 @@
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                <input type="number" min="1" max="{{content}}"  value="{{content}}">
-                                                &nbsp; téléphone(s)
+                                                <input type="number" min="0" max="{{content}}"  value="{{content}}">
+                                                &nbsp; téléphone(s) - 0,00 €
                                                 <label class="">
                                                     <!--<input type="checkbox" class="default">-->
                                                     <span class=""></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                <input type="number" min="1" max="{{content}}"  value="{{content}}">
-                                                &nbsp; armoire(s)
+                                                <input type="number" min="0" max="{{content}}"  value="{{content}}">
+                                                &nbsp; armoire(s) - 0,00 €
                                                 <label class="">
                                                     <!--<input type="checkbox" class="primary">-->
                                                     <span class=""></span>
@@ -76,32 +78,32 @@
                                 <div class="col-md-6">
                                     <div class="card" style="margin:50px 0">
                                         <!-- Default panel contents -->
-                                        <div class="card-header">Services</div>
+                                        <div class="card-header">Services en option</div>
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                               Courrier
+                                               Courrier - 0,00 €
                                                 <label class="switch ">
                                                     <input type="checkbox" class="default">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                Café
+                                                Café - 0,00 €
                                                 <label class="switch ">
                                                     <input type="checkbox" class="primary">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                Scanner
+                                                Scanner - 0,00 €
                                                 <label class="switch ">
                                                     <input type="checkbox" class="success">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                Photocopieuse
+                                                Photocopieuse - 0,00 €
                                                 <label class="switch ">
                                                     <input type="checkbox" class="info">
                                                     <span class="slider round"></span>
@@ -109,14 +111,14 @@
                                             </li>
 
                                         </ul>
-
                                     </div>
-
+                                    <span style="float:right;" class="form-label">TOTAL : {{total("30,00")}} €</span><br><br>
                                 </div>
 
                             </div>
                         </div>
-                        <a class="btn btn-primary" href="#">Réserver</a>
+
+                        <a style="float:right;" class="btn btn-primary" href="#">Réserver</a>
                 </div>
             </div>
                     </form>
