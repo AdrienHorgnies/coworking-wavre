@@ -9,6 +9,7 @@
 <input type="text" [(ngModel)]="term">
 </div>
 
+
 <div class="form-check">
 
     <div *ngFor="let space of spaces">
@@ -21,13 +22,13 @@
 </div>
 
 
-<div *ngFor="let space of spaces |filter:term">
+<div *ngFor="let space of spaces |filter:term" >
     <!--todo don't forget to either use component cow-space or the template beneath but not both-->
     <!--<cow-space [spaceModel]="space"></cow-space>-->
 
-    <div class="row" style="margin-top: 70px;" id="ads">
+    <div style="margin-top: 70px;" id="ads" class="row">
         <!-- Category Card -->
-        <div class="col-md-4">
+        <div class="col-md-4" >
             <div class="card rounded">
                 <div class="card-image">
                     <span class="card-notify-badge">Apd {{ space.price }} €</span>
@@ -41,14 +42,29 @@
                         <h5>{{ space.name }}</h5>
                         <h6>{{ space.category }}</h6>
                         <p style="color: #bf062d;">{{ space.area }}m² - {{ space.capacity }} pers. max </p>
-                        <p>{{ space.resume }}</p>
                     </div>
-                    <a class="btn btn-primary" href="#">Réserver</a>
+
+                    <div (click)="onClick(space.id)">
+                    <ul>
+                        <li type="buton" class="btn btn-primary" routerLink="/spacedetails" routerLinkActive="active">consulter</li>
+
+                    </ul>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+</div>
+
+<div class="col-xs-12">
+    <router-outlet></router-outlet>
 </div>
 
 

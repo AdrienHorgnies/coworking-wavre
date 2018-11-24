@@ -16,6 +16,37 @@ export class SpaceService {
     }
 
     // todo you must complete SpaceModel so it has all the attributes you showcase here
+    private listSpaces : SpaceModel[] =
+        [
+            {
+                id: 1,
+                name: 'le merveilleux',
+                category: 'bureau privatif',
+                area: 6,
+                capacity: 3,
+                price: 2000,
+                resume: 'espace de travail privatif qui vous séduira par son côté intime'
+            },
+            {
+                id: 2,
+                name: 'la belle',
+                category: 'bubble',
+                area: 2,
+                capacity: 1,
+                price: 1000,
+                resume: 'Vous serez dans votre bulle pour travailler'
+            },
+            {
+                id: 3,
+                name: 'la splendide',
+                category: 'bureau partagé',
+                area: 20,
+                capacity: 9,
+                price: 200,
+                resume: 'Espace de coworking parfait pour élargir votre réseau'
+            }
+        ];
+
     list(): Observable<Array<SpaceModel>> {
         return of([
             {
@@ -47,4 +78,9 @@ export class SpaceService {
             }
         ]).pipe(delay(500));
     }
+
+    getSpaceById(id : number): SpaceModel{
+    return this.listSpaces.find(e => e.id === id);
+}
+
 }
