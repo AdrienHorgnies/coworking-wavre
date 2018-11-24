@@ -13,7 +13,7 @@ Conducted as part of the "Integration and Development Project" and "E-Business" 
 - Adrien Horgnies: technical & project lead
 - Stéphane Thiry: back-end, functional analysis & business analysis
 - Phirum Chan: front-end, database architect & business analysis
-- Katia Baran: front-end, database architect & business analysis
+- Katia Baran: front-end, ui designer & business analysis
 - Steve Leveau: business analysis
 
 ## Front end with Angular
