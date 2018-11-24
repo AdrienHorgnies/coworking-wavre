@@ -34,12 +34,15 @@
                                 <!--<input class="form-control" type="time" required>-->
 
                                 <span class="form-label">Nombre de personnes</span>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                </select>
-                                <span class="select-arrow"></span>
+                                <!--<input class="form-control" [type]="numberpers" [(ngModel)]="content" required>-->
+                                <input type="text" [(ngModel)]="content">
+                                <p style="color: black;">{{content}}</p>
+                                <!--<select class="form-control">-->
+                                    <!--<option>1</option>-->
+                                    <!--<option>2</option>-->
+                                    <!--<option>3</option>-->
+                                <!--</select>-->
+                                <!--<span class="select-arrow"></span>-->
 
                                 <!-- todo ne pas permettre d'indiquer un nombre d'équipement supérieur à ce qui est sélectionné dans le nombre de personne-->
                                 <!-- todo automatiser le nombre de bureau et chaises en fonction du nombre de personnes-->
@@ -77,7 +80,8 @@
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                Bureau
+                                                <!--<p> {{content}} </p>-->
+                                                <p>{{content}} Bureau</p>
                                                 <label class="switch ">
                                                     <input type="checkbox" class="success">
                                                     <span class="slider"></span>

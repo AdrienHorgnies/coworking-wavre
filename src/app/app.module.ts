@@ -7,7 +7,7 @@ import { SpaceComponent } from './space/space.component';
 
 
 
-import {FormsModule, NgModel} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {BookingmeetingComponent} from './bookingmeeting/bookingmeeting.component';
 import { BookingspaceComponent } from './bookingspaceprivate/bookingspace.component';
 import { BookingspaceopenComponent } from './bookingspaceopen/bookingspaceopen.component';

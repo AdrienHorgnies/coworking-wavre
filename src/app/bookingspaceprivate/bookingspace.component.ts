@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingspaceComponent implements OnInit {
 
-  constructor() { }
+    // todo: initialiser le nombre de personnes >1 et <capacity
+    numberpers: string = "number";
+
+    public content: string = "";
+
+    constructor() { }
 
   ngOnInit() {
   }

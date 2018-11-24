@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingspaceopenComponent implements OnInit {
 
+    numberpers: string = "number";
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
