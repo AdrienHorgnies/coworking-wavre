@@ -1,8 +1,6 @@
 package com.ifosup.coworking.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -18,7 +16,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "city")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class City implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,7 +36,6 @@ public class City implements Serializable {
 
     @OneToMany(mappedBy = "city")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Building> buildings = new HashSet<>();
 
     public Long getId() {

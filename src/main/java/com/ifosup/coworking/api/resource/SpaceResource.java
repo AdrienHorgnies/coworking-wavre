@@ -1,6 +1,5 @@
 package com.ifosup.coworking.api.resource;
 
-import com.codahale.metrics.annotation.Timed;
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.Space;
@@ -39,7 +38,6 @@ public class SpaceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/spaces")
-    @Timed
     public ResponseEntity<Space> createSpace(@Valid @RequestBody Space space) throws URISyntaxException {
         log.debug("REST request to save Space : {}", space);
         if (space.getId() != null) {
@@ -61,7 +59,6 @@ public class SpaceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/spaces")
-    @Timed
     public ResponseEntity<Space> updateSpace(@Valid @RequestBody Space space) throws URISyntaxException {
         log.debug("REST request to update Space : {}", space);
         if (space.getId() == null) {
@@ -79,7 +76,6 @@ public class SpaceResource {
      * @return the ResponseEntity with status 200 (OK) and the list of spaces in body
      */
     @GetMapping("/spaces")
-    @Timed
     public List<Space> getAllSpaces() {
         log.debug("REST request to get all Spaces");
         return spaceRepository.findAllWithEagerRelationships();
@@ -92,7 +88,6 @@ public class SpaceResource {
      * @return the ResponseEntity with status 200 (OK) and with body the space, or with status 404 (Not Found)
      */
     @GetMapping("/spaces/{id}")
-    @Timed
     public ResponseEntity<Space> getSpace(@PathVariable Long id) {
         log.debug("REST request to get Space : {}", id);
         Space space = spaceRepository.findOneWithEagerRelationships(id);
@@ -106,7 +101,6 @@ public class SpaceResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/spaces/{id}")
-    @Timed
     public ResponseEntity<Void> deleteSpace(@PathVariable Long id) {
         log.debug("REST request to delete Space : {}", id);
         spaceRepository.delete(id);

@@ -1,6 +1,5 @@
 package com.ifosup.coworking.api.resource;
 
-import com.codahale.metrics.annotation.Timed;
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.EquipmentType;
@@ -39,7 +38,6 @@ public class EquipmentTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/equipment-types")
-    @Timed
     public ResponseEntity<EquipmentType> createEquipmentType(@Valid @RequestBody EquipmentType equipmentType) throws URISyntaxException {
         log.debug("REST request to save EquipmentType : {}", equipmentType);
         if (equipmentType.getId() != null) {
@@ -61,7 +59,6 @@ public class EquipmentTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/equipment-types")
-    @Timed
     public ResponseEntity<EquipmentType> updateEquipmentType(@Valid @RequestBody EquipmentType equipmentType) throws URISyntaxException {
         log.debug("REST request to update EquipmentType : {}", equipmentType);
         if (equipmentType.getId() == null) {
@@ -79,7 +76,6 @@ public class EquipmentTypeResource {
      * @return the ResponseEntity with status 200 (OK) and the list of equipmentTypes in body
      */
     @GetMapping("/equipment-types")
-    @Timed
     public List<EquipmentType> getAllEquipmentTypes() {
         log.debug("REST request to get all EquipmentTypes");
         return equipmentTypeRepository.findAll();
@@ -92,7 +88,6 @@ public class EquipmentTypeResource {
      * @return the ResponseEntity with status 200 (OK) and with body the equipmentType, or with status 404 (Not Found)
      */
     @GetMapping("/equipment-types/{id}")
-    @Timed
     public ResponseEntity<EquipmentType> getEquipmentType(@PathVariable Long id) {
         log.debug("REST request to get EquipmentType : {}", id);
         EquipmentType equipmentType = equipmentTypeRepository.findOne(id);
@@ -106,7 +101,6 @@ public class EquipmentTypeResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/equipment-types/{id}")
-    @Timed
     public ResponseEntity<Void> deleteEquipmentType(@PathVariable Long id) {
         log.debug("REST request to delete EquipmentType : {}", id);
         equipmentTypeRepository.delete(id);

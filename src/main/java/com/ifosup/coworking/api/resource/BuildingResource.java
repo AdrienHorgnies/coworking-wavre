@@ -1,6 +1,5 @@
 package com.ifosup.coworking.api.resource;
 
-import com.codahale.metrics.annotation.Timed;
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.Building;
@@ -20,7 +19,7 @@ import java.util.Optional;
  * REST controller for managing Building.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api/buildings")
 public class BuildingResource {
 
     private static final String ENTITY_NAME = "building";
@@ -38,8 +37,7 @@ public class BuildingResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new building, or with status 400 (Bad Request) if the building has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/buildings")
-    @Timed
+    @PostMapping("")
     public ResponseEntity<Building> createBuilding(@Valid @RequestBody Building building) throws URISyntaxException {
         log.debug("REST request to save Building : {}", building);
         if (building.getId() != null) {
@@ -60,8 +58,7 @@ public class BuildingResource {
      * or with status 500 (Internal Server Error) if the building couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/buildings")
-    @Timed
+    @PutMapping("")
     public ResponseEntity<Building> updateBuilding(@Valid @RequestBody Building building) throws URISyntaxException {
         log.debug("REST request to update Building : {}", building);
         if (building.getId() == null) {
@@ -78,8 +75,7 @@ public class BuildingResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of buildings in body
      */
-    @GetMapping("/buildings")
-    @Timed
+    @GetMapping("")
     public List<Building> getAllBuildings() {
         log.debug("REST request to get all Buildings");
         return buildingRepository.findAll();
@@ -91,8 +87,7 @@ public class BuildingResource {
      * @param id the id of the building to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the building, or with status 404 (Not Found)
      */
-    @GetMapping("/buildings/{id}")
-    @Timed
+    @GetMapping("{id}")
     public ResponseEntity<Building> getBuilding(@PathVariable Long id) {
         log.debug("REST request to get Building : {}", id);
         Building building = buildingRepository.findOne(id);
@@ -105,8 +100,7 @@ public class BuildingResource {
      * @param id the id of the building to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/buildings/{id}")
-    @Timed
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteBuilding(@PathVariable Long id) {
         log.debug("REST request to delete Building : {}", id);
         buildingRepository.delete(id);

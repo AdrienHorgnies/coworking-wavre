@@ -1,8 +1,6 @@
 package com.ifosup.coworking.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +15,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "building")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Building implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,13 +38,11 @@ public class Building implements Serializable {
 
     @OneToMany(mappedBy = "building")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Space> spaces = new HashSet<>();
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "space_service_type",
-        joinColumns = @JoinColumn(name = "spaces_id", referencedColumnName = "id"),
+    @JoinTable(name = "building_service_type",
+        joinColumns = @JoinColumn(name = "buildings_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "service_types_id", referencedColumnName = "id"))
     private Set<ServiceType> serviceTypes = new HashSet<>();
 

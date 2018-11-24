@@ -1,6 +1,5 @@
 package com.ifosup.coworking.api.resource;
 
-import com.codahale.metrics.annotation.Timed;
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.ServiceType;
@@ -39,7 +38,6 @@ public class ServiceTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/service-types")
-    @Timed
     public ResponseEntity<ServiceType> createServiceType(@Valid @RequestBody ServiceType serviceType) throws URISyntaxException {
         log.debug("REST request to save ServiceType : {}", serviceType);
         if (serviceType.getId() != null) {
@@ -61,7 +59,6 @@ public class ServiceTypeResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/service-types")
-    @Timed
     public ResponseEntity<ServiceType> updateServiceType(@Valid @RequestBody ServiceType serviceType) throws URISyntaxException {
         log.debug("REST request to update ServiceType : {}", serviceType);
         if (serviceType.getId() == null) {
@@ -79,7 +76,6 @@ public class ServiceTypeResource {
      * @return the ResponseEntity with status 200 (OK) and the list of serviceTypes in body
      */
     @GetMapping("/service-types")
-    @Timed
     public List<ServiceType> getAllServiceTypes() {
         log.debug("REST request to get all ServiceTypes");
         return serviceTypeRepository.findAll();
@@ -92,7 +88,6 @@ public class ServiceTypeResource {
      * @return the ResponseEntity with status 200 (OK) and with body the serviceType, or with status 404 (Not Found)
      */
     @GetMapping("/service-types/{id}")
-    @Timed
     public ResponseEntity<ServiceType> getServiceType(@PathVariable Long id) {
         log.debug("REST request to get ServiceType : {}", id);
         ServiceType serviceType = serviceTypeRepository.findOne(id);
@@ -106,7 +101,6 @@ public class ServiceTypeResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/service-types/{id}")
-    @Timed
     public ResponseEntity<Void> deleteServiceType(@PathVariable Long id) {
         log.debug("REST request to delete ServiceType : {}", id);
         serviceTypeRepository.delete(id);

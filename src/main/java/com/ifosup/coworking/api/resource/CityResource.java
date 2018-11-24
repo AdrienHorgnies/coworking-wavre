@@ -1,6 +1,5 @@
 package com.ifosup.coworking.api.resource;
 
-import com.codahale.metrics.annotation.Timed;
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.City;
@@ -39,7 +38,6 @@ public class CityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/cities")
-    @Timed
     public ResponseEntity<City> createCity(@Valid @RequestBody City city) throws URISyntaxException {
         log.debug("REST request to save City : {}", city);
         if (city.getId() != null) {
@@ -61,7 +59,6 @@ public class CityResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/cities")
-    @Timed
     public ResponseEntity<City> updateCity(@Valid @RequestBody City city) throws URISyntaxException {
         log.debug("REST request to update City : {}", city);
         if (city.getId() == null) {
@@ -79,7 +76,6 @@ public class CityResource {
      * @return the ResponseEntity with status 200 (OK) and the list of cities in body
      */
     @GetMapping("/cities")
-    @Timed
     public List<City> getAllCities() {
         log.debug("REST request to get all Cities");
         return cityRepository.findAll();
@@ -92,7 +88,6 @@ public class CityResource {
      * @return the ResponseEntity with status 200 (OK) and with body the city, or with status 404 (Not Found)
      */
     @GetMapping("/cities/{id}")
-    @Timed
     public ResponseEntity<City> getCity(@PathVariable Long id) {
         log.debug("REST request to get City : {}", id);
         City city = cityRepository.findOne(id);
@@ -106,7 +101,6 @@ public class CityResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/cities/{id}")
-    @Timed
     public ResponseEntity<Void> deleteCity(@PathVariable Long id) {
         log.debug("REST request to delete City : {}", id);
         cityRepository.delete(id);

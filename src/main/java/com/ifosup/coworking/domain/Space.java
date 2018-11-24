@@ -1,8 +1,6 @@
 package com.ifosup.coworking.domain;
 
 import com.ifosup.coworking.domain.enumeration.SpaceType;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -18,7 +16,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "space")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Space implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +49,6 @@ public class Space implements Serializable {
     private Building building;
 
     @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "space_equipment_type",
         joinColumns = @JoinColumn(name = "spaces_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "equipment_types_id", referencedColumnName = "id"))
