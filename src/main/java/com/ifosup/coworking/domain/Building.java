@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,9 +27,11 @@ public class Building implements Serializable {
     private Long id;
 
     @Column(name = "name")
+    @Size(min = 3, max = 25)
     private String name;
 
     @NotNull
+    @Size(max = 255)
     @Column(name = "address", nullable = false)
     private String address;
 

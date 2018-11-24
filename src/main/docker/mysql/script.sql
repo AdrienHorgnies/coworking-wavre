@@ -33,6 +33,16 @@ CREATE TABLE `city` (
 )
     ENGINE = InnoDB;
 
+CREATE TABLE `building` (
+    `id`      SERIAL          NOT NULL AUTO_INCREMENT,
+    `name`    VARCHAR(25)     NOT NULL,
+    `address` VARCHAR(255)    NOT NULL,
+    `city_id` BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`city_id`) REFERENCES `city`(`id`)
+)
+    ENGINE = InnoDB;
+
 INSERT INTO `user`(`id`, `email`, `password_hash`, `last_name`, `first_name`)
 VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQnumlMmCpVdNZm', 'System', 'System'),
 (2,
@@ -162,4 +172,47 @@ VALUES (1, 'Archennes', 1390),
     (103, 'Saint-Jean-Geest', 1370),
     (104, 'Saint-Remy-Geest', 1370),
     (105, 'Sart-Dames-Avelines', 1495),
-    (106, 'Thines', 1402);
+    (106, 'Thines', 1402),
+    (107, 'Thorembais-les-Béguines', 1360),
+    (108, 'Thorembais-Saint-Trond', 1360),
+    (109, 'Tilly', 1495),
+    (110, 'Tourinnes-la-Grosse', 1320),
+    (111, 'Tourinnes-Saint-Lambert', 1457),
+    (112, 'Tubize', 1480),
+    (113, 'Vieux-Genappe', 1472),
+    (114, 'Villers-la-Ville', 1495),
+    (115, 'Virginal-Samme', 1460),
+    (116, 'Walhain', 1457),
+    (117, 'Walhain-Saint-Paul', 1457),
+    (118, 'Waterloo', 1410),
+    (119, 'Wauthier-Braine', 1440),
+    (120, 'Wavre', 1300),
+    (121, 'Ways', 1474),
+    (122, 'Zétrud-Lumay', 1370);
+
+INSERT INTO `building` (`id`, `name`, `address`, `city_id`)
+VALUES (1, 'IFOSUP', 'Rue de la limite 16', 120),
+    (2, 'Le bureau des anges', 'Rue du Paradis 3', 120),
+    (3, 'The Office', 'Avenue de la cité 123', 120),
+    (4, 'Martins Hotel', 'Rue de l\'Hocaille 1', 63),
+    (5, 'La résidence d\'Adrien', 'Rue Génistroit 131A', 63),
+    (6, 'Altissia', 'Place de l\'Université 16', 63),
+    (7, 'Quimeo', 'Place de l\'Université 16', 63),
+    (8, 'Cinéscope', 'Grand-Place 55', 63),
+    (9, 'La mouture', 'Rue du travailleur 426', 63),
+    (10, 'Le Papillon', 'Boulevard du matin 62', 100),
+    (11, 'L\'antagoniste', 'Boulevard du soir 41', 99),
+    (12, 'Le protagoniste', 'Rue de la lassitude 19', 50),
+    (13, 'Le coup du collier', 'Rue de la quiétude 14', 33),
+    (14, 'L\'animal', 'Rue de la protéïne 10', 20),
+    (15, 'Le bonheur', 'Rue de la Tourbe 113', 76),
+    (16, 'Le bouclier du café', 'Avenue des dieux 1', 67),
+    (17, 'Les dès du pile ou face', 'Rue du chat 35', 59),
+    (18, 'L\'effort', 'Rue des Satinés 8', 26),
+    (19, 'Pierre-Curie', 'Place des Wallons 2', 63),
+    (20, 'La boule', 'Place des trapézistes 41', 15),
+    (21, 'La hauteur', 'Chemin des angles droits 2', 49),
+    (22, 'Le nom de Dieu', 'Chemin de l\'Éveil 1000', 1),
+    (23, 'Le Dauphin', 'Rue du clavier 98', 64),
+    (24, 'Le Bloc Rouge', 'Avenue de la Mésopotamie 2', 47),
+    (25, 'Le Berceau', 'Rue de l\'Encyclopédie', 48);
