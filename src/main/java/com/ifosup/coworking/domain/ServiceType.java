@@ -34,7 +34,7 @@ public class ServiceType implements Serializable {
     @ManyToMany(mappedBy = "serviceTypes")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Space> spaces = new HashSet<>();
+    private Set<Building> buildings = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -57,28 +57,28 @@ public class ServiceType implements Serializable {
         return this;
     }
 
-    public Set<Space> getSpaces() {
-        return spaces;
+    public Set<Building> getBuildings() {
+        return buildings;
     }
 
-    public void setSpaces(Set<Space> spaces) {
-        this.spaces = spaces;
+    public void setBuildings(Set<Building> buildings) {
+        this.buildings = buildings;
     }
 
-    public ServiceType spaces(Set<Space> spaces) {
-        this.spaces = spaces;
+    public ServiceType buildings(Set<Building> buildings) {
+        this.buildings = buildings;
         return this;
     }
 
-    public ServiceType addSpace(Space space) {
-        this.spaces.add(space);
-        space.getServiceTypes().add(this);
+    public ServiceType addBuilding(Building building) {
+        this.buildings.add(building);
+        building.getServiceTypes().add(this);
         return this;
     }
 
-    public ServiceType removeSpace(Space space) {
-        this.spaces.remove(space);
-        space.getServiceTypes().remove(this);
+    public ServiceType removeBuilding(Building building) {
+        this.buildings.remove(building);
+        building.getServiceTypes().remove(this);
         return this;
     }
 

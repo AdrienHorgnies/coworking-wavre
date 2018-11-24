@@ -15,10 +15,10 @@ import java.util.List;
 @Repository
 public interface SpaceRepository extends JpaRepository<Space, Long> {
 
-    @Query("select distinct space from Space space left join fetch space.equipmentTypes left join fetch space.serviceTypes")
+    @Query("select distinct space from Space space left join fetch space.equipmentTypes")
     List<Space> findAllWithEagerRelationships();
 
-    @Query("select space from Space space left join fetch space.equipmentTypes left join fetch space.serviceTypes where space.id =:id")
+    @Query("select space from Space space left join fetch space.equipmentTypes where space.id =:id")
     Space findOneWithEagerRelationships(@Param("id") Long id);
 
 }

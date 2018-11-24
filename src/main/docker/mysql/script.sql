@@ -78,11 +78,11 @@ CREATE TABLE `space_equipment_type` (
 )
     ENGINE = InnoDB;
 
-CREATE TABLE `space_service_type` (
-    `spaces_id`        BIGINT UNSIGNED NOT NULL,
+CREATE TABLE `building_service_type` (
+    `buildings_id`     BIGINT UNSIGNED NOT NULL,
     `service_types_id` BIGINT UNSIGNED NOT NULL,
-    PRIMARY KEY (`spaces_id`, `service_types_id`),
-    FOREIGN KEY (`spaces_id`) REFERENCES `space`(`id`),
+    PRIMARY KEY (`buildings_id`, `service_types_id`),
+    FOREIGN KEY (`buildings_id`) REFERENCES `building`(`id`),
     FOREIGN KEY (`service_types_id`) REFERENCES `service_type`(`id`)
 )
     ENGINE = InnoDB;
@@ -375,7 +375,7 @@ VALUES (1, 5),
     (24, 6),
     (26, 6);
 
-INSERT INTO `space_service_type` (`spaces_id`, `service_types_id`)
+INSERT INTO `building_service_type` (`buildings_id`, `service_types_id`)
 VALUES (1, 7),
     (1, 1),
     (2, 1),

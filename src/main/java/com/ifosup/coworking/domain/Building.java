@@ -44,6 +44,13 @@ public class Building implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Space> spaces = new HashSet<>();
 
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "space_service_type",
+        joinColumns = @JoinColumn(name = "spaces_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "service_types_id", referencedColumnName = "id"))
+    private Set<ServiceType> serviceTypes = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -113,6 +120,31 @@ public class Building implements Serializable {
     public Building removeSpace(Space space) {
         this.spaces.remove(space);
         space.setBuilding(null);
+        return this;
+    }
+
+    public Set<ServiceType> getServiceTypes() {
+        return serviceTypes;
+    }
+
+    public void setServiceTypes(Set<ServiceType> serviceTypes) {
+        this.serviceTypes = serviceTypes;
+    }
+
+    public Building serviceTypes(Set<ServiceType> serviceTypes) {
+        this.serviceTypes = serviceTypes;
+        return this;
+    }
+
+    public Building addServiceType(ServiceType serviceType) {
+        this.serviceTypes.add(serviceType);
+        serviceType.getBuildings().add(this);
+        return this;
+    }
+
+    public Building removeServiceType(ServiceType serviceType) {
+        this.serviceTypes.remove(serviceType);
+        serviceType.getBuildings().remove(this);
         return this;
     }
 

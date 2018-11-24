@@ -58,13 +58,6 @@ public class Space implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "equipment_types_id", referencedColumnName = "id"))
     private Set<EquipmentType> equipmentTypes = new HashSet<>();
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "space_service_type",
-        joinColumns = @JoinColumn(name = "spaces_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "service_types_id", referencedColumnName = "id"))
-    private Set<ServiceType> serviceTypes = new HashSet<>();
-
     public Long getId() {
         return id;
     }
@@ -160,31 +153,6 @@ public class Space implements Serializable {
     public Space removeEquipmentType(EquipmentType equipmentType) {
         this.equipmentTypes.remove(equipmentType);
         equipmentType.getSpaces().remove(this);
-        return this;
-    }
-
-    public Set<ServiceType> getServiceTypes() {
-        return serviceTypes;
-    }
-
-    public void setServiceTypes(Set<ServiceType> serviceTypes) {
-        this.serviceTypes = serviceTypes;
-    }
-
-    public Space serviceTypes(Set<ServiceType> serviceTypes) {
-        this.serviceTypes = serviceTypes;
-        return this;
-    }
-
-    public Space addServiceType(ServiceType serviceType) {
-        this.serviceTypes.add(serviceType);
-        serviceType.getSpaces().add(this);
-        return this;
-    }
-
-    public Space removeServiceType(ServiceType serviceType) {
-        this.serviceTypes.remove(serviceType);
-        serviceType.getSpaces().remove(this);
         return this;
     }
 
