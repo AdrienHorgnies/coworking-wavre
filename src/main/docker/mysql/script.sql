@@ -52,7 +52,40 @@ CREATE TABLE `space` (
     `building_id`     BIGINT UNSIGNED                    NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`building_id`) REFERENCES `building`(`id`)
-);
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `equipment_type` (
+    `id`   SERIAL      NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(25) NOT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `service_type` (
+    `id`   SERIAL      NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(25) NOT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `space_equipment_type` (
+    `spaces_id`          BIGINT UNSIGNED NOT NULL,
+    `equipment_types_id` BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`spaces_id`, `equipment_types_id`),
+    FOREIGN KEY (`spaces_id`) REFERENCES `space`(`id`),
+    FOREIGN KEY (`equipment_types_id`) REFERENCES `equipment_type`(`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `space_service_type` (
+    `spaces_id`        BIGINT UNSIGNED NOT NULL,
+    `service_types_id` BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`spaces_id`, `service_types_id`),
+    FOREIGN KEY (`spaces_id`) REFERENCES `space`(`id`),
+    FOREIGN KEY (`service_types_id`) REFERENCES `service_type`(`id`)
+)
+    ENGINE = InnoDB;
 
 INSERT INTO `user`(`id`, `email`, `password_hash`, `last_name`, `first_name`)
 VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQnumlMmCpVdNZm', 'System', 'System'),
