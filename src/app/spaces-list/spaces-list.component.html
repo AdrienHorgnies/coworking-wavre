@@ -1,3 +1,9 @@
-<p>
-    spaces-list works!
-</p>
+<div *ngFor="let space of spaces | slice:0:10">
+    {{space.name}}
+    {{space.type}}
+    {{space.peopleCapacity}}
+    {{space.area}}
+    {{space.building.address}}
+    {{space.building.city.name}}
+    {{space.building.city.zipCode}}
+</div>
