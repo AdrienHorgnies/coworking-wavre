@@ -35,8 +35,9 @@
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <!--<input class="form-control" [type]="numberpers" [(ngModel)]="content" required>-->
-                                <input type="text" [(ngModel)]="content">
-                                <p style="color: black;">{{content}}</p>
+                                <div>
+                                <input type="number" [(ngModel)]="content" [ngModelOptions]="{standalone: true}">
+                            </div>
                                 <!--<select class="form-control">-->
                                     <!--<option>1</option>-->
                                     <!--<option>2</option>-->
@@ -56,39 +57,40 @@
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                Téléphone
+                                                <input type="number" value="{{content}}">
+                                                <!--<select>-->
+                                                    <!--<option>1</option>-->
+                                                    <!--<option>2</option>-->
+                                                    <!--<option>3</option>-->
+                                                <!--</select>-->
+                                                téléphone(s)
                                                 <label class="switch ">
                                                     <input type="checkbox" class="default">
                                                     <span class="slider"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                <select>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                </select>
-                                                Armoire
+                                                <input type="number" value="{{content}}">
+                                                <!--<select value="{{content}}">-->
+                                                    <!--<option>1</option>-->
+                                                    <!--<option>2</option>-->
+                                                    <!--<option>3</option>-->
+                                                <!--</select>-->
+                                                armoire(s)
                                                 <label class="switch ">
                                                     <input type="checkbox" class="primary">
                                                     <span class="slider"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                <!--<p> {{content}} </p>-->
-                                                <p>{{content}} Bureau</p>
+                                                {{content}} bureau(x)
                                                 <label class="switch ">
                                                     <input type="checkbox" class="success">
                                                     <span class="slider"></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                Chaise
+                                                {{content}} Chaise(s)
                                                 <label class="switch ">
                                                     <input type="checkbox" class="info">
                                                     <span class="slider"></span>

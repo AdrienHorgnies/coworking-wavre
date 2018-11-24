@@ -7,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingspaceComponent implements OnInit {
 
+    content = "";
+
     // todo: initialiser le nombre de personnes >1 et <capacity
     numberpers: string = "number";
 
-    public content: string = "";
 
     constructor() { }
 
