@@ -10,7 +10,6 @@
             <div class="wizard-container">
                 <div class="card wizard-card" data-color="red" id="wizard">
                     <form action="" method="">
-                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                         <div>
                             <h4 class="info-text" style="color: blue;">BUREAU PRIVATIF</h4>
                         </div>
@@ -27,73 +26,48 @@
                                 <span class="form-label">Date de fin</span>
                                 <input class="form-control" type="date" required>
 
-                                <!--<span class="form-label">Heure de début</span>-->
-                                <!--<input class="form-control" type="time" required>-->
-
-                                <!--<span class="form-label">Heure de fin</span>-->
-                                <!--<input class="form-control" type="time" required>-->
-
                                 <span class="form-label">Nombre de personnes</span>
-                                <!--<input class="form-control" [type]="numberpers" [(ngModel)]="content" required>-->
                                 <div>
-                                <input type="number" [(ngModel)]="content" [ngModelOptions]="{standalone: true}">
+                                <input class="form-control" type="number" min="1" max="10" [(ngModel)]="content" [ngModelOptions]="{standalone: true}" required>
                             </div>
-                                <!--<select class="form-control">-->
-                                    <!--<option>1</option>-->
-                                    <!--<option>2</option>-->
-                                    <!--<option>3</option>-->
-                                <!--</select>-->
-                                <!--<span class="select-arrow"></span>-->
-
-                                <!-- todo ne pas permettre d'indiquer un nombre d'équipement supérieur à ce qui est sélectionné dans le nombre de personne-->
-                                <!-- todo automatiser le nombre de bureau et chaises en fonction du nombre de personnes-->
 
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card" style="margin:50px 0">
                                         <!-- Default panel contents -->
-                                        <div class="card-header">Equipement</div>
+                                        <div class="card-header">Equipement en option</div>
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                <input type="number" value="{{content}}">
-                                                <!--<select>-->
-                                                    <!--<option>1</option>-->
-                                                    <!--<option>2</option>-->
-                                                    <!--<option>3</option>-->
-                                                <!--</select>-->
-                                                téléphone(s)
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="default">
-                                                    <span class="slider"></span>
+                                                <input type="number" min="1" max="{{content}}"  value="{{content}}">
+                                                &nbsp; téléphone(s)
+                                                <label class="">
+                                                    <!--<input type="checkbox" class="default">-->
+                                                    <span class=""></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                <input type="number" value="{{content}}">
-                                                <!--<select value="{{content}}">-->
-                                                    <!--<option>1</option>-->
-                                                    <!--<option>2</option>-->
-                                                    <!--<option>3</option>-->
-                                                <!--</select>-->
-                                                armoire(s)
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="primary">
-                                                    <span class="slider"></span>
+                                                <input type="number" min="1" max="{{content}}"  value="{{content}}">
+                                                &nbsp; armoire(s)
+                                                <label class="">
+                                                    <!--<input type="checkbox" class="primary">-->
+                                                    <span class=""></span>
+                                                </label>
+                                            </li>
+                                            <div class="card-header">Inclus dans le prix</div>
+                                            <li class="list-group-item">
+                                                &nbsp; {{content}} bureau(x)
+                                                <label class="">
+                                                    <!--<input type="" class="success">-->
+                                                    <span class=""></span>
                                                 </label>
                                             </li>
                                             <li class="list-group-item">
-                                                {{content}} bureau(x)
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="success">
-                                                    <span class="slider"></span>
-                                                </label>
-                                            </li>
-                                            <li class="list-group-item">
-                                                {{content}} Chaise(s)
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="info">
-                                                    <span class="slider"></span>
+                                                &nbsp; {{content}} Chaise(s)
+                                                <label class="">
+                                                    <!--<input type="" class="info">-->
+                                                    <span class=""></span>
                                                 </label>
                                             </li>
                                         </ul>
