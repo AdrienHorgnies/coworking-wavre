@@ -4,10 +4,8 @@ import com.ifosup.coworking.domain.Space;
 import com.ifosup.coworking.domain.enumeration.SpaceType;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
+import java.util.Arrays;
 
 import static com.ifosup.coworking.service.ConditionOperator.*;
 
@@ -20,13 +18,15 @@ public class SpaceSpecification implements Specification<Space> {
 
     @Override
     public Predicate toPredicate(Root<Space> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+        Path<String> path = path(root);
+
         if (criterion.operator == MIN) {
             return criteriaBuilder.greaterThanOrEqualTo(
-                root.get(criterion.key), criterion.value
+                path, criterion.value
             );
         } else if (criterion.operator == MAX) {
             return criteriaBuilder.lessThanOrEqualTo(
-                root.get(criterion.key), criterion.value
+                path, criterion.value
             );
         } else if (criterion.operator == EQUALS) {
             SpaceType value = null;
@@ -35,13 +35,33 @@ public class SpaceSpecification implements Specification<Space> {
             }
 
             return criteriaBuilder.equal(
-                root.get(criterion.key), value == null ? criterion.value : value
+                path, value == null ? criterion.value : value
             );
         } else if (criterion.operator == CONTAINS) {
             return criteriaBuilder.like(
-                root.get(criterion.key), "%" + criterion.value + "%"
+                path, "%" + criterion.value + "%"
             );
         }
         return null;
+    }
+
+    private Path<String> path(Root<Space> root) {
+        String[] attributes = criterion.key.split("\\.");
+
+        if (attributes.length == 1) {
+            return root.get(criterion.key);
+        }
+
+        String[] relationships = Arrays.copyOf(attributes, attributes.length - 1);
+        String finalAttribute = attributes[attributes.length - 1];
+
+        Join<Space, ?> join = root
+            .join(relationships[0], JoinType.INNER);
+
+        for (int idx = 1; idx < relationships.length; idx++) {
+            join = join.join(relationships[idx], JoinType.INNER);
+        }
+
+        return join.get(finalAttribute);
     }
 }
