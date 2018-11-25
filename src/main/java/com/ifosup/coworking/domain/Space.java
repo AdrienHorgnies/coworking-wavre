@@ -44,6 +44,11 @@ public class Space implements Serializable {
     @Column(name = "area", nullable = false)
     private Integer area;
 
+    @NotNull
+    @Min(0)
+    @Column(name = "price", nullable = false)
+    private float price;
+
     @ManyToOne(optional = false)
     @NotNull
     private Building building;
@@ -111,6 +116,19 @@ public class Space implements Serializable {
 
     public Space area(Integer area) {
         this.area = area;
+        return this;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Space price(float price) {
+        this.price = price;
         return this;
     }
 
