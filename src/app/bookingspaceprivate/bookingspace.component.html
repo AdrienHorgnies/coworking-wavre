@@ -84,9 +84,9 @@
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                              Courrier <span *ngIf = "display != display"> - 5,00 €</span>
-                                                <label class="switch ">
-                                                    <input type="checkbox" class="default"(click)="display">
+                                                Courrier <span *ngIf="!display"> - 5,00 €</span>
+                                                <label class="switch">
+                                                    <input (click)="display = !display" class="default" type="checkbox">
                                                     <span class="slider round"></span>
                                                 </label>
                                             </li>
