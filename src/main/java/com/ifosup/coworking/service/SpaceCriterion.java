@@ -1,11 +1,13 @@
 package com.ifosup.coworking.service;
 
 public class SpaceCriterion {
-    public String specificationKey;
+    public String key;
+    public ConditionOperator operator;
     public String value;
 
-    public SpaceCriterion(String specificationKey, String value) {
-        this.specificationKey = specificationKey;
+    public SpaceCriterion(String key, String operator, String value) {
+        this.key = key;
+        this.operator = ConditionOperator.valueOf(operator.toUpperCase());
         this.value = value;
     }
 }
