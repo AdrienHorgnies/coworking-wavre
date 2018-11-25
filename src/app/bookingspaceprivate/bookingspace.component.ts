@@ -12,7 +12,7 @@ export class BookingspaceComponent implements OnInit {
     content = '';
     date1: string = '25/02/2019';
     date2 = '';
-    dispay: boolean = true;
+    display: boolean = true;
 
     // todo: initialiser le nombre de personnes >1 et <capacity
     numberpers: string = 'number';

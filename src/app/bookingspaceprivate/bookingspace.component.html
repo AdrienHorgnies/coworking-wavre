@@ -9,7 +9,10 @@
             <!-- Wizard container -->
             <div class="wizard-container">
                 <div class="card wizard-card" data-color="red" id="wizard">
+                    <!--Formulaire-->
                     <form action="" method="">
+
+                        <!--todo: Récupère le nom de la salle et sa catégorie préalablement sélectionnés -->
                         <div>
                             <h3 class="info-text" style="color: darkblue;">NOM DE LA SALLE</h3>
                             <h4 class="info-text" style="color: #9c27b0;">BUREAU PRIVATIF</h4>
@@ -17,9 +20,11 @@
 
                         <div class="tab-content">
 
-                            <div>
-                                <!--<h5 class="info-text">Choisissez vos options de réservation </h5>-->
+                            <!--NgModel: va reprendre la valeur des input et l'afficher dans les données dynamiques-->
 
+                            <div>
+
+                                <!--todo: format date et valeurs par défaut date début (date du jour) et date de fin (1 mois plus tard)-->
 
                                 <span class="form-label">Date de début</span>
                                 <input class="form-control " type="date" [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" value="{{date1}}" required>
@@ -27,10 +32,14 @@
                                 <span class="form-label">Date de fin</span>
                                 <input class="form-control" type="date" [(ngModel)]="date2"  [ngModelOptions]="{standalone: true}" required>
 
+                                <!--todo: déterminer le nombre max de personnes à la capacité ax du bureau (récupérer valeur de la db)-->
+
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
                                 <input class="form-control" type="number" min="1" max="10" value="1" [(ngModel)]="content"  [ngModelOptions]="{standalone: true}" required>
                             </div>
+                                <!--todo: récupérer le prix de la db-->
+
                                 <br><span class="form-label" style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
                                 <br><span class="form-label">Du {{date1}} au {{date2}}</span>
 
@@ -38,52 +47,43 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="card" style="margin:50px 0">
-                                        <!-- Default panel contents -->
+
+                                        <!-- todo: Récupère dans la db les équipements en option -->
+                                        <!-- Ne peut pas dépasser la valeur de l'input: nombre de personnes-->
+                                        <!--todo: Le prix est affiché si valeur > 0 : Le champ est calculé en fct du nombre sélectionné dans l'input-->
+                                        <!--todo: si switch = true: afficher le prix-->
+
                                         <div class="card-header">Equipement en option</div>
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
                                                 <input type="number" min="0" max="{{content}}"  value="{{content}}">
                                                 &nbsp; téléphone(s) - 0,00 €
-                                                <label class="">
-                                                    <!--<input type="checkbox" class="default">-->
-                                                    <span class=""></span>
-                                                </label>
                                             </li>
                                             <li class="list-group-item">
                                                 <input type="number" min="0" max="{{content}}"  value="{{content}}">
                                                 &nbsp; armoire(s) - 0,00 €
-                                                <label class="">
-                                                    <!--<input type="checkbox" class="primary">-->
-                                                    <span class=""></span>
-                                                </label>
                                             </li>
                                             <div class="card-header">Inclus dans le prix</div>
                                             <li class="list-group-item">
                                                 &nbsp; {{content}} bureau(x)
-                                                <label class="">
-                                                    <!--<input type="" class="success">-->
-                                                    <span class=""></span>
-                                                </label>
                                             </li>
                                             <li class="list-group-item">
                                                 &nbsp; {{content}} Chaise(s)
-                                                <label class="">
-                                                    <!--<input type="" class="info">-->
-                                                    <span class=""></span>
-                                                </label>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="card" style="margin:50px 0">
+
                                         <!-- Default panel contents -->
+                                        <!--todo: si switch = true: afficher le prix-->
                                         <div class="card-header">Services en option</div>
 
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                              Courrier <span *ngIf = 'display'> - 5,00 €</span>
+                                              Courrier <span *ngIf = "display != display"> - 5,00 €</span>
                                                 <label class="switch ">
                                                     <input type="checkbox" class="default"(click)="display">
                                                     <span class="slider round"></span>
@@ -113,11 +113,13 @@
 
                                         </ul>
                                     </div>
+                                    <!--todo: total: champ calculé-->
                                     <span style="float:right;" class="form-label">TOTAL : {{total("30,00")}} €</span><br><br>
                                 </div>
 
                             </div>
                         </div>
+                                <!--todo: route-->
                                 <a style="float:left;" class="btn btn-info" href="#">Back</a>
                         <a style="float:right;" class="btn btn-primary" href="#">Réserver</a>
                 </div>
