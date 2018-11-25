@@ -3,6 +3,7 @@ package com.ifosup.coworking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -28,6 +29,11 @@ public class EquipmentType implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Min(0)
+    @Column(name = "price", nullable = false)
+    private float price;
+
     @ManyToMany(mappedBy = "equipmentTypes")
     @JsonIgnore
     private Set<Space> spaces = new HashSet<>();
@@ -50,6 +56,19 @@ public class EquipmentType implements Serializable {
 
     public EquipmentType name(String name) {
         this.name = name;
+        return this;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public EquipmentType price(float price) {
+        this.price = price;
         return this;
     }
 
