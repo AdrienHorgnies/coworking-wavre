@@ -267,7 +267,7 @@ INSERT INTO `space` (`id`, `name`, `type`, `people_capacity`, `area`, `price`, `
 VALUES (1, 'Salon', 'PRIVATE', 4, 20, 1000.0, 5),
     (2, 'Aile de Paillettes', 'PRIVATE', 6, 14, 1000.0, 10),
     (3, 'War Room', 'PRIVATE', 10, 20, 1000.0, 2),
-    (4, 'QG', 'PRIVATE', 6, 18, 1000.0, 12),
+    (4, 'Le QG', 'PRIVATE', 6, 18, 1000.0, 12),
     (5, 'L104', 'PRIVATE', 20, 40, 1000.0, 1),
     (6, 'L108', 'PRIVATE', 20, 45, 1000.0, 1),
     (7, 'Les guichets', 'PRIVATE', 4, 8, 1000.0, 8),
