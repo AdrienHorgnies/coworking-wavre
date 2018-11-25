@@ -12,6 +12,7 @@ import { LoginComponent } from "./login/login.component";
 import { MenuComponent } from './menu/menu.component';
 import { SpacesListComponent } from './spaces-list/spaces-list.component';
 import { HomeComponent } from './home/home.component';
+import { SpaceDetailComponent } from './space-detail/space-detail.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
         LoginComponent,
         MenuComponent,
         SpacesListComponent,
-        HomeComponent
+        HomeComponent,
+        SpaceDetailComponent
     ],
     imports: [
         BrowserModule,
