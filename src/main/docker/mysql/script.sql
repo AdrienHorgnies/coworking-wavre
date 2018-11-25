@@ -50,21 +50,24 @@ CREATE TABLE `space` (
     `people_capacity` INTEGER                            NOT NULL,
     `area`            INTEGER                            NOT NULL,
     `building_id`     BIGINT UNSIGNED                    NOT NULL,
+    `price`           FLOAT                              NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`building_id`) REFERENCES `building`(`id`)
 )
     ENGINE = InnoDB;
 
 CREATE TABLE `equipment_type` (
-    `id`   SERIAL      NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(25) NOT NULL,
+    `id`    SERIAL      NOT NULL AUTO_INCREMENT,
+    `name`  VARCHAR(25) NOT NULL,
+    `price` FLOAT       NOT NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
 
 CREATE TABLE `service_type` (
-    `id`   SERIAL      NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(25) NOT NULL,
+    `id`    SERIAL      NOT NULL AUTO_INCREMENT,
+    `name`  VARCHAR(25) NOT NULL,
+    `price` FLOAT       NOT NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
@@ -96,7 +99,6 @@ VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQn
  'Administrator'),
 (3, 'user@localhost', '$2a$10$.Vt5BdgeuqXd2rsqA.UlIOfLNYMO2Hse4BOI5UIn5.KZUcjRWW5di', 'User', 'User'),
 (4, 'anonymous@localhost', '$2a$10$C9nfAndBnWq9WRSDiVOQj.RJEbq6lwwaT1QUupAwrZfF2gsevTrOm', 'User', 'Anonymous');
-
 
 INSERT INTO `authority`(`name`)
 VALUES ('ROLE_ADMIN'),
@@ -261,50 +263,50 @@ VALUES (1, 'IFOSUP', 'Rue de la limite 16', 120),
     (24, 'Le Bloc Rouge', 'Avenue de la Mésopotamie 2', 47),
     (25, 'Le Berceau', 'Rue de l\'Encyclopédie', 48);
 
-INSERT INTO `space` (`id`, `name`, `type`, `people_capacity`, `area`, `building_id`)
-VALUES (1, 'Salon', 'PRIVATE', 4, 20, 5),
-    (2, 'Aile de Paillettes', 'PRIVATE', 6, 14, 10),
-    (3, 'War Room', 'PRIVATE', 10, 20, 2),
-    (4, 'QG', 'PRIVATE', 6, 18, 12),
-    (5, 'L104', 'PRIVATE', 20, 40, 1),
-    (6, 'L108', 'PRIVATE', 20, 45, 1),
-    (7, 'Les guichets', 'PRIVATE', 4, 8, 8),
-    (8, 'L\'aquarium A', 'PRIVATE', 8, 22, 6),
-    (9, 'L\'aquarium B', 'PRIVATE', 8, 22, 6),
-    (10, 'All Start Nest', 'OPEN', 12, 25, 6),
-    (11, 'Salle 1', 'OPEN', 60, 100, 8),
-    (12, 'Salle 2', 'OPEN', 80, 120, 8),
-    (13, 'B-Rocket Launch Pad', 'OPEN', 20, 60, 6),
-    (14, 'Salle des tatamis', 'OPEN', 40, 60, 1),
-    (15, 'La Tonte', 'OPEN', 10, 28, 9),
-    (16, 'L\'enjambée', 'OPEN', 16, 34, 7),
-    (17, 'L\'ossature', 'OPEN', 8, 20, 4),
-    (18, 'Le massage', 'OPEN', 8, 20, 4),
-    (19, 'Le hamam', 'OPEN', 4, 10, 4),
-    (20, 'Le sauna', 'OPEN', 10, 20, 4),
-    (21, 'Véranda', 'BUBBLE', 2, 16, 5),
-    (22, 'Chambre d\'Adrien', 'BUBBLE', 2, 20, 5),
-    (23, 'Nid Douillet', 'BUBBLE', 3, 12, 15),
-    (24, 'Lieu d\'aisance', 'BUBBLE', 1, 2, 7),
-    (25, 'Concentration', 'BUBBLE', 1, 3, 6),
-    (26, 'Le bureau de Nicobo', 'BUBBLE', 1, 20, 6);
+INSERT INTO `space` (`id`, `name`, `type`, `people_capacity`, `area`, `price`, `building_id`)
+VALUES (1, 'Salon', 'PRIVATE', 4, 20, 1000.0, 5),
+    (2, 'Aile de Paillettes', 'PRIVATE', 6, 14, 1000.0, 10),
+    (3, 'War Room', 'PRIVATE', 10, 20, 1000.0, 2),
+    (4, 'QG', 'PRIVATE', 6, 18, 1000.0, 12),
+    (5, 'L104', 'PRIVATE', 20, 40, 1000.0, 1),
+    (6, 'L108', 'PRIVATE', 20, 45, 1000.0, 1),
+    (7, 'Les guichets', 'PRIVATE', 4, 8, 1000.0, 8),
+    (8, 'L\'aquarium A', 'PRIVATE', 8, 22, 1000.0, 6),
+    (9, 'L\'aquarium B', 'PRIVATE', 8, 22, 1000.0, 6),
+    (10, 'All Start Nest', 'OPEN', 12, 25, 1000.0, 6),
+    (11, 'Salle 1', 'OPEN', 60, 100, 1000.0, 8),
+    (12, 'Salle 2', 'OPEN', 80, 120, 1000.0, 8),
+    (13, 'B-Rocket Launch Pad', 'OPEN', 20, 60, 1000.0, 6),
+    (14, 'Salle des tatamis', 'OPEN', 40, 60, 1000.0, 1),
+    (15, 'La Tonte', 'OPEN', 10, 28, 1000.0, 9),
+    (16, 'L\'enjambée', 'OPEN', 16, 34, 1000.0, 7),
+    (17, 'L\'ossature', 'OPEN', 8, 20, 1000.0, 4),
+    (18, 'Le massage', 'OPEN', 8, 20, 1000.0, 4),
+    (19, 'Le hamam', 'OPEN', 4, 10, 1000.0, 4),
+    (20, 'Le sauna', 'OPEN', 10, 20, 1000.0, 4),
+    (21, 'Véranda', 'BUBBLE', 2, 16, 1000.0, 5),
+    (22, 'Chambre d\'Adrien', 'BUBBLE', 2, 20, 1000.0, 5),
+    (23, 'Nid Douillet', 'BUBBLE', 3, 12, 1000.0, 15),
+    (24, 'Lieu d\'aisance', 'BUBBLE', 1, 2, 1000.0, 7),
+    (25, 'Concentration', 'BUBBLE', 1, 3, 1000.0, 6),
+    (26, 'Le bureau de Nicobo', 'BUBBLE', 1, 20, 1000.0, 6);
 
-INSERT INTO `equipment_type` (`id`, `name`)
-VALUES (1, 'Ordinateur'), -- disponible à la location
-    (2, 'Imprimante'),
-    (3, 'Téléphone'),
-    (4, 'Scanner'),
-    (5, 'Armoire'),
-    (6, 'Casier');
+INSERT INTO `equipment_type` (`id`, `name`, `price`)
+VALUES (1, 'Ordinateur', 100.0),
+    (2, 'Imprimante', 100.0),
+    (3, 'Téléphone', 100.0),
+    (4, 'Scanner', 100.0),
+    (5, 'Armoire', 100.0),
+    (6, 'Casier', 100.0);
 
-INSERT INTO `service_type` (`id`, `name`)
-VALUES (1, 'Accueil'),
-    (2, 'Courrier'),
-    (3, 'Secrétariat'),
-    (4, 'Catering'),
-    (5, 'Café'),
-    (6, 'Salle de réunion'),
-    (7, 'Domiciliation virtuelle');
+INSERT INTO `service_type` (`id`, `name`, `price`)
+VALUES (1, 'Accueil', 500.0),
+    (2, 'Courrier', 500.0),
+    (3, 'Secrétariat', 500.0),
+    (4, 'Catering', 500.0),
+    (5, 'Café', 500.0),
+    (6, 'Salle de réunion', 500.0),
+    (7, 'Domiciliation virtuelle', 500.0);
 
 INSERT INTO `space_equipment_type` (`spaces_id`, `equipment_types_id`)
 VALUES (1, 5),
