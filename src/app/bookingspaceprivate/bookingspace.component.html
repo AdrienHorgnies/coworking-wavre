@@ -39,6 +39,7 @@
                                 <input class="form-control" type="number" min="1" max="10" value="1" [(ngModel)]="content"  [ngModelOptions]="{standalone: true}" required>
                             </div>
                                 <!--todo: récupérer le prix de la db-->
+                                <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label" style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
                                 <br><span class="form-label">Du {{date1}} au {{date2}}</span>
