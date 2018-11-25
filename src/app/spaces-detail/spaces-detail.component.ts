@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpaceService} from "../space.service";
+import { SpaceService } from "../space.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -7,25 +7,27 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './spaces-detail.component.html',
   styleUrls: ['./spaces-detail.component.css']
 })
+
 export class SpacesDetailComponent implements OnInit {
     name : string;
     area: number;
     price: number;
-    resume: string
-
+    type: string;
+    buildingName: string;
+    adresse: string;
+    cityName: string;
+    zipCode: number;
+    peopleCapacity: number;
+    equipmentTypeName: string;
+    serviceTypesName: string
 
   constructor(private spaceService: SpaceService, private  route: ActivatedRoute) { }
 
   ngOnInit() {
-      
+
       const id = +this.route.snapshot.paramMap.get('id');
       this.name = this.spaceService.getSpaceById(id).name;
       this.area = this.spaceService.getSpaceById(id).area;
-      this.price = this.spaceService.getSpaceById(id).price;
-      this.resume = this.spaceService.getSpaceById(id).resume;
   }
-
-
-
 
 }

@@ -1,3 +1,68 @@
-<p>
-    spaces-list works!
-</p>
+<!--&lt;!&ndash; Boucle qui appelle la liste entière des espaces &ndash;&gt;-->
+<!--&lt;!&ndash; <div *ngFor="let space of spaces | slice: 0 : 2"> : si on ne veut afficher que les 2 premières &ndash;&gt;-->
+
+<!--<form id="filter">-->
+<!--<Label> Filter</Label>-->
+<!--<input type="text"/>-->
+<!--</form>-->
+<div>
+    <input type="text" [(ngModel)]="term">
+</div>
+
+
+<div class="form-check">
+
+    <div *ngFor="let space of spaces">
+        <input class="form-check-input" type="checkbox" name="exampleRadios" id="{{ space.category }}" value="{{ space.category }}" [(ngModel)]="term"  ng-checked="expression">
+
+        <label class="form-check-label" for="{{ space.category }}">
+            {{ space.category }}
+        </label>
+    </div>
+</div>
+
+
+<div *ngFor="let space of spaceslist |filter:term" >
+
+    <!--<cow-space [spaceModel]="space"></cow-space>-->
+
+    <div style="margin-top: 70px;" id="ads" class="row">
+        <!-- Category Card -->
+        <div class="col-md-4" >
+            <div class="card rounded">
+                <div class="card-image">
+                    <span class="card-notify-badge">Apd {{ space.price }} €</span>
+                    <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg"
+                         alt="Alternate Text"/>
+                </div>
+
+                <div class="card-body text-center">
+                    <div class="ad-title m-auto">
+                        <!-- Récupère le nom de chaque espace -->
+                        <h5>{{ space.name }}</h5>
+                        <h6>{{ space.category }}</h6>
+                        <p style="color: #bf062d;">{{ space.area }}m² - {{ space.capacity }} pers. max </p>
+                    </div>
+
+                    <div (click)="onClick(space.id)">
+                        <ul>
+                            <li type="buton" class="btn btn-primary" routerLink="/spacedetails" routerLinkActive="active">consulter</li>
+
+                        </ul>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-xs-12">
+    <router-outlet></router-outlet>
+</div>

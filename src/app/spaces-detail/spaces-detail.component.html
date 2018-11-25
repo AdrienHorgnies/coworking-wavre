@@ -1,11 +1,21 @@
-
-
-
 <div class="card-body text-center">
     <div class="ad-title m-auto">
+
+        <h1> Lieu de la salle : {{ buildingName}}</h1>
         <h2> {{ name }}</h2>
-        <p> LE prix est de {{ price }} €</p>
-        <p> {{ resume }} </p>
+        <p>Adresse : {{ adresse }}  </p>
+        <p>Ville : {{ cityName }} {{ zipCode }}</p>
+
+        <br>
+
+        <p>Type de salle : {{ type }} </p>
+        <p>Capacité de la salle : {{ peopleCapacity }}</p>
+        <p>{{ area }}</p>
+
+        <br>
+
+        <p>Type de service : {{ serviceTypesName }}</p>
+        <p>Disponibilité des équipements dans les salles : {{ equipmentTypeName }}</p>
     </div>
 </div>
 
