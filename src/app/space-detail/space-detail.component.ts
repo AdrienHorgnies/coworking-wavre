@@ -13,6 +13,7 @@ export class SpaceDetailComponent implements OnInit, OnDestroy {
 
     space: SpaceModel;
     spaceSubscription: Subscription;
+    displayReservationForm: boolean;
 
     constructor(private route: ActivatedRoute, private spaceService: SpaceService) {
     }

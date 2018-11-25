@@ -13,4 +13,7 @@
     {{space.building.address}}
     {{space.building.city.name}}
     {{space.building.city.zipCode}}
+    <button (click)="displayReservationForm = true" *ngIf="!displayReservationForm">Réserver</button>
+    <button (click)="displayReservationForm = false" *ngIf="displayReservationForm">Cacher le formulaire</button>
+    <cow-reservation-form *ngIf="displayReservationForm" [space]="space"></cow-reservation-form>
 </div>
