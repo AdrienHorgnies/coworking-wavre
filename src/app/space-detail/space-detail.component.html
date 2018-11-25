@@ -1,0 +1,16 @@
+<div *ngIf="space">
+    {{space.name}}
+    {{space.type}}
+    {{space.peopleCapacity}}
+    {{space.area}}
+    <div *ngFor="let service of space.building.serviceTypes">
+        {{service.name}}
+    </div>
+    <div *ngFor="let equipment of space.equipmentTypes">
+        {{equipment.name}}
+    </div>
+    {{space.building.name}}
+    {{space.building.address}}
+    {{space.building.city.name}}
+    {{space.building.city.zipCode}}
+</div>
