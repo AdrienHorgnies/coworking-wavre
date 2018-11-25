@@ -4,6 +4,8 @@ import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.api.util.ResponseUtil;
 import com.ifosup.coworking.domain.Space;
 import com.ifosup.coworking.repository.SpaceRepository;
+import com.ifosup.coworking.service.SpaceCriterion;
+import com.ifosup.coworking.service.SpaceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * REST controller for managing Space.
@@ -25,9 +30,11 @@ public class SpaceResource {
     private static final String ENTITY_NAME = "space";
     private final Logger log = LoggerFactory.getLogger(SpaceResource.class);
     private final SpaceRepository spaceRepository;
+    private final SpaceService spaceService;
 
-    public SpaceResource(SpaceRepository spaceRepository) {
+    public SpaceResource(SpaceRepository spaceRepository, SpaceService spaceService) {
         this.spaceRepository = spaceRepository;
+        this.spaceService = spaceService;
     }
 
     /**
@@ -79,6 +86,26 @@ public class SpaceResource {
     public List<Space> getAllSpaces() {
         log.debug("REST request to get all Spaces");
         return spaceRepository.findAllWithEagerRelationships();
+    }
+
+
+    /**
+     * GET /spaces/_search : get spaces corresponding to query.
+     *
+     * @param query the query the spaces must comply with
+     * @return The ResponseEntity with status 200 (OK) and the list of spaces in body
+     */
+    @GetMapping("/spaces/_search")
+    public List<Space> searchSpaces(@RequestParam(value = "query") String query) {
+        Pattern pattern = Pattern.compile("(.+?):(\\w+?),");
+        Matcher matcher = pattern.matcher(query + ",");
+
+        List<SpaceCriterion> spaceCriteria = new ArrayList<>();
+        while (matcher.find()) {
+            spaceCriteria.add(new SpaceCriterion(matcher.group(1), matcher.group(2)));
+        }
+
+        return spaceService.search(spaceCriteria);
     }
 
     /**
