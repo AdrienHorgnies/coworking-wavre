@@ -9,14 +9,13 @@ import {formatDate} from "@angular/common";
 })
 export class BookingspaceComponent implements OnInit {
 
-    content = "";
-    date1: string = "25/02/2019";
-
-    date2 = "";
-    // totaldate = {{date1}};
+    content = '';
+    date1: string = '25/02/2019';
+    date2 = '';
+    dispay: boolean = true;
 
     // todo: initialiser le nombre de personnes >1 et <capacity
-    numberpers: string = "number";
+    numberpers: string = 'number';
 
     total(montant: string): string {
         return montant;
