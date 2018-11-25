@@ -1,6 +1,7 @@
 package com.ifosup.coworking.service;
 
 import com.ifosup.coworking.domain.Space;
+import com.ifosup.coworking.domain.enumeration.SpaceType;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,8 +29,13 @@ public class SpaceSpecification implements Specification<Space> {
                 root.get(criterion.key), criterion.value
             );
         } else if (criterion.operator == EQUALS) {
+            SpaceType value = null;
+            if (criterion.key.equals("type")) {
+                value = SpaceType.valueOf(criterion.value);
+            }
+
             return criteriaBuilder.equal(
-                root.get(criterion.key), criterion.value
+                root.get(criterion.key), value == null ? criterion.value : value
             );
         } else if (criterion.operator == CONTAINS) {
             return criteriaBuilder.like(

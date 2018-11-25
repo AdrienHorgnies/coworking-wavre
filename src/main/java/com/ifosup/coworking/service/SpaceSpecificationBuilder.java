@@ -2,9 +2,11 @@ package com.ifosup.coworking.service;
 
 import com.ifosup.coworking.domain.Space;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpaceSpecificationBuilder {
 
@@ -24,10 +26,18 @@ public class SpaceSpecificationBuilder {
             return null;
         }
 
-        return null;
-//        List<Specification> specifications = params.stream()
-//            .map(SpaceSpecification::new)
-//            .reduce();
-//        }
+
+        List<Specification> specs = params.stream()
+            .map(SpaceSpecification::new)
+            .collect(Collectors.toList());
+
+        Specification result = specs.get(0);
+
+        for (int i = 1; i < params.size(); i++) {
+            result = Specifications
+                .where(result)
+                .and(specs.get(i));
+        }
+        return result;
     }
 }
