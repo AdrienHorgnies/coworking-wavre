@@ -7,6 +7,7 @@ export interface SpaceModel {
     type: string;
     peopleCapacity: number;
     area: number;
+    price: number;
     building: BuildingModel;
     equipmentTypes: Array<EquipmentTypeModel>
 }
