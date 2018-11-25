@@ -1,3 +1,54 @@
+<p>test</p>
+<div class="row">
+    <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}' class="col-md-4">
+
+        <div style="margin-top: 70px;" id="ads">
+
+            <!-- Category Card -->
+            <div>
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">Apd {{ space.price }} €</span>
+                        <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg"
+                             alt="Alternate Text"/>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div class="ad-title m-auto">
+                            <!-- Récupère le nom de chaque espace -->
+                            <h5>{{ space.name }}</h5>
+                            <h6>{{ space.type }}</h6>
+                            <p style="color: #bf062d;">{{ space.area }}m² - {{ space.peopleCapacity }} pers. max </p>
+                        </div>
+
+
+                        <div (click)="onClick(space.id)">
+                            <ul>
+                                <li type="buton" class="btn btn-primary" routerLink="/spacedetails"
+                                    routerLinkActive="active">consulter
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <router-outlet></router-outlet>
+</div>
+
+
 <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}'>
     <img [src]="imageService.get(space.imageUrl)">
     <p>{{space.imageCredit}}</p>
