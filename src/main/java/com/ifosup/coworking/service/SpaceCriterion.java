@@ -10,4 +10,13 @@ public class SpaceCriterion {
         this.operator = ConditionOperator.valueOf(operator.toUpperCase());
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "SpaceCriterion{" +
+            "key='" + key + '\'' +
+            ", operator=" + operator +
+            ", value='" + value + '\'' +
+            '}';
+    }
 }

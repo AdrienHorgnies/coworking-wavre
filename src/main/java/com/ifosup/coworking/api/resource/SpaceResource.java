@@ -97,13 +97,15 @@ public class SpaceResource {
      */
     @GetMapping("/spaces/_search")
     public List<Space> searchSpaces(@RequestParam(value = "query") String query) {
-        Pattern pattern = Pattern.compile("(.+?)\\.([^.]+):(\\w+?),");
+        Pattern pattern = Pattern.compile("(.+?)\\.([^.]+):([\\w ]+?),");
         Matcher matcher = pattern.matcher(query + ",");
 
         List<SpaceCriterion> spaceCriteria = new ArrayList<>();
         while (matcher.find()) {
             spaceCriteria.add(new SpaceCriterion(matcher.group(1), matcher.group(2), matcher.group(3)));
         }
+
+        log.debug("REST request to get Space matching query {}", spaceCriteria);
 
         return spaceService.search(spaceCriteria);
     }
