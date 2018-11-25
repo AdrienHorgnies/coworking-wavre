@@ -1,10 +1,40 @@
-<p>test</p>
+<!-- Recherche/Filtre -->
+
+
+<form class="form-vertical" role="form">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+
+            <label for="customRange">Budget</label>
+            <input class="custom-range" id="customRange" max="1000" min="50" name="points1" step="50" type="range">
+
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio">BUBBLE</label>
+            </div>
+
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio2" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio2">PRIVATE</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio3" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio2">OPEN</label>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<!-- Liste des espaces de coworking -->
 <div class="row">
     <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}' class="col-md-4">
-
         <div style="margin-top: 70px;" id="ads">
 
-            <!-- Category Card -->
+            <!-- CAffiche le prix de base -->
             <div>
                 <div class="card rounded">
                     <div class="card-image">
