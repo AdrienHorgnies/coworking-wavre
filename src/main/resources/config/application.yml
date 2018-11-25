@@ -23,7 +23,7 @@ spring:
         hibernate:
             ddl-auto: none
         #        again, this could be dangerous as it could expose passwords
-        show-sql: true
+        show-sql: false
         database-platform: org.hibernate.dialect.MySQLDialect
     jackson:
         deserialization:
