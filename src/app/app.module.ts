@@ -13,6 +13,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SpacesListComponent } from './spaces-list/spaces-list.component';
 import { HomeComponent } from './home/home.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
+import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SpaceDetailComponent } from './space-detail/space-detail.component';
         MenuComponent,
         SpacesListComponent,
         HomeComponent,
-        SpaceDetailComponent
+        SpaceDetailComponent,
+        ReservationFormComponent
     ],
     imports: [
         BrowserModule,
