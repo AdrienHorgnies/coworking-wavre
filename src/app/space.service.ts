@@ -14,8 +14,7 @@ export class SpaceService {
 
     constructor() {
     }
-
-
+    
     private listSpaces : SpaceModel[] =
         [
             {
