@@ -39,8 +39,8 @@
                 <div class="card rounded">
                     <div class="card-image">
                         <span class="card-notify-badge">Apd {{ space.price }} €</span>
-                        <img class="img-fluid" src="https://www.jobat.be/extra/img/cubicle_brodyworklounge2.jpg"
-                             alt="Alternate Text"/>
+                        <img class="img-fluid" [src]="imageService.get(space.imageUrl)"
+                             [alt]="space.imageCredit"/>
                     </div>
 
                     <div class="card-body text-center">
@@ -52,13 +52,9 @@
                         </div>
 
 
-                        <div (click)="onClick(space.id)">
-                            <ul>
-                                <li type="buton" class="btn btn-primary" routerLink="/spacedetails"
-                                    routerLinkActive="active">consulter
-                                </li>
-
-                            </ul>
+                        <div>
+                            <button type="button" class="btn btn-primary">consulter
+                            </button>
                         </div>
 
                         <div class="container">
@@ -76,17 +72,4 @@
 
 <div class="col-xs-12">
     <router-outlet></router-outlet>
-</div>
-
-
-<div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}'>
-    <img [src]="imageService.get(space.imageUrl)">
-    <p>{{space.imageCredit}}</p>
-    {{space.name}}
-    {{space.type}}
-    {{space.peopleCapacity}}
-    {{space.area}}
-    {{space.building.address}}
-    {{space.building.city.name}}
-    {{space.building.city.zipCode}}
 </div>
