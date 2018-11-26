@@ -57,3 +57,6 @@ allow-credentials: true
 max-age: 1800
 
     HTTP/1.1 201
+logging:
+    level:
+        com.ifosup.coworking: DEBUG
