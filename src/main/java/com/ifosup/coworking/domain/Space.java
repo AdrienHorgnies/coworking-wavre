@@ -49,6 +49,9 @@ public class Space implements Serializable {
     @Column(name = "price", nullable = false)
     private float price;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -135,6 +138,19 @@ public class Space implements Serializable {
 
     public Space price(float price) {
         this.price = price;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Space description(String description) {
+        this.description = description;
         return this;
     }
 

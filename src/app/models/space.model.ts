@@ -8,6 +8,7 @@ export interface SpaceModel {
     peopleCapacity: number;
     area: number;
     price: number;
+    description: string;
     imageUrl: string;
     imageCredit: string;
     building: BuildingModel;
