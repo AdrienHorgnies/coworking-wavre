@@ -3,6 +3,7 @@ import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { ImageService } from "../image.service";
 
 @Component({
     selector: 'cow-space-detail',
@@ -15,7 +16,7 @@ export class SpaceDetailComponent implements OnInit, OnDestroy {
     spaceSubscription: Subscription;
     displayReservationForm: boolean;
 
-    constructor(private route: ActivatedRoute, private spaceService: SpaceService) {
+    constructor(private route: ActivatedRoute, private spaceService: SpaceService, public imageService: ImageService) {
     }
 
     ngOnInit() {
