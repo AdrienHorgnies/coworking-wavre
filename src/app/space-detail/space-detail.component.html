@@ -61,8 +61,6 @@
                                        [value]='displayReservationForm ? "Cacher" : "Réserver"'
                                        class='btn btn-next btn-fill btn-danger btn-wd'
                                        type='button'/>
-                                <cow-reservation-form *ngIf="displayReservationForm"
-                                                      [space]="space"></cow-reservation-form>
                             </div>
 
                             <div class="clearfix"></div>
@@ -72,4 +70,6 @@
             </div>
         </div> <!-- row -->
     </div> <!--  big container -->
+    <cow-reservation-form *ngIf="displayReservationForm"
+                          [space]="space"></cow-reservation-form>
 </div>
