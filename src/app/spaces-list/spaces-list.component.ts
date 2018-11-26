@@ -12,7 +12,6 @@ import { ImageService } from "../image.service";
 export class SpacesListComponent implements OnInit, OnDestroy {
 
     spaces: Array<SpaceModel>;
-
     spacesSubscription: Subscription;
 
     constructor(private spaceService: SpaceService, public imageService: ImageService) {

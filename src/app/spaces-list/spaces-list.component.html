@@ -1,11 +1,75 @@
-<div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}'>
-    <img [src]="imageService.get(space.imageUrl)">
-    <p>{{space.imageCredit}}</p>
-    {{space.name}}
-    {{space.type}}
-    {{space.peopleCapacity}}
-    {{space.area}}
-    {{space.building.address}}
-    {{space.building.city.name}}
-    {{space.building.city.zipCode}}
+<!-- Recherche/Filtre -->
+
+
+<form class="form-vertical" role="form">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+
+            <label for="customRange">Budget</label>
+            <input class="custom-range" id="customRange" max="1000" min="50" name="points1" step="50" type="range">
+
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio">BUBBLE</label>
+            </div>
+
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio2" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio2">PRIVATE</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input class="custom-control-input" id="customRadio3" name="example" type="radio" value="customEx">
+                <label class="custom-control-label" for="customRadio2">OPEN</label>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+<!-- Liste des espaces de coworking -->
+<div class="row">
+    <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}' class="col-md-4">
+        <div style="margin-top: 70px;" id="ads">
+
+            <!-- CAffiche le prix de base -->
+            <div>
+                <div class="card rounded">
+                    <div class="card-image">
+                        <span class="card-notify-badge">Apd {{ space.price }} €</span>
+                        <img class="img-fluid" [src]="imageService.get(space.imageUrl)"
+                             [alt]="space.imageCredit"/>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <div class="ad-title m-auto">
+                            <!-- Récupère le nom de chaque espace -->
+                            <h5>{{ space.name }}</h5>
+                            <h6>{{ space.type }}</h6>
+                            <p style="color: #bf062d;">{{ space.area }}m² - {{ space.peopleCapacity }} pers. max </p>
+                        </div>
+
+
+                        <div>
+                            <button type="button" class="btn btn-primary">consulter
+                            </button>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <router-outlet></router-outlet>
 </div>

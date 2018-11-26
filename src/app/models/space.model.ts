@@ -4,7 +4,7 @@ import { EquipmentTypeModel } from "./equipmentType.model";
 export interface SpaceModel {
     id: number;
     name: string;
-    type: string;
+    type: 'BUBBLE' | 'PRIVATE' | 'OPEN';
     peopleCapacity: number;
     area: number;
     price: number;
