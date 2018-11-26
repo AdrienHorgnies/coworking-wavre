@@ -1,25 +1,94 @@
-<div *ngIf="space">
-    <img [src]="imageService.get(space.imageUrl)">
-    <p>{{space.imageCredit}}</p>
-    <h1>{{space.name}}</h1>
-    <p>{{space.description}}</p>
-    {{space.type}}
-    {{space.peopleCapacity}}
-    {{space.area}}
-    {{space.price}}
-    <div *ngFor="let service of space.building.serviceTypes">
-        {{service.name}}
-        {{service.price}}
-    </div>
-    <div *ngFor="let equipment of space.equipmentTypes">
-        {{equipment.name}}
-        {{equipment.price}}
-    </div>
-    {{space.building.name}}
-    {{space.building.address}}
-    {{space.building.city.name}}
-    {{space.building.city.zipCode}}
-    <button (click)="displayReservationForm = true" *ngIf="!displayReservationForm">Réserver</button>
-    <button (click)="displayReservationForm = false" *ngIf="displayReservationForm">Cacher le formulaire</button>
-    <cow-reservation-form *ngIf="displayReservationForm" [space]="space"></cow-reservation-form>
-</div>
+<div class="image-container set-full-height">
+
+    <!--   Big container   -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <!-- Wizard container -->
+                <div class="wizard-container">
+                    <div class="card wizard-card" data-color="red" id="wizard">
+                        <form action="" method="">
+                            <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+
+                            <div class="wizard-header">
+                                <h3 class="wizard-title">
+                                    {{space.name}}
+                                </h3>
+                                <h5>     {{space.building.name}}
+                                    {{space.building.address}}
+                                   </h5>
+
+
+                                <h5>
+                                    {{space.building.city.zipCode}}
+                                    {{space.building.city.name}} </h5>
+
+                            </div>
+
+
+                            <div class="tab-content">
+                                <div  id="details">
+                                    <div class="row">
+
+                                        <div *ngFor="let service of space.building.serviceTypes">
+                                            {{service.name}}
+                                            {{service.price}} €
+                                        </div>
+                                        <div *ngFor="let equipment of space.equipmentTypes">
+                                            {{equipment.name}}
+                                            {{equipment.price}} €
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="wizard-footer">
+                                <div class="pull-right">
+
+
+                                    <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' (click)="displayReservationForm = true" *ngIf="!displayReservationForm" value='Réserver'/>
+                                    <input type='button' class='btn btn-next btn-fill btn-danger btn-wd' (click)="displayReservationForm = false" *ngIf="displayReservationForm" value='Cacher'/>
+                                    <cow-reservation-form *ngIf="displayReservationForm" [space]="space"></cow-reservation-form>
+
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div> <!-- wizard container -->
+            </div>
+        </div> <!-- row -->
+    </div> <!--  big container -->
+
+
+
+
+    <!--<div *ngIf="space">-->
+    <!--{{space.name}}-->
+    <!--{{space.type}}-->
+    <!--{{space.peopleCapacity}}-->
+    <!--{{space.area}}-->
+    <!--{{space.price}}-->
+    <!--<div *ngFor="let service of space.building.serviceTypes">-->
+        <!--{{service.name}}-->
+        <!--{{service.price}}-->
+    <!--</div>-->
+    <!--<div *ngFor="let equipment of space.equipmentTypes">-->
+        <!--{{equipment.name}}-->
+        <!--{{equipment.price}}-->
+    <!--</div>-->
+    <!--{{space.building.name}}-->
+    <!--{{space.building.address}}-->
+        <!--{{space.building.city.zipCode}}-->
+    <!--{{space.building.city.name}}-->
+
+    <!--<button (click)="displayReservationForm = true" *ngIf="!displayReservationForm">Réserver</button>-->
+    <!--<button (click)="displayReservationForm = false" *ngIf="displayReservationForm">Cacher le formulaire</button>-->
+    <!--<cow-reservation-form *ngIf="displayReservationForm" [space]="space"></cow-reservation-form>-->
+<!--</div>-->
