@@ -23,7 +23,7 @@ public class ImageResource {
     public void getImage(@PathVariable String image, HttpServletResponse response) throws IOException {
         log.debug("REST request to get Image : {}", image);
 
-        ClassPathResource imgFile = new ClassPathResource("images/coworking-spaces/" + image);
+        ClassPathResource imgFile = new ClassPathResource("public/images/coworking-spaces/" + image);
 
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         StreamUtils.copy(imgFile.getInputStream(), response.getOutputStream());
