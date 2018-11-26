@@ -103,16 +103,16 @@ VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQn
 (4, 'anonymous@localhost', '$2a$10$C9nfAndBnWq9WRSDiVOQj.RJEbq6lwwaT1QUupAwrZfF2gsevTrOm', 'User', 'Anonymous');
 
 INSERT INTO `authority`(`name`)
-VALUES ('ROLE_ADMIN'),
-    ('ROLE_USER'),
-    ('ROLE_ANONYMOUS');
+VALUES ('ADMIN'),
+    ('USER'),
+    ('ANONYMOUS');
 
 INSERT INTO `user_authority`(`user_id`, `authority_name`)
-VALUES (1, 'ROLE_ADMIN'),
-    (1, 'ROLE_USER'),
-    (2, 'ROLE_ADMIN'),
-    (2, 'ROLE_USER'),
-    (3, 'ROLE_USER');
+VALUES (1, 'ADMIN'),
+    (1, 'USER'),
+    (2, 'ADMIN'),
+    (2, 'USER'),
+    (3, 'USER');
 
 INSERT INTO `city` (`id`, `name`, `zip_code`)
 VALUES (1, 'Archennes', 1390),
