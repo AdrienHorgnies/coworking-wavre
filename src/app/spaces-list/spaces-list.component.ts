@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
+import { ImageService } from "../image.service";
 
 @Component({
     selector: 'cow-spaces-list',
@@ -14,7 +15,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
 
     spacesSubscription: Subscription;
 
-    constructor(private spaceService: SpaceService) {
+    constructor(private spaceService: SpaceService, public imageService: ImageService) {
     }
 
     ngOnInit() {

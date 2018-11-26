@@ -1,4 +1,5 @@
 <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}'>
+    <img [src]="imageService.get(space.imageUrl)">
     {{space.name}}
     {{space.type}}
     {{space.peopleCapacity}}
