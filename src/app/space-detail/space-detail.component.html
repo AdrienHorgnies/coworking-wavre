@@ -8,20 +8,19 @@
                 <div class="wizard-container">
                     <div class="card wizard-card" data-color="red" id="wizard">
                         <form action="" method="">
-                            <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
 
                             <div class="wizard-header">
                                 <h3 class="wizard-title">
                                     {{space.name}}
                                 </h3>
                                 <h5>     {{space.building.name}}
-                                    {{space.building.address}}
+
                                    </h5>
 
-
-                                <h5>
+                                <h6>
+                                    {{space.building.address}} -
                                     {{space.building.city.zipCode}}
-                                    {{space.building.city.name}} </h5>
+                                    {{space.building.city.name}} </h6>
 
                             </div>
 
@@ -30,14 +29,36 @@
                                 <div  id="details">
                                     <div class="row">
 
-                                        <div *ngFor="let service of space.building.serviceTypes">
-                                            {{service.name}}
-                                            {{service.price}} €
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card" style="margin:50px 0">
+
+
+                                                        <div class="card-header">Description</div>
+
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                               blablablabla
+                                                            </li>
+                                                            <li class="list-group-item">
+                                                                WIFI GRATUIT
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                                        <div *ngFor="let equipment of space.equipmentTypes">
-                                            {{equipment.name}}
-                                            {{equipment.price}} €
-                                        </div>
+
+                                        <!--<div *ngFor="let service of space.building.serviceTypes">-->
+                                            <!--{{service.name}}-->
+                                            <!--{{service.price}} €-->
+                                        <!--</div>-->
+                                        <!--<div *ngFor="let equipment of space.equipmentTypes">-->
+                                            <!--{{equipment.name}}-->
+                                            <!--{{equipment.price}} €-->
+                                        <!--</div>-->
 
 
 
