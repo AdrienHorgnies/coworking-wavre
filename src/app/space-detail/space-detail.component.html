@@ -1,7 +1,8 @@
 <div *ngIf="space">
     <img [src]="imageService.get(space.imageUrl)">
     <p>{{space.imageCredit}}</p>
-    {{space.name}}
+    <h1>{{space.name}}</h1>
+    <p>{{space.description}}</p>
     {{space.type}}
     {{space.peopleCapacity}}
     {{space.area}}
