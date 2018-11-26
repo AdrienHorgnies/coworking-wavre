@@ -1,3 +1,137 @@
-<p>
-    reservation for {{space.name}}
-</p>
+<!--   Big container   -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!-- Wizard container -->
+            <div class="wizard-container">
+                <div class="card wizard-card" data-color="red" id="wizard">
+                    <!--Formulaire-->
+                    <form action="" method="">
+
+                        <!--todo: Récupère le nom de la salle et sa catégorie préalablement sélectionnés -->
+                        <div>
+                            <h3 class="info-text" style="color: darkblue;">NOM DE LA SALLE</h3>
+                            <h4 class="info-text" style="color: #9c27b0;">BUREAU PRIVATIF</h4>
+                        </div>
+
+                        <div class="tab-content">
+
+                            <!--NgModel: va reprendre la valeur des input et l'afficher dans les données dynamiques-->
+
+                            <div>
+
+                                <!--todo: format date et valeurs par défaut date début (date du jour) et date de fin (1 mois plus tard)-->
+
+                                <span class="form-label">Date de début</span>
+                                <input [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" class="form-control "
+                                       required type="date" value="{{date1}}">
+
+                                <span class="form-label">Date de fin</span>
+                                <input [(ngModel)]="date2" [ngModelOptions]="{standalone: true}" class="form-control"
+                                       required type="date">
+
+                                <!--todo: déterminer le nombre max de personnes à la capacité ax du bureau (récupérer valeur de la db)-->
+
+                                <span class="form-label">Nombre de personnes</span>
+                                <div>
+                                    <input [(ngModel)]="content" [ngModelOptions]="{standalone: true}"
+                                           class="form-control" max="10" min="1" required type="number" value="1">
+                                </div>
+                                <!--todo: récupérer le prix de la db-->
+                                <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
+
+                                <br><span class="form-label"
+                                          style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
+                                <br><span class="form-label">Du {{date1}} au {{date2}}</span>
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card" style="margin:50px 0">
+
+                                                <!-- todo: Récupère dans la db les équipements en option -->
+                                                <!-- Ne peut pas dépasser la valeur de l'input: nombre de personnes-->
+                                                <!--todo: Le prix est affiché si valeur > 0 : Le champ est calculé en fct du nombre sélectionné dans l'input-->
+                                                <!--todo: si switch = true: afficher le prix-->
+
+                                                <div class="card-header">Equipement en option</div>
+
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <input max="{{content}}" min="0" type="number"
+                                                               value="{{content}}">
+                                                        &nbsp; téléphone(s) - 0,00 €
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <input max="{{content}}" min="0" type="number"
+                                                               value="{{content}}">
+                                                        &nbsp; armoire(s) - 0,00 €
+                                                    </li>
+                                                    <div class="card-header">Inclus dans le prix</div>
+                                                    <li class="list-group-item">
+                                                        &nbsp; {{content}} bureau(x)
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        &nbsp; {{content}} Chaise(s)
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card" style="margin:50px 0">
+
+                                                <!-- Default panel contents -->
+                                                <!--todo: si switch = true: afficher le prix-->
+                                                <div class="card-header">Services en option</div>
+
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        Courrier <span *ngIf="!display"> - 5,00 €</span>
+                                                        <label class="switch">
+                                                            <input (click)="display = !display" class="default"
+                                                                   type="checkbox">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Café - 0,00 €
+                                                        <label class="switch">
+                                                            <input class="primary" type="checkbox">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Scanner - 0,00 €
+                                                        <label class="switch ">
+                                                            <input class="success" type="checkbox">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        Photocopieuse - 0,00 €
+                                                        <label class="switch ">
+                                                            <input class="info" type="checkbox">
+                                                            <span class="slider round"></span>
+                                                        </label>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <!--todo: total: champ calculé-->
+                                            <span class="form-label"
+                                                  style="float:right;">TOTAL : total("30,00") €</span><br><br>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!--todo: route-->
+                                <a class="btn btn-info" href="#" style="float:left;">Back</a>
+                                <a class="btn btn-primary" href="#" style="float:right;">Réserver</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- wizard container -->
+        </div>
+    </div> <!-- row -->
+</div> <!--  big container -->
