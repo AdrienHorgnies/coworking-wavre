@@ -6,16 +6,17 @@ import { RouterModule } from "@angular/router";
 import { Ng5SliderModule } from 'ng5-slider';
 import { DateValueAccessorModule } from "angular-date-value-accessor";
 
-import { ROUTES } from "./app.routes";
+import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-import { JwtInterceptorService } from "./jwt-interceptor.service";
-import { LoginComponent } from "./login/login.component";
+import { JwtInterceptorService } from './jwt-interceptor.service';
+import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { SpacesListComponent } from './spaces-list/spaces-list.component';
 import { HomeComponent } from './home/home.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
+import { ProfilComponent } from './profil/profil.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
         SpacesListComponent,
         HomeComponent,
         SpaceDetailComponent,
-        ReservationFormComponent
+        ReservationFormComponent,
+        ProfilComponent
     ],
     imports: [
         BrowserModule,
