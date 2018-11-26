@@ -52,6 +52,9 @@ public class Space implements Serializable {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "image_credit")
+    private String imageCredit;
+
     @ManyToOne(optional = false)
     @NotNull
     private Building building;
@@ -145,6 +148,19 @@ public class Space implements Serializable {
 
     public Space imageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public String getImageCredit() {
+        return imageCredit;
+    }
+
+    public void setImageCredit(String imageCredit) {
+        this.imageCredit = imageCredit;
+    }
+
+    public Space imageCredit(String imageCredit) {
+        this.imageCredit = imageCredit;
         return this;
     }
 

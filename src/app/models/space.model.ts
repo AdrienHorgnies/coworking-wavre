@@ -9,6 +9,7 @@ export interface SpaceModel {
     area: number;
     price: number;
     imageUrl: string;
+    imageCredit: string;
     building: BuildingModel;
     equipmentTypes: Array<EquipmentTypeModel>
 }
