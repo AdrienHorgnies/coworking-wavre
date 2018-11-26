@@ -40,23 +40,21 @@ coworking:
         allowed-methods: POST, PUT, GET, DELETE, OPTIONS
         allowed-headers: "*"
         exposed-headers:
-        - X-Content-Type-Options
-        - X-XSS-Protection
-        - Cache-Control
-        - Pragma
-        - Expires
-        - X-Frame-Options
-        - Access-Control-Allow-Origin
-        - Vary
-        - Access-Control-Expose-Headers
-        - Access-Control-Allow-Credentials
-        - Authorization
-        - Content-Length
-        - Date
-allow-credentials: true
-max-age: 1800
-
-    HTTP/1.1 201
+            - X-Content-Type-Options
+            - X-XSS-Protection
+            - Cache-Control
+            - Pragma
+            - Expires
+            - X-Frame-Options
+            - Access-Control-Allow-Origin
+            - Vary
+            - Access-Control-Expose-Headers
+            - Access-Control-Allow-Credentials
+            - Authorization
+            - Content-Length
+            - Date
+        allow-credentials: true
+        max-age: 1800
 logging:
     level:
         com.ifosup.coworking: DEBUG
