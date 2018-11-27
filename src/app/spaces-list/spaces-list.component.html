@@ -2,7 +2,8 @@
 
 <form action="">
     <div class="form-group">
-        <select (ngModelChange)="onFilterFormChanges()" [(ngModel)]="filters.type.value" class="form-control"
+        <select (ngModelChange)="filters.type.value = $event; onFilterFormChanges()" [(ngModel)]="filters.type.value"
+                class="form-control"
                 id="space-type-filter" name="space-type">
             <option disabled selected value="BUBBLE">Type d'espace:</option>
             <option [value]="null">Tous</option>

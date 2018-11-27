@@ -19,4 +19,11 @@ export class SpaceService {
     get(id: number) {
         return this.http.get<SpaceModel>(`${environment.apiUrl}/spaces/${id}`);
     }
+
+    search(query: string) {
+        if (query) {
+            return this.http.get<Array<SpaceModel>>(`${environment.apiUrl}/spaces/_search?query=${query}`);
+        }
+        return this.list();
+    }
 }

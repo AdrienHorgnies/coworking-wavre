@@ -14,6 +14,8 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     spaces: Array<SpaceModel>;
     spacesSubscription: Subscription;
 
+    searchSubscription: Subscription;
+
     filters = {
         priceMin: {
             key: 'price.min',
@@ -40,8 +42,18 @@ export class SpacesListComponent implements OnInit, OnDestroy {
             .join(",");
     }
 
+
     onFilterFormChanges() {
-        console.log(this.buildQuery());
+        this.ngOnDestroy();
+
+        const query = this.buildQuery();
+
+        if (query) {
+            console.log(this.buildQuery());
+            this.searchSubscription = this.spaceService.search(query).subscribe(spaces => this.spaces = spaces);
+        } else {
+            this.spacesSubscription = this.spaceService.list().subscribe(spaces => this.spaces = spaces);
+        }
     }
 
     ngOnInit() {
@@ -51,6 +63,9 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         if (this.spacesSubscription) {
             this.spacesSubscription.unsubscribe();
+        }
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe();
         }
     }
 }
