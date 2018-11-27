@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ProfilComponent } from './profil/profil.component';
+import {TabModule} from 'angular-tabs-component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ProfilComponent } from './profil/profil.component';
         RouterModule.forRoot(ROUTES),
         Ng5SliderModule,
         DateValueAccessorModule
+        TabModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
