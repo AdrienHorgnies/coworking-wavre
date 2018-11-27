@@ -22,4 +22,9 @@ public interface SpaceRepository extends JpaRepository<Space, Long>, JpaSpecific
     @Query("select space from Space space left join fetch space.equipmentTypes where space.id =:id")
     Space findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select min(price) from Space")
+    Integer findMinPrice();
+
+    @Query("select max(price) from Space")
+    Integer findMaxPrice();
 }

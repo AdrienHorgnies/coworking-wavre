@@ -1,31 +1,31 @@
 <!-- Recherche/Filtre -->
 
-
-<form class="form-vertical" role="form">
-    <div class="form-row">
-        <div class="col-md-4 mb-3">
-
-            <label for="customRange">Budget</label>
-            <input class="custom-range" id="customRange" max="1000" min="50" name="points1" step="50" type="range">
-
-
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio">BUBBLE</label>
-            </div>
-
-
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio2" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio2">PRIVATE</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio3" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio2">OPEN</label>
-            </div>
-        </div>
+<form action="">
+    <div class="form-group">
+        <select (ngModelChange)="filters.type.value = $event; onFilterFormChanges()" [(ngModel)]="filters.type.value"
+                class="form-control"
+                id="space-type-filter" name="space-type">
+            <option disabled selected value="BUBBLE">Type d'espace:</option>
+            <option [value]="null">Tous</option>
+            <option value="BUBBLE">Bubble</option>
+            <option value="PRIVATE">Private</option>
+            <option value="OPEN">Open</option>
+        </select>
     </div>
 
+    <div class="form-group">
+        <label for="price-min">Prix min :</label>
+        <input (ngModelChange)="filters.priceMin.value = $event; onFilterFormChanges()"
+               [(ngModel)]="filters.priceMin.value" class="form-control"
+               id="price-min" max="1000" min="0" name="price-min" type="number" value="200">
+    </div>
+
+    <div class="form-group">
+        <label for="price-max">Prix max :</label>
+        <input (ngModelChange)="filters.priceMax.value = $event; onFilterFormChanges()"
+               [(ngModel)]="filters.priceMax.value" class="form-control"
+               id="price-max" max="1000" min="0" name="price-max" type="number" value="800">
+    </div>
 </form>
 
 
