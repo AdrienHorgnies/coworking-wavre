@@ -15,13 +15,15 @@
 
     <div class="form-group">
         <label for="price-min">Prix min :</label>
-        <input (ngModelChange)="onFilterFormChanges()" [(ngModel)]="filters.priceMin.value" class="form-control"
+        <input (ngModelChange)="filters.priceMin.value = $event; onFilterFormChanges()"
+               [(ngModel)]="filters.priceMin.value" class="form-control"
                id="price-min" max="1000" min="0" name="price-min" type="number" value="200">
     </div>
 
     <div class="form-group">
         <label for="price-max">Prix max :</label>
-        <input (ngModelChange)="onFilterFormChanges()" [(ngModel)]="filters.priceMax.value" class="form-control"
+        <input (ngModelChange)="filters.priceMax.value = $event; onFilterFormChanges()"
+               [(ngModel)]="filters.priceMax.value" class="form-control"
                id="price-max" max="1000" min="0" name="price-max" type="number" value="800">
     </div>
 </form>

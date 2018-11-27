@@ -26,4 +26,12 @@ export class SpaceService {
         }
         return this.list();
     }
+
+    minPrice() {
+        return this.http.get<number>(`${environment.apiUrl}/spaces/price/min`);
+    }
+
+    maxPrice() {
+        return this.http.get<number>(`${environment.apiUrl}/spaces/price/max`);
+    }
 }

@@ -15,6 +15,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     spacesSubscription: Subscription;
 
     searchSubscription: Subscription;
+    subscriptions: Array<Subscription> = new Array<Subscription>();
 
     filters = {
         priceMin: {
@@ -57,15 +58,15 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.spacesSubscription = this.spaceService.list().subscribe(spaces => this.spaces = spaces);
+        this.subscriptions.push(this.spaceService.list().subscribe(spaces => this.spaces = spaces));
+        this.subscriptions.push(this.spaceService.minPrice().subscribe(value => this.filters.priceMin.value = value));
+        this.subscriptions.push(this.spaceService.maxPrice().subscribe(value => this.filters.priceMax.value = value));
     }
 
     ngOnDestroy() {
-        if (this.spacesSubscription) {
-            this.spacesSubscription.unsubscribe();
-        }
-        if (this.searchSubscription) {
-            this.searchSubscription.unsubscribe();
-        }
+        this.subscriptions.forEach(sub => {
+            sub.unsubscribe();
+        });
+        this.subscriptions = new Array<Subscription>();
     }
 }
