@@ -1,32 +1,24 @@
 <!-- Recherche/Filtre -->
 
 
-<form class="form-vertical" role="form">
-    <div class="form-row">
-        <div class="col-md-4 mb-3">
+<div class="form-group">
+    <select class="form-control" id="space-type-filter" name="space-type">
+        <option disabled selected value="BUBBLE">Type d'espace:</option>
+        <option value="ALL">Tous</option>
+        <option value="BUBBLE">Bubble</option>
+        <option value="PRIVATE">Private</option>
+        <option value="OPEN">Open</option>
+    </select>
+</div>
 
-            <label for="customRange">Budget</label>
-            <input class="custom-range" id="customRange" max="1000" min="50" name="points1" step="50" type="range">
-
-
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio">BUBBLE</label>
-            </div>
-
-
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio2" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio2">PRIVATE</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input class="custom-control-input" id="customRadio3" name="example" type="radio" value="customEx">
-                <label class="custom-control-label" for="customRadio2">OPEN</label>
-            </div>
-        </div>
-    </div>
-
-</form>
+<div class="form-group">
+    <label for="price-min">Prix min :</label>
+    <input type="number" name="price-min" id="price-min" value="200" min="0" max="1000" class="form-control">
+</div>
+<div class="form-group">
+    <label for="price-max">Prix max :</label>
+    <input type="number" name="price-max" id="price-max" value="800" min="0" max="1000" class="form-control">
+</div>
 
 
 <!-- Liste des espaces de coworking -->
