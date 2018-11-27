@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ProfilComponent } from './profil/profil.component';
+import {TabModule} from 'angular-tabs-component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { ProfilComponent } from './profil/profil.component';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
+        TabModule,
         RouterModule.forRoot(ROUTES)
     ],
     providers: [
