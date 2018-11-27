@@ -29,7 +29,7 @@ import java.util.Collections;
 @RequestMapping("api")
 public class AuthenticationController {
 
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+    private final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
     private final UserService userService;
 
@@ -51,6 +51,7 @@ public class AuthenticationController {
 
     @PostMapping("register")
     public ResponseEntity register(@RequestBody @Valid RegistrationDto registrationDto, HttpServletResponse response) {
+        log.debug("REST Request to register user {}", registrationDto.email);
         if (registrationDto.password.length() < coworkingProperties.getSecurity().getMinPasswordLength()) {
             return new ResponseEntity<>("Password length should be at least " + coworkingProperties.getSecurity().getMinPasswordLength(), HttpStatus.BAD_REQUEST);
         }
@@ -67,12 +68,13 @@ public class AuthenticationController {
 
     @PostMapping("authenticate")
     public ResponseEntity authenticate(@RequestBody @Valid CredentialsDto credentialsDto, HttpServletResponse response) {
+        log.debug("REST Request to authenticate user {}", credentialsDto.email);
         try {
             setAuthorization(credentialsDto.email, credentialsDto.password, credentialsDto.rememberMe, response);
 
             return ResponseEntity.noContent().build();
         } catch (AuthenticationException e) {
-            logger.trace("Authentication exception trace: {}", e);
+            log.trace("Authentication exception trace: {}", e);
             return new ResponseEntity<>(Collections.singletonMap("AuthenticationException",
                 e.getLocalizedMessage()), HttpStatus.UNAUTHORIZED);
         }
