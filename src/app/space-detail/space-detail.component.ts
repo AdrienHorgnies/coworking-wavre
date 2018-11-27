@@ -3,7 +3,7 @@ import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { ImageService } from "../image.service";
+import { UserService } from "../user.service";
 
 @Component({
     selector: 'cow-space-detail',
@@ -12,19 +12,28 @@ import { ImageService } from "../image.service";
 })
 export class SpaceDetailComponent implements OnInit, OnDestroy {
 
+    isUserLoggedIn: boolean;
+    isUserLoggedInSubscription: Subscription;
+
     space: SpaceModel;
     spaceSubscription: Subscription;
     displayReservationForm: boolean;
 
-    constructor(private route: ActivatedRoute, private spaceService: SpaceService, public imageService: ImageService) {
+    constructor(private route: ActivatedRoute, private spaceService: SpaceService, private userService: UserService) {
     }
 
     ngOnInit() {
         this.spaceSubscription = this.spaceService.get(+this.route.snapshot.paramMap.get('id')).subscribe(space => this.space = space);
+        this.isUserLoggedInSubscription = this.userService.$isUserLoggedIn.subscribe(isUserLoggedIn => this.isUserLoggedIn = isUserLoggedIn);
     }
 
     ngOnDestroy() {
-        this.spaceSubscription.unsubscribe();
+        if (this.spaceSubscription) {
+            this.spaceSubscription.unsubscribe();
+        }
+        if (this.isUserLoggedInSubscription) {
+            this.isUserLoggedInSubscription.unsubscribe();
+        }
     }
 
 }

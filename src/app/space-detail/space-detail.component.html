@@ -54,15 +54,21 @@
 
                         </div>
                         <div class="wizard-footer">
-                            <div class="pull-right">
-
-
+                            <div *ngIf="!isUserLoggedIn" class="container" style="margin-top: 50px;">
+                                <p>Veuillez vous connecter afin de pouvoir réserver.</p>
+                                <button class="btn btn-primary" routerLink="/login" style="margin-left: 10px;"
+                                        type="button">Se connecter
+                                </button>
+                                <button class="btn btn-primary" routerLink="/register" style="margin-left: 10px;"
+                                        type="button">S'inscrire
+                                </button>
+                            </div>
+                            <div *ngIf="isUserLoggedIn" class="pull-right">
                                 <input (click)="displayReservationForm = ! displayReservationForm"
                                        [value]='displayReservationForm ? "Cacher" : "Réserver"'
                                        class='btn btn-next btn-fill btn-danger btn-wd'
                                        type='button'/>
                             </div>
-
                             <div class="clearfix"></div>
                         </div>
                     </div>
