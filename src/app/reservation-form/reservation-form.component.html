@@ -10,8 +10,8 @@
 
                         <!--todo: Récupère le nom de la salle et sa catégorie préalablement sélectionnés -->
                         <div>
-                            <h3 class="info-text" style="color: darkblue;">NOM DE LA SALLE</h3>
-                            <h4 class="info-text" style="color: #9c27b0;">BUREAU PRIVATIF</h4>
+                            <h3 class="info-text" style="color: darkblue;">{{space.name}}</h3>
+                            <h4 class="info-text" style="color: #9c27b0;">{{space.type}}</h4>
                         </div>
 
                         <div class="tab-content">
@@ -41,7 +41,7 @@
                                 <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
+                                          style="color: darkblue;">Prix forfaitaire : {{space.price}} €</span>
                                 <br><span class="form-label">Du {{date1}} au {{date2}}</span>
 
                                 <div class="container">
@@ -57,16 +57,19 @@
                                                 <div class="card-header">Equipement en option</div>
 
                                                 <ul class="list-group list-group-flush">
+                                                    <div *ngFor="let equipment of space.equipmentTypes" routerLink='/spaces/{{space.id}}'>
                                                     <li class="list-group-item">
                                                         <input max="{{content}}" min="0" type="number"
                                                                value="{{content}}">
-                                                        &nbsp; téléphone(s) - 0,00 €
+                                                        &nbsp; {{equipment.name}} - {{equipment.price}} €
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <input max="{{content}}" min="0" type="number"
-                                                               value="{{content}}">
-                                                        &nbsp; armoire(s) - 0,00 €
-                                                    </li>
+                                                    <!--<li class="list-group-item">-->
+                                                        <!--<input max="{{content}}" min="0" type="number"-->
+                                                               <!--value="{{content}}">-->
+                                                        <!--&nbsp; armoire(s) - 0,00 €-->
+                                                    <!--</li>-->
+                                            </div>
+
                                                     <div class="card-header">Inclus dans le prix</div>
                                                     <li class="list-group-item">
                                                         &nbsp; {{content}} bureau(x)
