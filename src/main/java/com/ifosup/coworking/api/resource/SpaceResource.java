@@ -135,4 +135,16 @@ public class SpaceResource {
         spaceRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/spaces/price/min")
+    public Integer getMinPrice() {
+        log.debug("REST request to get min Space price");
+        return spaceRepository.findMinPrice();
+    }
+
+    @GetMapping("/spaces/price/max")
+    public Integer getMaxPrice() {
+        log.debug("REST request to get max Space price");
+        return spaceRepository.findMaxPrice();
+    }
 }
