@@ -1,5 +1,7 @@
 package com.ifosup.coworking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -23,6 +25,10 @@ public class EquipmentPack implements Serializable {
     @NotNull
     private EquipmentType equipmentType;
 
+    @ManyToOne
+    @JsonIgnore
+    @NotNull
+    private Reservation reservation;
 
     public Long getId() {
         return id;
@@ -56,5 +62,13 @@ public class EquipmentPack implements Serializable {
     public EquipmentPack equipmentType(EquipmentType equipmentType) {
         this.equipmentType = equipmentType;
         return this;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
     }
 }
