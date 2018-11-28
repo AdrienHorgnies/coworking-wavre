@@ -1,8 +1,6 @@
 package com.ifosup.coworking.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -17,24 +15,19 @@ public class Reservation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 3, max = 25)
     @Column(name = "title")
     private String title;
 
-    @NotNull
     @Column(name = "order_date")
     private Instant orderDate;
 
-    @NotNull
     @Column(name = "start_date")
     private Instant startDate;
 
-    @NotNull
     @Column(name = "end_date")
     private Instant endDate;
 
     @ManyToOne(optional = false)
-    @NotNull
     private Space space;
 
     @ManyToMany
