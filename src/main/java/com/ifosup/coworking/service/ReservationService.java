@@ -25,7 +25,7 @@ public class ReservationService {
         reservation.setStartDate(makeReservationDto.getStartDate());
         reservation.setEndDate(makeReservationDto.getEndDate());
         reservation.setSpace(makeReservationDto.getSpace());
-        reservation.setEquipmentPacks(makeReservationDto.getEquipmentPacks());
+        reservation.setEquipmentOrders(makeReservationDto.getEquipmentOrders());
         reservation.setServiceTypes(makeReservationDto.getServiceTypes());
 
         return reservationRepository.save(reservation);

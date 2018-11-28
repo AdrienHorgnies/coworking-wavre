@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Table
-public class EquipmentPack implements Serializable {
+public class EquipmentOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +47,7 @@ public class EquipmentPack implements Serializable {
         this.quantity = quantity;
     }
 
-    public EquipmentPack quantity(Integer quantity) {
+    public EquipmentOrder quantity(Integer quantity) {
         this.quantity = quantity;
         return this;
     }
@@ -60,7 +60,7 @@ public class EquipmentPack implements Serializable {
         this.equipmentType = equipmentType;
     }
 
-    public EquipmentPack equipmentType(EquipmentType equipmentType) {
+    public EquipmentOrder equipmentType(EquipmentType equipmentType) {
         this.equipmentType = equipmentType;
         return this;
     }
@@ -81,11 +81,11 @@ public class EquipmentPack implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EquipmentPack equipmentPack = (EquipmentPack) o;
-        if (equipmentPack.getId() == null || getId() == null) {
+        EquipmentOrder equipmentOrder = (EquipmentOrder) o;
+        if (equipmentOrder.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), equipmentPack.getId());
+        return Objects.equals(getId(), equipmentOrder.getId());
     }
 
     @Override

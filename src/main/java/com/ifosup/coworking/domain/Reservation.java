@@ -37,7 +37,7 @@ public class Reservation implements Serializable {
     private Set<ServiceType> serviceTypes = new HashSet<>();
 
     @OneToMany(mappedBy = "reservation")
-    private Set<EquipmentPack> equipmentPacks = new HashSet<>();
+    private Set<EquipmentOrder> equipmentOrders = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -95,12 +95,12 @@ public class Reservation implements Serializable {
         this.serviceTypes = serviceTypes;
     }
 
-    public Set<EquipmentPack> getEquipmentPacks() {
-        return equipmentPacks;
+    public Set<EquipmentOrder> getEquipmentOrders() {
+        return equipmentOrders;
     }
 
-    public void setEquipmentPacks(Set<EquipmentPack> equipmentPacks) {
-        this.equipmentPacks = equipmentPacks;
+    public void setEquipmentOrders(Set<EquipmentOrder> equipmentOrders) {
+        this.equipmentOrders = equipmentOrders;
     }
 
     @Override

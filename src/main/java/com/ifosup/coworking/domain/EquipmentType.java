@@ -40,7 +40,7 @@ public class EquipmentType implements Serializable {
 
     @OneToMany(mappedBy = "equipmentType")
     @JsonIgnore
-    private Set<EquipmentPack> equipmentPacks = new HashSet<>();
+    private Set<EquipmentOrder> equipmentOrders = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -101,20 +101,20 @@ public class EquipmentType implements Serializable {
         return this;
     }
 
-    public EquipmentType equipmentPacks(Set<EquipmentPack> equipmentPacks) {
-        this.equipmentPacks = equipmentPacks;
+    public EquipmentType equipmentPacks(Set<EquipmentOrder> equipmentOrders) {
+        this.equipmentOrders = equipmentOrders;
         return this;
     }
 
-    public EquipmentType addEquipmentPack(EquipmentPack equipmentPack) {
-        this.equipmentPacks.add(equipmentPack);
-        equipmentPack.setEquipmentType(this);
+    public EquipmentType addEquipmentPack(EquipmentOrder equipmentOrder) {
+        this.equipmentOrders.add(equipmentOrder);
+        equipmentOrder.setEquipmentType(this);
         return this;
     }
 
-    public EquipmentType removeEquipmentPack(EquipmentPack equipmentPack) {
-        this.equipmentPacks.remove(equipmentPack);
-        equipmentPack.setEquipmentType(null);
+    public EquipmentType removeEquipmentPack(EquipmentOrder equipmentOrder) {
+        this.equipmentOrders.remove(equipmentOrder);
+        equipmentOrder.setEquipmentType(null);
         return this;
     }
 

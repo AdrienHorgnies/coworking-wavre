@@ -1,6 +1,6 @@
 package com.ifosup.coworking.dto;
 
-import com.ifosup.coworking.domain.EquipmentPack;
+import com.ifosup.coworking.domain.EquipmentOrder;
 import com.ifosup.coworking.domain.ServiceType;
 import com.ifosup.coworking.domain.Space;
 
@@ -25,7 +25,7 @@ public class MakeReservationDto {
 
     private Set<ServiceType> serviceTypes;
 
-    private Set<EquipmentPack> equipmentPacks;
+    private Set<EquipmentOrder> equipmentOrders;
 
     public String getTitle() {
         return title;
@@ -67,11 +67,11 @@ public class MakeReservationDto {
         this.serviceTypes = serviceTypes;
     }
 
-    public Set<EquipmentPack> getEquipmentPacks() {
-        return equipmentPacks;
+    public Set<EquipmentOrder> getEquipmentOrders() {
+        return equipmentOrders;
     }
 
-    public void setEquipmentPacks(Set<EquipmentPack> equipmentPacks) {
-        this.equipmentPacks = equipmentPacks;
+    public void setEquipmentOrders(Set<EquipmentOrder> equipmentOrders) {
+        this.equipmentOrders = equipmentOrders;
     }
 }
