@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Table
 public class EquipmentPack implements Serializable {
@@ -70,5 +71,25 @@ public class EquipmentPack implements Serializable {
 
     public void setReservation(Reservation reservation) {
         this.reservation = reservation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        EquipmentPack equipmentPack = (EquipmentPack) o;
+        if (equipmentPack.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), equipmentPack.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

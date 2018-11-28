@@ -38,6 +38,10 @@ public class ServiceType implements Serializable {
     @JsonIgnore
     private Set<Building> buildings = new HashSet<>();
 
+    @ManyToMany(mappedBy = "serviceTypes")
+    @JsonIgnore
+    private Set<Reservation> reservations = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -95,6 +99,14 @@ public class ServiceType implements Serializable {
         this.buildings.remove(building);
         building.getServiceTypes().remove(this);
         return this;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     @Override
