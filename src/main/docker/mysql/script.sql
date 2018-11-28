@@ -93,6 +93,47 @@ CREATE TABLE `building_service_type` (
 )
     ENGINE = InnoDB;
 
+CREATE TABLE `reservation` (
+    `id`                  SERIAL          NOT NULL AUTO_INCREMENT,
+    `title`               VARCHAR(25),
+    `order_date`          DATETIME        NOT NULL,
+    `start_date`          DATETIME        NOT NULL,
+    `end_date`            DATETIME        NOT NULL,
+    `space_price_per_day` FLOAT           NOT NULL,
+    `total_price`         FLOAT           NOT NULL,
+    `confirmed`           BOOLEAN         NOT NULL,
+    `space_id`            BIGINT UNSIGNED NOT NULL,
+    `user_id`             BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`space_id`) REFERENCES `space`(`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `equipment_order` (
+    `id`                 SERIAL          NOT NULL AUTO_INCREMENT,
+    `quantity`           INTEGER         NOT NULL,
+    `unit_price_per_day` FLOAT           NOT NULL,
+    `equipment_type_id`  BIGINT UNSIGNED NOT NULL,
+    `reservation_id`     BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`equipment_type_id`) REFERENCES `equipment_type`(`id`),
+    FOREIGN KEY (`reservation_id`) REFERENCES `reservation`(`id`)
+)
+    ENGINE = InnoDB;
+
+CREATE TABLE `service_order` (
+    `id`                 SERIAL          NOT NULL AUTO_INCREMENT,
+    `quantity`           INTEGER         NOT NULL,
+    `unit_price_per_day` FLOAT           NOT NULL,
+    `service_type_id`    BIGINT UNSIGNED NOT NULL,
+    `reservation_id`     BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`service_type_id`) REFERENCES `service_type`(`id`),
+    FOREIGN KEY (`reservation_id`) REFERENCES `reservation`(`id`)
+)
+    ENGINE = InnoDB;
+
 INSERT INTO `user`(`id`, `email`, `password_hash`, `last_name`, `first_name`)
 VALUES (1, 'system@localhost', '$2a$10$t9A4RrSdlcAUCCPmYd.8xOfBq39sNev4oQRdUWfQnumlMmCpVdNZm', 'System', 'System'),
 (2,
