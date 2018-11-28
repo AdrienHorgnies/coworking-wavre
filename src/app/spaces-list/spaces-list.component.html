@@ -13,19 +13,8 @@
         </select>
     </div>
 
-    <div class="form-group">
-        <label for="price-min">Prix min :</label>
-        <input (ngModelChange)="filters.priceMin.value = $event; onFilterFormChanges()"
-               [(ngModel)]="filters.priceMin.value" class="form-control"
-               id="price-min" max="1000" min="0" name="price-min" type="number" value="200">
-    </div>
-
-    <div class="form-group">
-        <label for="price-max">Prix max :</label>
-        <input (ngModelChange)="filters.priceMax.value = $event; onFilterFormChanges()"
-               [(ngModel)]="filters.priceMax.value" class="form-control"
-               id="price-max" max="1000" min="0" name="price-max" type="number" value="800">
-    </div>
+    <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
+                [(value)]="filters.priceMin.value" [options]="options"></ng5-slider>
 </form>
 
 
@@ -68,8 +57,4 @@
         </div>
 
     </div>
-</div>
-
-<div class="col-xs-12">
-    <router-outlet></router-outlet>
 </div>

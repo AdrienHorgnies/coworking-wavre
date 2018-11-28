@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ImageService } from "../image.service";
+import { LabelType, Options } from "ng5-slider";
 
 @Component({
     selector: 'cow-spaces-list',
@@ -32,6 +33,22 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         }
     };
 
+    options: Options = {
+        floor: this.filters.priceMin.value,
+        ceil: this.filters.priceMax.value,
+        step: 10,
+        translate: (value: number, label: LabelType): string => {
+            switch (label) {
+                case LabelType.Low:
+                    return '<b>Min price:</b> ' + value + ' €';
+                case LabelType.High:
+                    return '<b>Max price:</b> ' + value + ' €';
+                default:
+                    return value + ' €';
+            }
+        }
+    };
+
     constructor(private spaceService: SpaceService, public imageService: ImageService) {
     }
 
@@ -50,7 +67,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         const query = this.buildQuery();
 
         if (query) {
-            console.log(this.buildQuery());
+            console.log("Querying :", this.buildQuery());
             this.searchSubscription = this.spaceService.search(query).subscribe(spaces => this.spaces = spaces);
         } else {
             this.spacesSubscription = this.spaceService.list().subscribe(spaces => this.spaces = spaces);
