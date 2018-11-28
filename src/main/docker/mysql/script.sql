@@ -100,7 +100,7 @@ CREATE TABLE `reservation` (
     `start_date`          DATETIME        NOT NULL,
     `end_date`            DATETIME        NOT NULL,
     `space_price_per_day` FLOAT           NOT NULL,
-    `total_price`         FLOAT           NOT NULL,
+    `grand_total_price`   FLOAT           NOT NULL,
     `confirmed`           BOOLEAN         NOT NULL,
     `space_id`            BIGINT UNSIGNED NOT NULL,
     `user_id`             BIGINT UNSIGNED NOT NULL,

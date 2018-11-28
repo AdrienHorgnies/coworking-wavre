@@ -1,5 +1,7 @@
 package com.ifosup.coworking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -27,8 +29,21 @@ public class Reservation implements Serializable {
     @Column(name = "end_date")
     private Instant endDate;
 
+    @Column(name = "space_price_per_day")
+    private Float spacePricePerDay;
+
+    @Column(name = "grand_total_price")
+    private Float grandTotalPrice;
+
+    @Column(name = "confirmed")
+    private Boolean confirmed;
+
     @ManyToOne(optional = false)
     private Space space;
+
+    @ManyToOne(optional = false)
+    @JsonIgnore
+    private User user;
 
     @ManyToMany
     @JoinTable(name = "reservation_service_type",
