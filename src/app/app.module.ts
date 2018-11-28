@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
+import { Ng5SliderModule } from 'ng5-slider';
 
 import { ROUTES } from "./app.routes";
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        RouterModule.forRoot(ROUTES)
+        RouterModule.forRoot(ROUTES),
+        Ng5SliderModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
