@@ -1,0 +1,90 @@
+<div>
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>CoWorking Wavre</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+    <div>
+        <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+
+            <header>
+                <h1>FACTURE
+                    <h2>CoWorking Wavre − Réservation salle</h2>
+                </h1>
+            </header>
+            <section class="flex">
+                <dl>
+                    <dt>Facture #</dt>
+                    <dd>1</dd>
+                    <dt>Date de facturation</dt>
+                    <dd>29.11.2018</dd>
+                </dl>
+            </section>
+            <section class="flex">
+                <dl class="bloc">
+                    <dt>Facturé à:</dt>
+                    <dd>
+                        Phirum Chan<br>
+                        Rue Ernest Cosse 1<br>
+                        1490 Court-Saint-Etienne, Belgique
+                        <dl>
+                            <dt>Attn</dt>
+                            <dd>Chan</dd>
+                            <dt>Téléphone</dt>
+                            <dd>0472/42.66.16</dd>
+                            <dt>Courriel</dt>
+                            <dd>chan.1804.student@ifosupwavre.be</dd>
+                        </dl>
+                    </dd>
+                </dl>
+                <dl class="bloc">
+                    <dt>Description de service:</dt>
+                    <dd>Développement AIR</dd>
+                    <dt>Période totale:</dt>
+                    <dd>24 Mai au 2 Juin 2014</dd>
+                </dl>
+            </section>
+            <table>
+                <thead>
+                <tr>
+                    <th>Période</th>
+                    <th>Description</th>
+                    <th>Heures</th>
+                    <th>Taux</th>
+                    <th>Montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td> 30 Novembre au 7 Décembre</td>
+                    <td>Réservation de salle</td>
+                    <td>24&#8202;h</td>
+                    <td>20&#8202;€/h</td>
+                    <td>480&#8202;€</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3">− Faire les chèques payable au nom de moi −</td>
+                    <td>Total:</td>
+                    <td>480&#8202;€</td>
+                </tr>
+                </tfoot>
+            </table>
+            <footer>
+                <p>CoWorking – Gestion d'Informatique | <a href="http://localhost:4200/">CoWorking Wavre</a></p>
+                <p>IFOSUP Wavre - 6, rue de la Limite - 1300 Wavre | Tél. 010/22.20.260 ></p>
+            </footer>
+
+        </kendo-pdf-export>
+
+    </div>
+    </body>
+</div>
+<div class="example-config">
+    <button kendo-button (click)="pdf.saveAs('PhirumChan.pdf')">
+        Format PDF
+    </button>
+</div>
