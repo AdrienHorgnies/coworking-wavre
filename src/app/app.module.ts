@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import  { PDFExportModule } from "@progress/kendo-angular-pdf-export";
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,6 +16,8 @@ import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ProfilComponent } from './profil/profil.component';
 import {TabModule} from 'angular-tabs-component';
+
+import { FullCalendarModule } from "ng-fullcalendar";
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import {TabModule} from 'angular-tabs-component';
         ReactiveFormsModule,
         FormsModule,
         TabModule,
-        RouterModule.forRoot(ROUTES)
+        RouterModule.forRoot(ROUTES),
+        PDFExportModule,
+        FullCalendarModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
