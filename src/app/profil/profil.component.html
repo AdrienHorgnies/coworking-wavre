@@ -1,66 +1,10 @@
-<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
-<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>-->
-<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
-<!------ Include the above in your HEAD tag ---------->
-
-<!--<div class="container">-->
-    <!--<div class="row">-->
-        <!--<div class="col-sm-4 col-md-4 user-details">-->
-            <!--<div class="user-image">-->
-                <!--<img src="https://www.emploi.ci/sites/all/modules/custom/emaprofiles/images/user-profile-man.jpg"  class="img-circle">-->
-            <!--</div>-->
-            <!--<div class="user-info-block">-->
-                <!--<div class="user-heading">-->
-                    <!--<h3>Chan Phirum</h3>-->
-                    <!--<span class="help-block">Phirum Chan</span>-->
-                <!--</div>-->
-                <!--<ul class="navigation">-->
-                    <!--<li class="active">-->
-                        <!--<a data-toggle="tab" href="#information">-->
-                            <!--<span class="glyphicon glyphicon-user"></span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a data-toggle="tab" href="#settings">-->
-                            <!--<span class="glyphicon glyphicon-cog"></span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a data-toggle="tab" href="#email">-->
-                            <!--<span class="glyphicon glyphicon-envelope"></span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a data-toggle="tab" href="#events">-->
-                            <!--<span class="glyphicon glyphicon-calendar"></span>-->
-                        <!--</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-                <!--<div class="user-body">-->
-                    <!--<div class="tab-content">-->
-
-                            <!--<div id="information" class="tab-pane active">-->
-                            <!--<h4>Information de compte</h4>-->
-                        <!--</div>-->
-                        <!--<div id="settings" class="tab-pane">-->
-                            <!--<h4>Option</h4>-->
-                        <!--</div>-->
-                        <!--<div id="email" class="tab-pane">-->
-                            <!--<h4>Historique de facturation</h4>-->
-                        <!--</div>-->
-                        <!--<div id="events" class="tab-pane">-->
-                            <!--<h4>Calendrier de réservation</h4>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://unpkg.com/bootstrap-css-only@4.1.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.css" rel="stylesheet">
+<link href="https://unpkg.com/angular-calendar@0.26.4/css/angular-calendar.css" rel="stylesheet">
+<link href="https://unpkg.com/flatpickr@4.5.2/dist/flatpickr.css" rel="stylesheet">
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container emp-profile">
@@ -73,11 +17,7 @@
                         Change Photo
                         <input type="file" name="file"/>
                     </div>
-                    <div class="example-config">
-                        <button kendo-button (click)="pdf.saveAs('invoice.pdf')">
-                            Save As PDF...
-                        </button>
-                    </div>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -89,15 +29,8 @@
                         Web Developer and Designer
                     </h6>
 
-                    <!--<ul class="nav nav-tabs" id="myTab" role="tablist">-->
-                        <!--<li class="nav-item">-->
-                            <!--<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>-->
-                        <!--</li>-->
-                        <!--<li class="nav-item">-->
-                            <!--<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                    <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+
+
                     <tabs>
                         <tab tabTitle="Infos">
                             <div class="col-md-8">
@@ -149,16 +82,8 @@
                                 </div>
 
                         </tab>
-                        <tab tabTitle="Réservations">
-                            <div class="control-section">
-                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
-                            </div>
-                            <div *ngIf="calendarOptions">
-                                <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
-                                                 (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
-                            </div>
-                        </tab>
-                        <tab tabTitle="Calendrier">
+
+                        <tab tabTitle="Facturation">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="home">
                                     <div class="table-responsive">
@@ -166,20 +91,37 @@
                                             <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Libellé</th>
-                                                <th>Total</th>
+                                                <th>Facture</th>
+                                                <th>N°</th>
                                             </tr>
                                             </thead>
                                             <tbody id="items">
                                             <tr>
                                                 <td>1</td>
-                                                <td>Table cell</td>
-                                                <td>Table cell</td>
+                                                <td><a href=""></a>Salle privé</td>
+                                                <td>1</td>
+                                                <td>
+                                                    <div class="example-config">
+                                                        <button kendo-button (click)="pdf.saveAs('PhirumChan.pdf')">
+                                                            Format PDF
+                                                        </button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>Table cell</td>
-                                                <td>Table cell</td>
+                                                <td>Salle Bubble</td>
+                                                <td>2</td>
+                                                <td>
+                                                    <div class="example-config">
+                                                    <button kendo-button (click)="pdf.saveAs('PhirumChan.pdf')">
+                                                        Format PDF
+                                                    </button>
+                                                </div>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
 
                                             </tr>
                                             </tbody>
@@ -198,7 +140,7 @@
 
                         </tabs>
                     </tabs>
-                    </kendo-pdf-export>
+
                 </div>
             </div>
             <div class="col-md-2">
@@ -206,23 +148,285 @@
             </div>
         </div>
     </form>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    <p>SKILLS</p>
-                    <a href="">Web Designer</a><br/>
-                    <a href="">Web Developer</a><br/>
-                    <a href="">WordPress</a><br/>
-                    <a href="">WooCommerce</a><br/>
-                    <a href="">PHP, .Net</a><br/>
+
+</div>
+
+<div>
+
+
+
+    <ng-template #modalContent let-close="close">
+        <div class="modal-header">
+            <h5 class="modal-title">Event action occurred</h5>
+
+        </div>
+        <div class="modal-body">
+            <div>
+                Action:
+                <pre>{{ modalData?.action }}</pre>
+            </div>
+            <div>
+                Event:
+                <pre>{{ modalData?.event | json }}</pre>
+            </div>
+        </div>
+
+    </ng-template>
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div
+                    class="btn btn-primary"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="activeDayIsOpen = false">
+                    Avant
+                </div>
+                <div
+                    class="btn btn-outline-secondary"
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate">
+                    Aujourd'hui
+                </div>
+                <div
+                    class="btn btn-primary"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="activeDayIsOpen = false">
+                    Après
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group">
+                <div
+                    class="btn btn-primary"
+                    (click)="view = CalendarView.Month"
+                    [class.active]="view === CalendarView.Month">
+                    Mois
+                </div>
+                <div
+                    class="btn btn-primary"
+                    (click)="view = CalendarView.Week"
+                    [class.active]="view === CalendarView.Week">
+                    Semaine
+                </div>
+                <div
+                    class="btn btn-primary"
+                    (click)="view = CalendarView.Day"
+                    [class.active]="view === CalendarView.Day">
+                    Jour
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+    </div>
+
+    <br><br><br>
+
+    <h3>
+        Editer
+        <button
+            class="btn btn-primary pull-right"
+            (click)="addEvent()">
+          Ajouter un nouveau pense bête
+        </button>
+        <div class="clearfix"></div>
+    </h3>
+
+    <table class="table table-bordered">
+
+
+        <tr>
+            <th>Titre</th>
+            <th>Couleur 1</th>
+            <th>Couleur 2</th>
+            <th>Commencement</th>
+            <th>Fin</th>
+            <th>Supprimer</th>
+        </tr>
+
+
+
+        <tr *ngFor="let event of events; let index = index">
+            <td>
+                <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="event.title"
+                    (keyup)="refresh.next()">
+            </td>
+            <td>
+                <input
+                    type="color"
+                    [(ngModel)]="event.color.primary"
+                    (change)="refresh.next()">
+            </td>
+            <td>
+                <input
+                    type="color"
+                    [(ngModel)]="event.color.secondary"
+                    (change)="refresh.next()">
+            </td>
+            <td>
+                <input
+                    class="form-control"
+                    type="text"
+                    mwlFlatpickr
+                    [(ngModel)]="event.start"
+                    (ngModelChange)="refresh.next()"
+                    [altInput]="true"
+                    [convertModelValue]="true"
+                    [enableTime]="true"
+                    dateFormat="Y-m-dTH:i"
+                    altFormat="F j, Y H:i"
+                    placeholder="Not set">
+            </td>
+            <td>
+                <input
+                    class="form-control"
+                    type="text"
+                    mwlFlatpickr
+                    [(ngModel)]="event.end"
+                    (ngModelChange)="refresh.next()"
+                    [altInput]="true"
+                    [convertModelValue]="true"
+                    [enableTime]="true"
+                    dateFormat="Y-m-dTH:i"
+                    altFormat="F j, Y H:i"
+                    placeholder="Not set">
+            </td>
+            <td>
+                <button
+                    class="btn btn-danger"
+                    (click)="events.splice(index, 1); refresh.next()">
+                    Supprimer
+                </button>
+            </td>
+        </tr>
+
+
+    </table>
+
+
 </div>
 
+<div>
 
+    <head>
+        <meta charset="UTF-8"/>
+        <title>CoWorking Wavre</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+    <div>
+    <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
 
+    <header>
+        <h1>FACTURE
+            <h2>CoWorking Wavre − Réservation salle</h2>
+        </h1>
+    </header>
+    <section class="flex">
+        <dl>
+            <dt>Facture #</dt>
+            <dd>1</dd>
+            <dt>Date de facturation</dt>
+            <dd>29.11.2018</dd>
+        </dl>
+    </section>
+    <section class="flex">
+        <dl class="bloc">
+            <dt>Facturé à:</dt>
+            <dd>
+                Phirum Chan<br>
+                Rue Ernest Cosse 1<br>
+                1490 Court-Saint-Etienne, Belgique
+                <dl>
+                    <dt>Attn</dt>
+                    <dd>Chan</dd>
+                    <dt>Téléphone</dt>
+                    <dd>0472/42.66.16</dd>
+                    <dt>Courriel</dt>
+                    <dd>chan.1804.student@ifosupwavre.be</dd>
+                </dl>
+            </dd>
+        </dl>
+        <dl class="bloc">
+            <dt>Description de service:</dt>
+            <dd>Développement AIR</dd>
+            <dt>Période totale:</dt>
+            <dd>24 Mai au 2 Juin 2014</dd>
+        </dl>
+    </section>
+    <table>
+        <thead>
+        <tr>
+            <th>Période</th>
+            <th>Description</th>
+            <th>Heures</th>
+            <th>Taux</th>
+            <th>Montant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> 30 Novembre au 7 Décembre</td>
+            <td>Réservation de salle</td>
+            <td>24&#8202;h</td>
+            <td>20&#8202;€/h</td>
+            <td>480&#8202;€</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="3">− Faire les chèques payable au nom de moi −</td>
+            <td>Total:</td>
+            <td>480&#8202;€</td>
+        </tr>
+        </tfoot>
+    </table>
+    <footer>
+        <p>CoWorking – Gestion d'Informatique | <a href="http://localhost:4200/">CoWorking Wavre</a></p>
+        <p>IFOSUP Wavre - 6, rue de la Limite - 1300 Wavre | Tél. 010/22.20.260 ></p>
+    </footer>
+
+    </kendo-pdf-export>
+
+</div>
+    </body>
+</div>
