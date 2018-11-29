@@ -13,9 +13,7 @@ import * as moment from 'moment';
 })
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
-    moment = moment;
-
-    startDate: Date = moment().toDate();
+    startDate: Date = moment().startOf('day').toDate();
     endDate: Date = moment().add(7, 'days').toDate();
     peopleNumber: number = 1;
 
@@ -28,10 +26,6 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     constructor(private spaceService: SpaceService, private route: ActivatedRoute) {
         moment.locale("fr");
-    }
-
-    displayDate(date: Date) {
-        return moment(date).format("dddd, MMMM Do YYYY")
     }
 
     // kudo to https://gist.github.com/icemilo/a0b98a1508aab82853eb

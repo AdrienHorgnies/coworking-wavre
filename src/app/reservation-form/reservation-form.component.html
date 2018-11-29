@@ -24,7 +24,6 @@
                                 <span class="form-label">Date de début</span>
                                 <input [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"
                                        class="form-control "
-                                       [value]="startDate"
                                        required type="date" useValueAsDate>
 
                                 <span class="form-label">Date de fin</span>
@@ -38,14 +37,11 @@
                                            max={{space.peopleCapacity}}
                                            min="1" required type="number">
                                 </div>
-                                <!--todo: récupérer le prix de la db-->
-                                <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Prix forfaitaire : {{space.price * peopleNumber * calculateBusinessDays(startDate, endDate)}}
+                                          style="color: darkblue;">Location de l'espace : {{space.price * peopleNumber * calculateBusinessDays(startDate, endDate)}}
                                 €</span>
-                                <br><span class="form-label">Du {{displayDate(startDate)}}
-                                au {{displayDate(endDate)}}</span>
+                                <br><span class="form-label">{{calculateBusinessDays(startDate, endDate)}} jours ouvrables</span>
 
                                 <div class="container">
                                     <div class="row">
