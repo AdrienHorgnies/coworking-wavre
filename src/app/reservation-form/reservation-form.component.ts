@@ -14,7 +14,8 @@ export class ReservationFormComponent implements OnInit {
 
     @Input() space: SpaceModel;
 
-    content = '';
+    equipementNumber: number = 1;
+    equipementNumberUpdate: number = 1;
     date1: string = '25/02/2019';
     date2 = '';
     display: boolean = true;

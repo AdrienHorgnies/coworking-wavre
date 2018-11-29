@@ -34,8 +34,8 @@
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
-                                    <input [(ngModel)]="content" [ngModelOptions]="{standalone: true}"
-                                           class="form-control" max="10" min="1" required type="number" value="1">
+                                    <input [(ngModel)]="equipementNumber" [ngModelOptions]="{standalone: true}"
+                                           class="form-control" max={{space.peopleCapacity}} min="1" required type="number" value="1">
                                 </div>
                                 <!--todo: récupérer le prix de la db-->
                                 <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
@@ -49,33 +49,26 @@
                                         <div class="col-md-6">
                                             <div class="card" style="margin:50px 0">
 
-                                                <!-- todo: Récupère dans la db les équipements en option -->
                                                 <!-- Ne peut pas dépasser la valeur de l'input: nombre de personnes-->
                                                 <!--todo: Le prix est affiché si valeur > 0 : Le champ est calculé en fct du nombre sélectionné dans l'input-->
-                                                <!--todo: si switch = true: afficher le prix-->
 
                                                 <div class="card-header">Equipement en option</div>
 
                                                 <ul class="list-group list-group-flush">
                                                     <div *ngFor="let equipment of space.equipmentTypes" routerLink='/spaces/{{space.id}}'>
                                                     <li class="list-group-item">
-                                                        <input max="{{content}}" min="0" type="number"
-                                                               value="{{content}}">
+                                                        <input [(ngModel)]="equipementNumberUpdate" [ngModelOptions]="{standalone: true}"max="{{equipementNumber}}" min="0" type="number"
+                                                               value="{{equipementNumber}}">
                                                         &nbsp; {{equipment.name}} - {{equipment.price}} €
                                                     </li>
-                                                    <!--<li class="list-group-item">-->
-                                                        <!--<input max="{{content}}" min="0" type="number"-->
-                                                               <!--value="{{content}}">-->
-                                                        <!--&nbsp; armoire(s) - 0,00 €-->
-                                                    <!--</li>-->
                                             </div>
 
                                                     <div class="card-header">Inclus dans le prix</div>
                                                     <li class="list-group-item">
-                                                        &nbsp; {{content}} bureau(x)
+                                                        &nbsp; {{equipementNumber}} bureau(x)
                                                     </li>
                                                     <li class="list-group-item">
-                                                        &nbsp; {{content}} Chaise(s)
+                                                        &nbsp; {{equipementNumber}} Chaise(s)
                                                     </li>
                                                 </ul>
                                             </div>
