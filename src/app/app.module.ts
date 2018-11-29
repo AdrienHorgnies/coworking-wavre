@@ -25,6 +25,8 @@ import {CommonModule} from "@angular/common";
 import {NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
 import {CalendarModule, DateAdapter} from "angular-calendar";
 import {FlatpickrModule} from "angularx-flatpickr";
+import { CalendarComponent } from './calendar/calendar.component';
+import { FactureComponent } from './facture/facture.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import {FlatpickrModule} from "angularx-flatpickr";
         SpaceDetailComponent,
         ReservationFormComponent,
         ProfilComponent,
+        CalendarComponent,
+        FactureComponent,
     ],
     imports: [
         BrowserModule,
