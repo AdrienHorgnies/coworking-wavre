@@ -1,114 +1,228 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>-->
+<!--<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 <!------ Include the above in your HEAD tag ---------->
 
-<tabs>
-    <tab tabTitle="Infos">
-        Société:
-        Nom:
-        Prénom:
-        Adresse:
-        TVA:
+<!--<div class="container">-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-4 col-md-4 user-details">-->
+            <!--<div class="user-image">-->
+                <!--<img src="https://www.emploi.ci/sites/all/modules/custom/emaprofiles/images/user-profile-man.jpg"  class="img-circle">-->
+            <!--</div>-->
+            <!--<div class="user-info-block">-->
+                <!--<div class="user-heading">-->
+                    <!--<h3>Chan Phirum</h3>-->
+                    <!--<span class="help-block">Phirum Chan</span>-->
+                <!--</div>-->
+                <!--<ul class="navigation">-->
+                    <!--<li class="active">-->
+                        <!--<a data-toggle="tab" href="#information">-->
+                            <!--<span class="glyphicon glyphicon-user"></span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a data-toggle="tab" href="#settings">-->
+                            <!--<span class="glyphicon glyphicon-cog"></span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a data-toggle="tab" href="#email">-->
+                            <!--<span class="glyphicon glyphicon-envelope"></span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a data-toggle="tab" href="#events">-->
+                            <!--<span class="glyphicon glyphicon-calendar"></span>-->
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<div class="user-body">-->
+                    <!--<div class="tab-content">-->
 
-    </tab>
-    <tab tabTitle="Réservations">
-        Modèle à updater
-    </tab>
-    <tab tabTitle="Factures">
-        <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Libellé</th>
-                            <th>Total</th>
-                        </tr>
-                        </thead>
-                        <tbody id="items">
-                        <tr>
-                            <td>1</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
+                            <!--<div id="information" class="tab-pane active">-->
+                            <!--<h4>Information de compte</h4>-->
+                        <!--</div>-->
+                        <!--<div id="settings" class="tab-pane">-->
+                            <!--<h4>Option</h4>-->
+                        <!--</div>-->
+                        <!--<div id="email" class="tab-pane">-->
+                            <!--<h4>Historique de facturation</h4>-->
+                        <!--</div>-->
+                        <!--<div id="events" class="tab-pane">-->
+                            <!--<h4>Calendrier de réservation</h4>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 
-                        </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-4 text-center">
-                            <ul class="pagination" id="myPager"></ul>
-                        </div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://avatars1.githubusercontent.com/u/33428960?s=460&v=4" alt=""/>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
                     </div>
-                </div><!--/table-resp-->
-            </div><!--/tab-pane-->
-        </div>
-    </tab>
-    <tabs>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 col-md-4 user-details">
-            <div class="user-image">
-                <img src="https://www.emploi.ci/sites/all/modules/custom/emaprofiles/images/user-profile-man.jpg"  class="img-circle">
-            </div>
-            <div class="user-info-block">
-                <div class="user-heading">
-                    <h3>Chan Phirum</h3>
-                    <span class="help-block">Phirum Chan</span>
-                </div>
-                <ul class="navigation">
-                    <li class="active">
-                        <a data-toggle="tab" href="#information">
-                            <span class="glyphicon glyphicon-user"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#settings">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#email">
-                            <span class="glyphicon glyphicon-envelope"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#events">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </a>
-                    </li>
-                </ul>
-                <div class="user-body">
-                    <div class="tab-content">
-
-                            <div id="information" class="tab-pane active">
-                            <h4>Information de compte</h4>
-                        </div>
-                        <div id="settings" class="tab-pane">
-                            <h4>Option</h4>
-                        </div>
-                        <div id="email" class="tab-pane">
-                            <h4>Historique de facturation</h4>
-                        </div>
-                        <div id="events" class="tab-pane">
-                            <h4>Calendrier de réservation</h4>
-                        </div>
+                    <div class="example-config">
+                        <button kendo-button (click)="pdf.saveAs('invoice.pdf')">
+                            Save As PDF...
+                        </button>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                       Phirum Chan
+                    </h5>
+                    <h6>
+                        Web Developer and Designer
+                    </h6>
+
+                    <!--<ul class="nav nav-tabs" id="myTab" role="tablist">-->
+                        <!--<li class="nav-item">-->
+                            <!--<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>-->
+                        <!--</li>-->
+                        <!--<li class="nav-item">-->
+                            <!--<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                    <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+                    <tabs>
+                        <tab tabTitle="Infos">
+                            <div class="col-md-8">
+                                <div class="tab-content profile-tab" id="myTabContent">
+                                    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <label>User Id</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Phirum</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Chan</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Phirumch18@hotmail.com</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>0472/42.66.16</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Web Developer and Designer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                        </tab>
+                        <tab tabTitle="Réservations">
+                            <div class="control-section">
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css">
+                            </div>
+                            <div *ngIf="calendarOptions">
+                                <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+                                                 (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+                            </div>
+                        </tab>
+                        <tab tabTitle="Calendrier">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Libellé</th>
+                                                <th>Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="items">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Table cell</td>
+                                                <td>Table cell</td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-4 col-md-offset-4 text-center">
+                                                <ul class="pagination" id="myPager"></ul>
+                                            </div>
+                                        </div>
+                                    </div><!--/table-resp-->
+                                </div><!--/tab-pane-->
+                            </div>
+                        </tab>
+                        <tabs>
+
+                        </tabs>
+                    </tabs>
+                    </kendo-pdf-export>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            </div>
         </div>
-    </div>
+    </form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br/>
+                    <a href="">Bootsnipp Profile</a><br/>
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br/>
+                    <a href="">Web Developer</a><br/>
+                    <a href="">WordPress</a><br/>
+                    <a href="">WooCommerce</a><br/>
+                    <a href="">PHP, .Net</a><br/>
+                </div>
+            </div>
+        </div>
 </div>
-
-
 
 
 
