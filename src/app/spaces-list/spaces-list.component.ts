@@ -50,6 +50,10 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     };
 
     constructor(private spaceService: SpaceService, public imageService: ImageService) {
+        // hack to correctly update slider options as Angular doesn't see the difference unless it's a different object
+        setTimeout(() => {
+            this.options = Object.assign({}, this.options);
+        });
     }
 
     buildQuery(): string {
@@ -76,8 +80,14 @@ export class SpacesListComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscriptions.push(this.spaceService.list().subscribe(spaces => this.spaces = spaces));
-        this.subscriptions.push(this.spaceService.minPrice().subscribe(value => this.filters.priceMin.value = value));
-        this.subscriptions.push(this.spaceService.maxPrice().subscribe(value => this.filters.priceMax.value = value));
+        this.subscriptions.push(this.spaceService.minPrice().subscribe(value => {
+            this.filters.priceMin.value = value;
+            this.options.floor = value;
+        }));
+        this.subscriptions.push(this.spaceService.maxPrice().subscribe(value => {
+            this.filters.priceMax.value = value;
+            this.options.ceil = value;
+        }));
     }
 
     ngOnDestroy() {
