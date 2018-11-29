@@ -42,7 +42,7 @@
                                 <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Prix forfaitaire : {{space.price * peopleNumber * (moment(endDate).diff(moment(startDate), 'days'))}}
+                                          style="color: darkblue;">Prix forfaitaire : {{space.price * peopleNumber * calculateBusinessDays(startDate, endDate)}}
                                 €</span>
                                 <br><span class="form-label">Du {{displayDate(startDate)}}
                                 au {{displayDate(endDate)}}</span>
