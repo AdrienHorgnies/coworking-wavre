@@ -101,18 +101,18 @@ public class EquipmentType implements Serializable {
         return this;
     }
 
-    public EquipmentType equipmentPacks(Set<EquipmentOrder> equipmentOrders) {
+    public EquipmentType equipmentOrders(Set<EquipmentOrder> equipmentOrders) {
         this.equipmentOrders = equipmentOrders;
         return this;
     }
 
-    public EquipmentType addEquipmentPack(EquipmentOrder equipmentOrder) {
+    public EquipmentType addEquipmentOrder(EquipmentOrder equipmentOrder) {
         this.equipmentOrders.add(equipmentOrder);
         equipmentOrder.setEquipmentType(this);
         return this;
     }
 
-    public EquipmentType removeEquipmentPack(EquipmentOrder equipmentOrder) {
+    public EquipmentType removeEquipmentOrder(EquipmentOrder equipmentOrder) {
         this.equipmentOrders.remove(equipmentOrder);
         equipmentOrder.setEquipmentType(null);
         return this;
