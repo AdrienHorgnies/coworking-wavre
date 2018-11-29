@@ -23,15 +23,17 @@ public class ReservationService {
     private final SpaceRepository spaceRepository;
     private final EquipmentTypeRepository equipmentTypeRepository;
     private final ServiceTypeRepository serviceTypeRepository;
+    private final UserService userService;
 
-    public ReservationService(ReservationRepository reservationRepository, SpaceRepository spaceRepository, EquipmentTypeRepository equipmentTypeRepository, ServiceTypeRepository serviceTypeRepository) {
+    public ReservationService(ReservationRepository reservationRepository, SpaceRepository spaceRepository, EquipmentTypeRepository equipmentTypeRepository, ServiceTypeRepository serviceTypeRepository, UserService userService) {
         this.reservationRepository = reservationRepository;
         this.spaceRepository = spaceRepository;
         this.equipmentTypeRepository = equipmentTypeRepository;
         this.serviceTypeRepository = serviceTypeRepository;
+        this.userService = userService;
     }
 
-    public Reservation save(MakeReservationDto makeReservationDto, User user) {
+    public Reservation save(MakeReservationDto makeReservationDto) {
         Timestamp now = Timestamp.from(Instant.now());
 
         Space space = trustedSpace(makeReservationDto.getSpace());
@@ -43,7 +45,7 @@ public class ReservationService {
         reservation.setEndDate(makeReservationDto.getEndDate());
         reservation.setPeopleNumber(makeReservationDto.getPeopleNumber());
         reservation.setSpacePricePerDay(space.getPrice());
-        reservation.setUser(user);
+        reservation.setUser(userService.getCurrentUser());
         reservation.setSpace(space);
 
         for (EquipmentOrder equipmentOrder : trustedEquipmentOrders(makeReservationDto.getEquipmentOrderDtos())) {
