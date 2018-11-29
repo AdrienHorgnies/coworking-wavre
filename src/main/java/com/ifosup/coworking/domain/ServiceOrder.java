@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
-@Table
+@Entity
 public class ServiceOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;

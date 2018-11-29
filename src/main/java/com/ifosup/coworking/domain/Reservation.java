@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Reservation implements Serializable {
 
     private static final long serialVersionUID = 1L;

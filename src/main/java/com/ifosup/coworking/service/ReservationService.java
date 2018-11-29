@@ -41,9 +41,9 @@ public class ReservationService {
         reservation.setStartDate(makeReservationDto.getStartDate());
         reservation.setEndDate(makeReservationDto.getEndDate());
         reservation.setPeopleNumber(makeReservationDto.getPeopleNumber());
+        reservation.setSpacePricePerDay(space.getPrice());
         reservation.setUser(user);
         reservation.setSpace(space);
-        reservation.setSpacePricePerDay(space.getPrice());
 
         for (EquipmentOrder equipmentOrder : trustedEquipmentOrders(makeReservationDto.getEquipmentOrderDtos())) {
             reservation.addEquipmentOrder(equipmentOrder);
