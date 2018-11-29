@@ -4,6 +4,7 @@ import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.domain.Reservation;
 import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.MakeReservationDto;
+import com.ifosup.coworking.repository.ReservationRepository;
 import com.ifosup.coworking.repository.UserRepository;
 import com.ifosup.coworking.security.SecurityUtils;
 import com.ifosup.coworking.service.ReservationService;
@@ -11,16 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 import static com.ifosup.coworking.security.AuthoritiesConstants.USER;
@@ -33,10 +32,12 @@ public class ReservationResource {
     private final Logger log = LoggerFactory.getLogger(ServiceTypeResource.class);
 
     private final ReservationService reservationService;
+    private final ReservationRepository reservationRepository;
     private final UserRepository userRepository;
 
-    public ReservationResource(ReservationService reservationService, UserRepository userRepository) {
+    public ReservationResource(ReservationService reservationService, ReservationRepository reservationRepository, UserRepository userRepository) {
         this.reservationService = reservationService;
+        this.reservationRepository = reservationRepository;
         this.userRepository = userRepository;
     }
 
@@ -69,5 +70,23 @@ public class ReservationResource {
         return ResponseEntity.created(new URI("/api/reservations/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * GET /reservations/own
+     *
+     * @return the ResponseEntity with status 200 (Ok) and with body the authenticated user's reservations
+     */
+    @GetMapping("own")
+    @Secured(USER)
+    public ResponseEntity<List<Reservation>> getOwnReservations() {
+        log.debug("REST request to get authenticated user reservations");
+
+        Optional<User> optionalUser = userRepository.findOneByEmail(SecurityUtils.getCurrentUserLogin());
+        if (!optionalUser.isPresent()) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "currentUserNotFound", "getting reservations failed because security context hold non existent user")).build();
+        }
+
+        return ResponseEntity.ok(reservationRepository.getAllByUserId(optionalUser.get().id));
     }
 }
