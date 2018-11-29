@@ -19,8 +19,12 @@ import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
 import { ProfilComponent } from './profil/profil.component';
 import {TabModule} from 'angular-tabs-component';
-
-import { FullCalendarModule } from "ng-fullcalendar";
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule} from "ng-fullcalendar";
+import {CommonModule} from "@angular/common";
+import {NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
+import {CalendarModule, DateAdapter} from "angular-calendar";
+import {FlatpickrModule} from "angularx-flatpickr";
 
 
 @NgModule({
@@ -33,7 +37,7 @@ import { FullCalendarModule } from "ng-fullcalendar";
         HomeComponent,
         SpaceDetailComponent,
         ReservationFormComponent,
-        ProfilComponent
+        ProfilComponent,
     ],
     imports: [
         BrowserModule,
@@ -45,7 +49,14 @@ import { FullCalendarModule } from "ng-fullcalendar";
         DateValueAccessorModule,
         TabModule,
         PDFExportModule,
-        FullCalendarModule
+        FullCalendarModule,
+        CommonModule,
+        NgbModalModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory
+        })
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
