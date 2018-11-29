@@ -4,7 +4,6 @@ import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.UserDto;
 import com.ifosup.coworking.repository.UserRepository;
 import com.ifosup.coworking.security.SecurityUtils;
-import com.ifosup.coworking.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +22,8 @@ public class UserResource {
 
     private final UserRepository userRepository;
 
-    private final UserService userService;
-
-    public UserResource(UserRepository userRepository, UserService userService) {
+    public UserResource(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userService = userService;
     }
 
     @GetMapping("")
