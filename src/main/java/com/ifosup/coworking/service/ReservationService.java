@@ -10,6 +10,7 @@ import com.ifosup.coworking.repository.ServiceTypeRepository;
 import com.ifosup.coworking.repository.SpaceRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
@@ -36,7 +37,7 @@ public class ReservationService {
     public Reservation save(MakeReservationDto makeReservationDto) {
         Timestamp now = Timestamp.from(Instant.now());
 
-        Space space = trustedSpace(makeReservationDto.getSpace());
+        Space trustedSpace = trustedSpace(makeReservationDto.getSpace());
 
         Reservation reservation = new Reservation();
         reservation.setTitle(makeReservationDto.getTitle());
@@ -44,19 +45,19 @@ public class ReservationService {
         reservation.setStartDate(makeReservationDto.getStartDate());
         reservation.setEndDate(makeReservationDto.getEndDate());
         reservation.setPeopleNumber(makeReservationDto.getPeopleNumber());
-        reservation.setSpacePricePerDay(space.getPrice());
+        reservation.setSpacePricePerDay(trustedSpace.getPrice());
         reservation.setUser(userService.getCurrentUser());
-        reservation.setSpace(space);
+        reservation.setSpace(trustedSpace);
 
-        for (EquipmentOrder equipmentOrder : trustedEquipmentOrders(makeReservationDto.getEquipmentOrderDtos())) {
-            reservation.addEquipmentOrder(equipmentOrder);
+        for (EquipmentOrderDto equipmentOrderDto : makeReservationDto.getEquipmentOrderDtos()) {
+            reservation.addEquipmentOrder(trustedEquipmentOrder(trustedSpace, equipmentOrderDto));
         }
         for (ServiceOrder serviceOrder : trustedServiceOrders(makeReservationDto.getServiceOrderDtos())) {
             reservation.addServiceOrder(serviceOrder);
         }
 
         int durationInDays = (int) Duration.between(reservation.getStartDate().toInstant(), reservation.getEndDate().toInstant()).toDays();
-        float spaceLocationPrice = space.getPrice() * durationInDays;
+        float spaceLocationPrice = trustedSpace.getPrice() * durationInDays;
         float equipmentPrice = (float) reservation.getEquipmentOrders().stream()
             .mapToDouble(equipmentOrder -> equipmentOrder.getQuantity() * equipmentOrder.getUnitPricePerDay())
             .sum() * durationInDays;
@@ -74,21 +75,24 @@ public class ReservationService {
         return spaceRepository.findOne(space.getId());
     }
 
-    private Set<EquipmentOrder> trustedEquipmentOrders(Set<EquipmentOrderDto> equipmentOrderDtos) {
-        Set<EquipmentOrder> equipmentOrders = new HashSet<>();
+    /**
+     * @param trustedSpace      a Space queried from the database
+     * @param equipmentOrderDto an EquipmentOrderDto from the user
+     * @return an EquipmentOrder from the trustedSpace and matching the equipmentOrderDto
+     */
+    private EquipmentOrder trustedEquipmentOrder(Space trustedSpace, EquipmentOrderDto equipmentOrderDto) {
+        EquipmentType trustedEquipmentType = trustedSpace
+            .getEquipmentTypes()
+            .stream()
+            .filter(equipmentOrderDto.getEquipmentType()::equals)
+            .findFirst()
+            .orElseThrow(() -> new EntityNotFoundException("provided EquipmentOrderDto doesn't match database"));
 
-        for (EquipmentOrderDto equipmentOrderDto : equipmentOrderDtos) {
-            EquipmentType equipmentType = trustedEquipmentType(equipmentOrderDto.getEquipmentType());
-
-            EquipmentOrder equipmentOrder = new EquipmentOrder();
-
-            equipmentOrder.setEquipmentType(equipmentType);
-            equipmentOrder.setQuantity(equipmentOrderDto.getQuantity());
-            equipmentOrder.setUnitPricePerDay(equipmentType.getPrice());
-            equipmentOrders.add(equipmentOrder);
-        }
-
-        return equipmentOrders;
+        return (new EquipmentOrder())
+            .equipmentType(trustedEquipmentType)
+            .quantity(equipmentOrderDto.getQuantity())
+            .unitPricePerDay(trustedEquipmentType.getPrice())
+            ;
     }
 
     private Set<ServiceOrder> trustedServiceOrders(Set<ServiceOrderDto> serviceOrderDtos) {
@@ -106,11 +110,6 @@ public class ReservationService {
         }
 
         return serviceOrders;
-    }
-
-    private EquipmentType trustedEquipmentType(EquipmentType equipmentType) {
-        // todo use space repository to find supported EquipmentType, front could be lying
-        return equipmentTypeRepository.findOne(equipmentType.getId());
     }
 
     private ServiceType trustedServiceType(ServiceType serviceType) {

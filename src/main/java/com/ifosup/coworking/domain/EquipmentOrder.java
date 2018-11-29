@@ -64,6 +64,11 @@ public class EquipmentOrder implements Serializable {
         this.unitPricePerDay = unitPricePerDay;
     }
 
+    public EquipmentOrder unitPricePerDay(Float unitPricePerDay) {
+        this.unitPricePerDay = unitPricePerDay;
+        return this;
+    }
+
     public EquipmentType getEquipmentType() {
         return equipmentType;
     }
