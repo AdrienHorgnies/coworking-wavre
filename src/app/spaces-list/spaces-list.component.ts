@@ -53,7 +53,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         // hack to correctly update slider options as Angular doesn't see the difference unless it's a different object
         setTimeout(() => {
             this.options = Object.assign({}, this.options);
-        });
+        }, 500);
     }
 
     buildQuery(): string {
