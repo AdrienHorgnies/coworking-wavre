@@ -32,7 +32,7 @@ public class UserResource {
         return userRepository.findAll();
     }
 
-    @GetMapping("current")
+    @GetMapping("self")
     @Secured(USER)
     public ResponseEntity<UserDto> getSelf() {
         String currentUserLogin = SecurityUtils.getCurrentUserLogin();
