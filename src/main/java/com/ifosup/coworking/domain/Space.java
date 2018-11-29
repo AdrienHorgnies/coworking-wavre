@@ -1,5 +1,6 @@
 package com.ifosup.coworking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ifosup.coworking.domain.enumeration.SpaceType;
 
 import javax.persistence.*;
@@ -67,6 +68,10 @@ public class Space implements Serializable {
         joinColumns = @JoinColumn(name = "spaces_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "equipment_types_id", referencedColumnName = "id"))
     private Set<EquipmentType> equipmentTypes = new HashSet<>();
+
+    @OneToMany(mappedBy = "space")
+    @JsonIgnore
+    private Set<Reservation> reservations = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -215,6 +220,20 @@ public class Space implements Serializable {
     public Space removeEquipmentType(EquipmentType equipmentType) {
         this.equipmentTypes.remove(equipmentType);
         equipmentType.getSpaces().remove(this);
+        return this;
+    }
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public Space addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setSpace(this);
         return this;
     }
 

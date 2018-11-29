@@ -38,6 +38,10 @@ public class EquipmentType implements Serializable {
     @JsonIgnore
     private Set<Space> spaces = new HashSet<>();
 
+    @OneToMany(mappedBy = "equipmentType")
+    @JsonIgnore
+    private Set<EquipmentOrder> equipmentOrders = new HashSet<>();
+
     public Long getId() {
         return id;
     }
@@ -94,6 +98,23 @@ public class EquipmentType implements Serializable {
     public EquipmentType removeSpace(Space space) {
         this.spaces.remove(space);
         space.getEquipmentTypes().remove(this);
+        return this;
+    }
+
+    public EquipmentType equipmentOrders(Set<EquipmentOrder> equipmentOrders) {
+        this.equipmentOrders = equipmentOrders;
+        return this;
+    }
+
+    public EquipmentType addEquipmentOrder(EquipmentOrder equipmentOrder) {
+        this.equipmentOrders.add(equipmentOrder);
+        equipmentOrder.setEquipmentType(this);
+        return this;
+    }
+
+    public EquipmentType removeEquipmentOrder(EquipmentOrder equipmentOrder) {
+        this.equipmentOrders.remove(equipmentOrder);
+        equipmentOrder.setEquipmentType(null);
         return this;
     }
 

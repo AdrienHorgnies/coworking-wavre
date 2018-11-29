@@ -5,12 +5,14 @@ import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.RegistrationDto;
 import com.ifosup.coworking.repository.AuthorityRepository;
 import com.ifosup.coworking.repository.UserRepository;
+import com.ifosup.coworking.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,5 +51,13 @@ public class UserService {
 
         logger.debug("Trying to save {}", user);
         return userRepository.save(user);
+    }
+
+    public User getCurrentUser() {
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+
+        return userRepository
+            .findOneByEmail(currentUserLogin)
+            .orElseThrow(() -> new EntityNotFoundException("Authenticated user doesn't exist !"));
     }
 }

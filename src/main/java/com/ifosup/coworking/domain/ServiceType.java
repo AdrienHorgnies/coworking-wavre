@@ -38,6 +38,10 @@ public class ServiceType implements Serializable {
     @JsonIgnore
     private Set<Building> buildings = new HashSet<>();
 
+    @OneToMany(mappedBy = "serviceType")
+    @JsonIgnore
+    private Set<ServiceOrder> serviceOrders = new HashSet<>();
+    
     public Long getId() {
         return id;
     }
@@ -94,6 +98,25 @@ public class ServiceType implements Serializable {
     public ServiceType removeBuilding(Building building) {
         this.buildings.remove(building);
         building.getServiceTypes().remove(this);
+        return this;
+    }
+
+    public Set<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+    public void setServiceOrders(Set<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
+    }
+
+    public ServiceType serviceOrders(Set<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
+        return this;
+    }
+
+    public ServiceType addServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrders.add(serviceOrder);
+        serviceOrder.setServiceType(this);
         return this;
     }
 

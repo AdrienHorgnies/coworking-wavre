@@ -30,6 +30,23 @@ public class User {
         inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     public Set<Authority> authorities = new HashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<Reservation> reservations = new HashSet<>();
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public User addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setUser(this);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +

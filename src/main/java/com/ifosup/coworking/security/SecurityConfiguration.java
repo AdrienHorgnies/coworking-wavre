@@ -20,8 +20,6 @@ import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.PostConstruct;
 
-import static com.ifosup.coworking.security.AuthoritiesConstants.ADMIN;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -70,9 +68,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/api/current").hasRole("USER")
             .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/reservations").hasRole("USER")
             .antMatchers(HttpMethod.POST, "/api/register", "/api/authenticate").permitAll()
-            .antMatchers("/api/**").hasRole(ADMIN)
+            .antMatchers("/api/**").hasRole("ADMIN")
             .and()
             .apply(securityConfigurerAdapter());
     }
