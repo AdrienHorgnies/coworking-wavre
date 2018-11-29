@@ -41,6 +41,12 @@ public class User {
         this.reservations = reservations;
     }
 
+    public User addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setUser(this);
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +

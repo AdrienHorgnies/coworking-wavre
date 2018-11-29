@@ -118,6 +118,38 @@ public class Reservation implements Serializable {
         this.equipmentOrders = equipmentOrders;
     }
 
+    public Float getSpacePricePerDay() {
+        return spacePricePerDay;
+    }
+
+    public void setSpacePricePerDay(Float spacePricePerDay) {
+        this.spacePricePerDay = spacePricePerDay;
+    }
+
+    public Float getGrandTotalPrice() {
+        return grandTotalPrice;
+    }
+
+    public void setGrandTotalPrice(Float grandTotalPrice) {
+        this.grandTotalPrice = grandTotalPrice;
+    }
+
+    public Boolean getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Boolean confirmed) {
+        this.confirmed = confirmed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

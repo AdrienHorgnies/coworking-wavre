@@ -231,6 +231,12 @@ public class Space implements Serializable {
         this.reservations = reservations;
     }
 
+    public Space addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+        reservation.setSpace(this);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
