@@ -14,8 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class ReservationService {
@@ -50,10 +48,12 @@ public class ReservationService {
         reservation.setSpace(trustedSpace);
 
         for (EquipmentOrderDto equipmentOrderDto : makeReservationDto.getEquipmentOrderDtos()) {
-            reservation.addEquipmentOrder(trustedEquipmentOrder(trustedSpace, equipmentOrderDto));
+            EquipmentOrder trustedEquipmentOrder = trustedEquipmentOrder(trustedSpace, equipmentOrderDto);
+            reservation.addEquipmentOrder(trustedEquipmentOrder);
         }
-        for (ServiceOrder serviceOrder : trustedServiceOrders(makeReservationDto.getServiceOrderDtos())) {
-            reservation.addServiceOrder(serviceOrder);
+        for (ServiceOrderDto serviceOrderDto : makeReservationDto.getServiceOrderDtos()) {
+            ServiceOrder trustedServiceOrder = trustedServiceOrder(trustedSpace, serviceOrderDto);
+            reservation.addServiceOrder(trustedServiceOrder);
         }
 
         int durationInDays = (int) Duration.between(reservation.getStartDate().toInstant(), reservation.getEndDate().toInstant()).toDays();
@@ -82,8 +82,7 @@ public class ReservationService {
      */
     private EquipmentOrder trustedEquipmentOrder(Space trustedSpace, EquipmentOrderDto equipmentOrderDto) {
         EquipmentType trustedEquipmentType = trustedSpace
-            .getEquipmentTypes()
-            .stream()
+            .getEquipmentTypes().stream()
             .filter(equipmentOrderDto.getEquipmentType()::equals)
             .findFirst()
             .orElseThrow(() -> new EntityNotFoundException("provided EquipmentOrderDto doesn't match database"));
@@ -91,29 +90,25 @@ public class ReservationService {
         return (new EquipmentOrder())
             .equipmentType(trustedEquipmentType)
             .quantity(equipmentOrderDto.getQuantity())
-            .unitPricePerDay(trustedEquipmentType.getPrice())
-            ;
+            .unitPricePerDay(trustedEquipmentType.getPrice());
     }
 
-    private Set<ServiceOrder> trustedServiceOrders(Set<ServiceOrderDto> serviceOrderDtos) {
-        Set<ServiceOrder> serviceOrders = new HashSet<>();
+    /**
+     * @param trustedSpace    a Space queried from the database
+     * @param serviceOrderDto a ServiceOrderDto from the user
+     * @return a ServiceOrderDto from the trustedSpace and matching the serviceOrderDto
+     */
+    private ServiceOrder trustedServiceOrder(Space trustedSpace, ServiceOrderDto serviceOrderDto) {
+        ServiceType trustedServiceType = trustedSpace
+            .getBuilding()
+            .getServiceTypes().stream()
+            .filter(serviceOrderDto.getServiceType()::equals)
+            .findFirst()
+            .orElseThrow(() -> new EntityNotFoundException("provided ServiceOrderDto doesn't match database"));
 
-        for (ServiceOrderDto serviceOrderDto : serviceOrderDtos) {
-            ServiceType serviceType = trustedServiceType(serviceOrderDto.getServiceType());
-
-            ServiceOrder serviceOrder = new ServiceOrder();
-
-            serviceOrder.setServiceType(serviceType);
-            serviceOrder.setQuantity(serviceOrderDto.getQuantity());
-            serviceOrder.setUnitPricePerDay(serviceType.getPrice());
-            serviceOrders.add(serviceOrder);
-        }
-
-        return serviceOrders;
-    }
-
-    private ServiceType trustedServiceType(ServiceType serviceType) {
-        // todo use building repository to find supported EquipmentType, front could be lying
-        return serviceTypeRepository.findOne(serviceType.getId());
+        return (new ServiceOrder())
+            .serviceType(trustedServiceType)
+            .quantity(serviceOrderDto.getQuantity())
+            .unitPricePerDay(trustedServiceType.getPrice());
     }
 }

@@ -64,6 +64,11 @@ public class ServiceOrder implements Serializable {
         this.unitPricePerDay = unitPricePerDay;
     }
 
+    public ServiceOrder unitPricePerDay(Float unitPricePerDay) {
+        this.unitPricePerDay = unitPricePerDay;
+        return this;
+    }
+
     public ServiceType getServiceType() {
         return serviceType;
     }
