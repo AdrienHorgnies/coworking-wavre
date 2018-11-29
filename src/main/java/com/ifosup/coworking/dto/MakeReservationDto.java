@@ -1,9 +1,8 @@
 package com.ifosup.coworking.dto;
 
-import com.ifosup.coworking.domain.EquipmentOrder;
-import com.ifosup.coworking.domain.ServiceType;
 import com.ifosup.coworking.domain.Space;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
@@ -21,11 +20,15 @@ public class MakeReservationDto {
     private Instant endDate;
 
     @NotNull
+    @Min(1)
+    private Integer peopleNumber;
+
+    @NotNull
     private Space space;
 
-    private Set<ServiceType> serviceTypes;
+    private Set<ServiceOrderDto> serviceOrderDtos;
 
-    private Set<EquipmentOrder> equipmentOrders;
+    private Set<EquipmentOrderDto> equipmentOrderDtos;
 
     public String getTitle() {
         return title;
@@ -51,6 +54,14 @@ public class MakeReservationDto {
         this.endDate = endDate;
     }
 
+    public Integer getPeopleNumber() {
+        return peopleNumber;
+    }
+
+    public void setPeopleNumber(Integer peopleNumber) {
+        this.peopleNumber = peopleNumber;
+    }
+
     public Space getSpace() {
         return space;
     }
@@ -59,19 +70,19 @@ public class MakeReservationDto {
         this.space = space;
     }
 
-    public Set<ServiceType> getServiceTypes() {
-        return serviceTypes;
+    public Set<ServiceOrderDto> getServiceOrderDtos() {
+        return serviceOrderDtos;
     }
 
-    public void setServiceTypes(Set<ServiceType> serviceTypes) {
-        this.serviceTypes = serviceTypes;
+    public void setServiceOrderDtos(Set<ServiceOrderDto> serviceOrderDtos) {
+        this.serviceOrderDtos = serviceOrderDtos;
     }
 
-    public Set<EquipmentOrder> getEquipmentOrders() {
-        return equipmentOrders;
+    public Set<EquipmentOrderDto> getEquipmentOrderDtos() {
+        return equipmentOrderDtos;
     }
 
-    public void setEquipmentOrders(Set<EquipmentOrder> equipmentOrders) {
-        this.equipmentOrders = equipmentOrders;
+    public void setEquipmentOrderDtos(Set<EquipmentOrderDto> equipmentOrderDtos) {
+        this.equipmentOrderDtos = equipmentOrderDtos;
     }
 }

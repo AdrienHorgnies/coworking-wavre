@@ -3,6 +3,7 @@ package com.ifosup.coworking.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -28,6 +29,10 @@ public class Reservation implements Serializable {
 
     @Column(name = "end_date")
     private Instant endDate;
+
+    @Column(name = "people_number")
+    @Min(1)
+    private Integer peopleNumber;
 
     @Column(name = "space_price_per_day")
     private Float spacePricePerDay;
@@ -89,6 +94,14 @@ public class Reservation implements Serializable {
 
     public void setEndDate(Instant endDate) {
         this.endDate = endDate;
+    }
+
+    public Integer getPeopleNumber() {
+        return peopleNumber;
+    }
+
+    public void setPeopleNumber(Integer peopleNumber) {
+        this.peopleNumber = peopleNumber;
     }
 
     public Space getSpace() {

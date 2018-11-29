@@ -99,6 +99,7 @@ CREATE TABLE `reservation` (
     `order_date`          DATETIME        NOT NULL,
     `start_date`          DATETIME        NOT NULL,
     `end_date`            DATETIME        NOT NULL,
+    `people_number`       INTEGER         NOT NULL,
     `space_price_per_day` FLOAT           NOT NULL,
     `grand_total_price`   FLOAT           NOT NULL,
     `confirmed`           BOOLEAN         NOT NULL,

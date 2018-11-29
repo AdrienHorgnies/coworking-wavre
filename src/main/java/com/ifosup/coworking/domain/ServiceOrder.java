@@ -18,9 +18,13 @@ public class ServiceOrder implements Serializable {
     private Long id;
 
     @NotNull
-    @Min(0)
+    @Min(1)
     @Column(name = "quantity", nullable = false)
-    private Integer quantity;
+    private Integer quantity = 1;
+
+    @NotNull
+    @Min(0)
+    private Float unitPricePerDay;
 
     @ManyToOne(optional = false)
     @NotNull
@@ -50,6 +54,14 @@ public class ServiceOrder implements Serializable {
     public ServiceOrder quantity(Integer quantity) {
         this.quantity = quantity;
         return this;
+    }
+
+    public Float getUnitPricePerDay() {
+        return unitPricePerDay;
+    }
+
+    public void setUnitPricePerDay(Float unitPricePerDay) {
+        this.unitPricePerDay = unitPricePerDay;
     }
 
     public ServiceType getServiceType() {
