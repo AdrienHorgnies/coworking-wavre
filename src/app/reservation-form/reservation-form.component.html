@@ -1,5 +1,5 @@
 <!--   Big container   -->
-<div class="container">
+<div *ngIf="space" class="container">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <!-- Wizard container -->
@@ -8,7 +8,6 @@
                     <!--Formulaire-->
                     <form action="" method="">
 
-                        <!--todo: Récupère le nom de la salle et sa catégorie préalablement sélectionnés -->
                         <div>
                             <h3 class="info-text" style="color: darkblue;">{{space.name}}</h3>
                             <h4 class="info-text" style="color: #9c27b0;">{{space.type}}</h4>
@@ -23,11 +22,12 @@
                                 <!--todo: format date et valeurs par défaut date début (date du jour) et date de fin (1 mois plus tard)-->
 
                                 <span class="form-label">Date de début</span>
-                                <input [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" class="form-control "
+                                <input [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"
+                                       class="form-control "
                                        required type="date" value="{{date1}}">
 
                                 <span class="form-label">Date de fin</span>
-                                <input [(ngModel)]="date2" [ngModelOptions]="{standalone: true}" class="form-control"
+                                <input [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" class="form-control"
                                        required type="date">
 
                                 <!--todo: déterminer le nombre max de personnes à la capacité ax du bureau (récupérer valeur de la db)-->
@@ -55,7 +55,7 @@
                                                 <div class="card-header">Equipement en option</div>
 
                                                 <ul class="list-group list-group-flush">
-                                                    <div *ngFor="let equipment of space.equipmentTypes" routerLink='/spaces/{{space.id}}'>
+                                                    <div *ngFor="let equipment of space.equipmentTypes">
                                                     <li class="list-group-item">
                                                         <input [(ngModel)]="equipementNumberUpdate" [ngModelOptions]="{standalone: true}"max="{{equipementNumber}}" min="0" type="number"
                                                                value="{{equipementNumberUpdate}}">

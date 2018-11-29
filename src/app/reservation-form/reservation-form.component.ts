@@ -12,10 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
+    startDate: Date;
+    endDate: Date;
+
     equipementNumber: number = 1;
     equipementNumberUpdate: number = 1;
-    date1: string = '25/02/2019';
-    date2 = '';
     display: boolean = true;
 
     // todo: initialiser le nombre de personnes >1 et <capacity
