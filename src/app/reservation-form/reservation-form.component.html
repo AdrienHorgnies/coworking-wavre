@@ -58,8 +58,9 @@
                                                     <div *ngFor="let equipment of space.equipmentTypes" routerLink='/spaces/{{space.id}}'>
                                                     <li class="list-group-item">
                                                         <input [(ngModel)]="equipementNumberUpdate" [ngModelOptions]="{standalone: true}"max="{{equipementNumber}}" min="0" type="number"
-                                                               value="{{equipementNumber}}">
-                                                        &nbsp; {{equipment.name}} - {{equipment.price}} €
+                                                               value="{{equipementNumberUpdate}}">
+                                                        &nbsp; {{equipment.name}} - {{equipment.price*equipementNumberUpdate}} €
+
                                                     </li>
                                             </div>
 
@@ -115,7 +116,7 @@
                                             </div>
                                             <!--todo: total: champ calculé-->
                                             <span class="form-label"
-                                                  style="float:right;">TOTAL : total("30,00") €</span><br><br>
+                                                  style="float:right;">TOTAL : {{space.price}} €</span><br><br>
                                         </div>
 
                                     </div>
