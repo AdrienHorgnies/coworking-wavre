@@ -23,13 +23,6 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
     equipementNumberUpdate: number = 1;
     display: boolean = true;
 
-    // todo: initialiser le nombre de personnes >1 et <capacity
-    numberpers: string = 'number';
-
-    total(montant: string): string {
-        return montant;
-    }
-
     space: SpaceModel;
     spaceSubscription: Subscription;
 
