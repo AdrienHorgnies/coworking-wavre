@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
-import { ImageService } from "../image.service";
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -11,8 +11,6 @@ import { ImageService } from "../image.service";
     styleUrls: ['./reservation-form.component.css']
 })
 export class ReservationFormComponent implements OnInit {
-
-    @Input() space: SpaceModel;
 
     equipementNumber: number = 1;
     equipementNumberUpdate: number = 1;
@@ -27,20 +25,19 @@ export class ReservationFormComponent implements OnInit {
         return montant;
     }
 
+    space: SpaceModel;
+    spaceSubscription: Subscription;
 
-    spaces: Array<SpaceModel>;
-    spacesSubscription: Subscription;
-
-    constructor(private spaceService: SpaceService, public imageService: ImageService) {
+    constructor(private spaceService: SpaceService, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.spacesSubscription = this.spaceService.list().subscribe(spaces => this.spaces = spaces);
+        this.spaceSubscription = this.spaceService.get(+this.route.snapshot.paramMap.get('id')).subscribe(space => this.space = space);
     }
 
     ngOnDestroy() {
-        if (this.spacesSubscription) {
-            this.spacesSubscription.unsubscribe();
+        if (this.spaceSubscription) {
+            this.spaceSubscription.unsubscribe();
         }
     }
 }

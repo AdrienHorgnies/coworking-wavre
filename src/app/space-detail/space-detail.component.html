@@ -65,10 +65,10 @@
                                 </button>
                             </div>
                             <div *ngIf="isUserLoggedIn" class="pull-right">
-                                <input (click)="displayReservationForm = ! displayReservationForm"
-                                       [value]='displayReservationForm ? "Cacher" : "Réserver"'
-                                       class='btn btn-next btn-fill btn-danger btn-wd'
-                                       type='button'/>
+                                <button routerLink="/spaces/{{space.id}}//reservation"
+                                        class='btn btn-next btn-fill btn-danger btn-wd'
+                                        type='button'>"Réserver"
+                                </button>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -77,6 +77,6 @@
             </div>
         </div> <!-- row -->
     </div> <!--  big container -->
-    <cow-reservation-form *ngIf="displayReservationForm"
+    <cow-reservation-form *ngIf="displayReservationForm" id="reservation-form"
                           [space]="space"></cow-reservation-form>
 </div>
