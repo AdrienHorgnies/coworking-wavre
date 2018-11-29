@@ -45,14 +45,11 @@ public class Reservation implements Serializable {
     @JsonIgnore
     private User user;
 
-    @ManyToMany
-    @JoinTable(name = "reservation_service_type",
-        joinColumns = @JoinColumn(name = "reservations_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "service_types_id", referencedColumnName = "id"))
-    private Set<ServiceType> serviceTypes = new HashSet<>();
-
     @OneToMany(mappedBy = "reservation")
     private Set<EquipmentOrder> equipmentOrders = new HashSet<>();
+
+    @OneToMany(mappedBy = "reservation")
+    private Set<ServiceOrder> serviceOrders = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -102,20 +99,32 @@ public class Reservation implements Serializable {
         this.space = space;
     }
 
-    public Set<ServiceType> getServiceTypes() {
-        return serviceTypes;
-    }
-
-    public void setServiceTypes(Set<ServiceType> serviceTypes) {
-        this.serviceTypes = serviceTypes;
-    }
-
     public Set<EquipmentOrder> getEquipmentOrders() {
         return equipmentOrders;
     }
 
     public void setEquipmentOrders(Set<EquipmentOrder> equipmentOrders) {
         this.equipmentOrders = equipmentOrders;
+    }
+
+    public Reservation addEquipmentOrder(EquipmentOrder equipmentOrder) {
+        this.equipmentOrders.add(equipmentOrder);
+        equipmentOrder.setReservation(this);
+        return this;
+    }
+
+    public Set<ServiceOrder> getServiceOrders() {
+        return serviceOrders;
+    }
+
+    public void setServiceOrders(Set<ServiceOrder> serviceOrders) {
+        this.serviceOrders = serviceOrders;
+    }
+
+    public Reservation addServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrders.add(serviceOrder);
+        serviceOrder.setReservation(this);
+        return this;
     }
 
     public Float getSpacePricePerDay() {
