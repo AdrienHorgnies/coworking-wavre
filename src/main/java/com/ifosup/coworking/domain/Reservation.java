@@ -51,10 +51,10 @@ public class Reservation implements Serializable {
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private Set<EquipmentOrder> equipmentOrders = new HashSet<>();
 
-    @OneToMany(mappedBy = "reservation")
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private Set<ServiceOrder> serviceOrders = new HashSet<>();
 
     public Long getId() {
