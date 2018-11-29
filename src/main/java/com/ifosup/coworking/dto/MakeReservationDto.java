@@ -5,7 +5,7 @@ import com.ifosup.coworking.domain.Space;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.Set;
 
 public class MakeReservationDto {
@@ -14,10 +14,10 @@ public class MakeReservationDto {
     private String title;
 
     @NotNull
-    private Instant startDate;
+    private Timestamp startDate;
 
     @NotNull
-    private Instant endDate;
+    private Timestamp endDate;
 
     @NotNull
     @Min(1)
@@ -38,19 +38,19 @@ public class MakeReservationDto {
         this.title = title;
     }
 
-    public Instant getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

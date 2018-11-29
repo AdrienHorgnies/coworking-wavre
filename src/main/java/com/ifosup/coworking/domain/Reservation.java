@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -23,13 +23,13 @@ public class Reservation implements Serializable {
     private String title;
 
     @Column(name = "order_date")
-    private Instant orderDate;
+    private Timestamp orderDate;
 
     @Column(name = "start_date")
-    private Instant startDate;
+    private Timestamp startDate;
 
     @Column(name = "end_date")
-    private Instant endDate;
+    private Timestamp endDate;
 
     @Column(name = "people_number")
     @Min(1)
@@ -42,7 +42,7 @@ public class Reservation implements Serializable {
     private Float grandTotalPrice;
 
     @Column(name = "confirmed")
-    private Boolean confirmed;
+    private Boolean confirmed = false;
 
     @ManyToOne(optional = false)
     private Space space;
@@ -73,27 +73,27 @@ public class Reservation implements Serializable {
         this.title = title;
     }
 
-    public Instant getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Instant orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 
-    public Instant getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Instant startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Instant getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Instant endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

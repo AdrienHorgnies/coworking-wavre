@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Optional;
 
@@ -56,11 +57,11 @@ public class ReservationResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "currentUserNotFound", "reservation failed because security context hold non existent user")).build();
         }
 
-        Instant now = Instant.now();
-        if (makeReservationDto.getStartDate().isBefore(now)) {
+        Timestamp now = Timestamp.from(Instant.now());
+        if (makeReservationDto.getStartDate().before(now)) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "startBeforeNow", "A new reservation cannot start before it is made")).build();
         }
-        if (makeReservationDto.getEndDate().isBefore(makeReservationDto.getStartDate())) {
+        if (makeReservationDto.getEndDate().before(makeReservationDto.getStartDate())) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "endBeforeStart", "A new reservation cannot end before it starts")).build();
         }
 

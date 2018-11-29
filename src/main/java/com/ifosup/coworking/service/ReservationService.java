@@ -10,6 +10,7 @@ import com.ifosup.coworking.repository.ServiceTypeRepository;
 import com.ifosup.coworking.repository.SpaceRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashSet;
@@ -31,7 +32,7 @@ public class ReservationService {
     }
 
     public Reservation save(MakeReservationDto makeReservationDto, User user) {
-        Instant now = Instant.now();
+        Timestamp now = Timestamp.from(Instant.now());
 
         Space space = trustedSpace(makeReservationDto.getSpace());
 
@@ -52,7 +53,7 @@ public class ReservationService {
             reservation.addServiceOrder(serviceOrder);
         }
 
-        int durationInDays = (int) Duration.between(reservation.getEndDate(), reservation.getStartDate()).toDays();
+        int durationInDays = (int) Duration.between(reservation.getStartDate().toInstant(), reservation.getEndDate().toInstant()).toDays();
         float spaceLocationPrice = space.getPrice() * durationInDays;
         float equipmentPrice = (float) reservation.getEquipmentOrders().stream()
             .mapToDouble(equipmentOrder -> equipmentOrder.getQuantity() * equipmentOrder.getUnitPricePerDay())
