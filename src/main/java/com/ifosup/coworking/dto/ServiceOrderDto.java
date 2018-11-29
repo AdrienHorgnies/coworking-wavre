@@ -9,7 +9,7 @@ public class ServiceOrderDto {
 
     @NotNull
     @Min(1)
-    private Integer quantity;
+    private Integer quantity = 1;
 
     @NotNull
     private ServiceType serviceType;
