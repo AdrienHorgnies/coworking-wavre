@@ -24,25 +24,28 @@
                                 <span class="form-label">Date de début</span>
                                 <input [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"
                                        class="form-control "
-                                       required type="date" value="{{date1}}">
+                                       [value]="startDate"
+                                       required type="date" useValueAsDate>
 
                                 <span class="form-label">Date de fin</span>
                                 <input [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" class="form-control"
-                                       required type="date">
-
-                                <!--todo: déterminer le nombre max de personnes à la capacité ax du bureau (récupérer valeur de la db)-->
+                                       required type="date" useValueAsDate>
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
-                                    <input [(ngModel)]="equipementNumber" [ngModelOptions]="{standalone: true}"
-                                           class="form-control" max={{space.peopleCapacity}} min="1" required type="number" value="1">
+                                    <input [(ngModel)]="peopleNumber" [max]="space.peopleCapacity"
+                                           [ngModelOptions]="{standalone: true}" class="form-control"
+                                           max={{space.peopleCapacity}}
+                                           min="1" required type="number">
                                 </div>
                                 <!--todo: récupérer le prix de la db-->
                                 <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Prix forfaitaire : {{space.price}} €</span>
-                                <br><span class="form-label">Du {{date1}} au {{date2}}</span>
+                                          style="color: darkblue;">Prix forfaitaire : {{space.price * peopleNumber * (moment(endDate).diff(moment(startDate), 'days'))}}
+                                €</span>
+                                <br><span class="form-label">Du {{displayDate(startDate)}}
+                                au {{displayDate(endDate)}}</span>
 
                                 <div class="container">
                                     <div class="row">
@@ -56,13 +59,16 @@
 
                                                 <ul class="list-group list-group-flush">
                                                     <div *ngFor="let equipment of space.equipmentTypes">
-                                                    <li class="list-group-item">
-                                                        <input [(ngModel)]="equipementNumberUpdate" [ngModelOptions]="{standalone: true}"max="{{equipementNumber}}" min="0" type="number"
-                                                               value="{{equipementNumberUpdate}}">
-                                                        &nbsp; {{equipment.name}} - {{equipment.price*equipementNumberUpdate}} €
+                                                        <li class="list-group-item">
+                                                            <input [(ngModel)]="equipementNumberUpdate"
+                                                                   [ngModelOptions]="{standalone: true}"
+                                                                   max="{{equipementNumber}}" min="0" type="number"
+                                                                   value="{{equipementNumberUpdate}}">
+                                                            &nbsp; {{equipment.name}}
+                                                            - {{equipment.price * equipementNumberUpdate}} €
 
-                                                    </li>
-                                            </div>
+                                                        </li>
+                                                    </div>
 
                                                     <div class="card-header">Inclus dans le prix</div>
                                                     <li class="list-group-item">

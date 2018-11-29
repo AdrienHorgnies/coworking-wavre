@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 
 @Component({
@@ -12,8 +13,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
-    startDate: Date;
-    endDate: Date;
+    moment = moment;
+
+    startDate: Date = moment().toDate();
+    endDate: Date = moment().add(7, 'days').toDate();
+    peopleNumber: number = 1;
 
     equipementNumber: number = 1;
     equipementNumberUpdate: number = 1;
@@ -30,6 +34,11 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
     spaceSubscription: Subscription;
 
     constructor(private spaceService: SpaceService, private route: ActivatedRoute) {
+        moment.locale("fr");
+    }
+
+    displayDate(date: Date) {
+        return moment(date).format("dddd, MMMM Do YYYY")
     }
 
     ngOnInit() {
