@@ -26,10 +26,10 @@
             <!-- CAffiche le prix de base -->
             <div>
                 <div class="card rounded">
+                    <img class="card-img-top" [src]="imageService.get(space.imageUrl)"
+                         [alt]="space.imageCredit"/>
                     <div class="card-image">
                         <span class="card-notify-badge">Apd {{ space.price }} €</span>
-                        <img class="img-fluid" [src]="imageService.get(space.imageUrl)"
-                             [alt]="space.imageCredit"/>
                     </div>
 
                     <div class="card-body text-center">
