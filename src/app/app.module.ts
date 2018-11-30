@@ -22,7 +22,7 @@ import { TabModule } from 'angular-tabs-component';
 import { FullCalendarModule } from "ng-fullcalendar";
 import { CommonModule } from "@angular/common";
 import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
-import { FactureComponent } from './facture/facture.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { FactureComponent } from './facture/facture.component';
         SpaceDetailComponent,
         ReservationFormComponent,
         ProfileComponent,
-        FactureComponent,
+        InvoiceComponent,
     ],
     imports: [
         BrowserModule,

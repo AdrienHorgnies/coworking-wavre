@@ -7,7 +7,7 @@ import { SpacesListComponent } from "./spaces-list/spaces-list.component";
 import { SpaceDetailComponent } from "./space-detail/space-detail.component";
 import { ReservationFormComponent } from "./reservation-form/reservation-form.component";
 import { ProfileComponent } from "./profile/profile.component";
-import { FactureComponent } from "./facture/facture.component";
+import { InvoiceComponent } from "./invoice/invoice.component";
 
 export const ROUTES: Routes = [
     {path: 'home', component: HomeComponent},
@@ -18,5 +18,5 @@ export const ROUTES: Routes = [
     {path: 'spaces/:id', component: SpaceDetailComponent},
     {path: 'spaces/:id/reservation', component: ReservationFormComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'facture', component: FactureComponent}
+    {path: 'invoice', component: InvoiceComponent}
 ];
