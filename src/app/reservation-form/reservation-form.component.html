@@ -95,6 +95,9 @@
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </li>
+                                                    <li *ngIf="space.building.serviceTypes.length === 0">
+                                                        Pas de service disponible pour cet espace.
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <span class="form-label"
