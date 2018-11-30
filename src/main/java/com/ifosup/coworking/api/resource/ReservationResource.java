@@ -2,6 +2,7 @@ package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.domain.Reservation;
+import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.MakeReservationDto;
 import com.ifosup.coworking.repository.ReservationRepository;
 import com.ifosup.coworking.repository.UserRepository;
@@ -78,5 +79,25 @@ public class ReservationResource {
         log.debug("REST request to get authenticated user reservations");
 
         return ResponseEntity.ok(reservationRepository.getAllByUser(userService.getCurrentUser()));
+    }
+
+    /**
+     * GET /reservations/{id}
+     *
+     * @param id the id of the reservation we are looking for
+     * @return the ResponseEntity with status 200 (Ok) and with body the reservation if the authenticated user owns it
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<Reservation> getReservation(@PathVariable Long id) {
+        log.debug("REST request to get reservation {}", id);
+
+        Reservation reservation = reservationRepository.findOne(id);
+        User currentUser = userService.getCurrentUser();
+
+        if (!currentUser.id.equals(reservation.getUser().id)) {
+            return ResponseEntity.notFound().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "notFoundForCurrentUser", "No reservation with such id has been found for current user")).build();
+        }
+
+        return ResponseEntity.ok(reservation);
     }
 }

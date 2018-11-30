@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ReservationModel } from "../models/reservation.model";
+import { Subscription } from 'rxjs';
+import { ReservationService } from "../reservation.service";
 
 @Component({
     selector: 'cow-invoice',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InvoiceComponent implements OnInit {
 
-  constructor() { }
+    reservation: ReservationModel;
+    reservationSubscription: Subscription;
 
-  ngOnInit() {
-  }
+    constructor(private route: ActivatedRoute, private reservationService: ReservationService) {
+    }
+
+    ngOnInit() {
+        this.reservationSubscription = this.reservationService.get(+this.route.snapshot.paramMap.get('id')).subscribe(reservation => this.reservation = reservation);
+    }
 
 }

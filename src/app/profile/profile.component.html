@@ -1,6 +1,6 @@
 <div *ngIf="user" class="container emp-profile">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" style="padding-left: 0; padding-right: 0;">
             <div class="profile-head">
                 <h5>
                     {{user.firstName}} {{user.lastName}}
@@ -55,7 +55,8 @@
                                         </tr>
                                         </thead>
                                         <tbody id="items">
-                                        <tr *ngFor="let reservation of reservations">
+                                        <tr *ngFor="let reservation of reservations"
+                                            routerLink="/reservations/{{reservation.id}}/invoice">
                                             <td>{{displayDate(reservation.orderDate)}}</td>
                                             <td>{{displayDate(reservation.startDate)}}</td>
                                             <td>{{displayDate(reservation.endDate)}}</td>

@@ -18,5 +18,5 @@ export const ROUTES: Routes = [
     {path: 'spaces/:id', component: SpaceDetailComponent},
     {path: 'spaces/:id/reservation', component: ReservationFormComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'invoice', component: InvoiceComponent}
+    {path: 'reservations/:id/invoice', component: InvoiceComponent}
 ];

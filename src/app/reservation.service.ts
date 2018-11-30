@@ -19,4 +19,8 @@ export class ReservationService {
     listOwn() {
         return this.http.get<Array<ReservationModel>>(`${environment.apiUrl}/reservations/own`);
     }
+
+    get(id: number) {
+        return this.http.get<ReservationModel>(`${environment.apiUrl}/reservations/${id}`);
+    }
 }
