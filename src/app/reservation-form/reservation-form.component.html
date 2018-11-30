@@ -1,9 +1,17 @@
 <!--   Big container   -->
-<div *ngIf="space" class="container">
+<div *ngIf="hasSucceeded" class="alert alert-success" role="alert">
+    Merci pour votre réservation.
+</div>
+<div *ngIf="hasErrored" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <button type="button" class="close" aria-label="Close" (click)="hasErrored = false;">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Uh, Oh! Quelqu'un chose s'est mal passé.</strong> Réessayez ou contactez notre support.
+</div>
+<div *ngIf="space && !hasSucceeded" class="container">
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-12">
             <!-- Wizard container -->
-            <div class="wizard-container">
                 <div class="card wizard-card" data-color="red" id="wizard">
                     <!--Formulaire-->
                     <form action="" method="">
@@ -96,8 +104,7 @@
 
                                     </div>
                                 </div>
-                                <!--todo: route-->
-                                <button class="btn btn-info" routerLink="/spaces" style="float:left;">Back</button>
+                                <button class="btn btn-info" routerLink="/spaces" style="float:left;">Espaces</button>
                                 <button (click)="submitReservation()" class="btn btn-primary" style="float:right;">
                                     Réserver
                                 </button>
@@ -105,7 +112,6 @@
                         </div>
                     </form>
                 </div>
-            </div> <!-- wizard container -->
         </div>
     </div> <!-- row -->
 </div> <!--  big container -->
