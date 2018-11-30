@@ -7,6 +7,8 @@ import * as moment from 'moment';
 import { EquipmentTypeModel } from "../models/equipmentType.model";
 import { ServiceTypeModel } from "../models/serviceType.model";
 import { ReservationService } from "../reservation.service";
+import { EquipmentOrderModel } from "../models/equipmentOrder.model";
+import { ServiceOrderModel } from "../models/serviceOrder.model";
 
 
 @Component({
@@ -113,8 +115,8 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
             endDate: this.endDate,
             peopleNumber: this.peopleNumber,
             space: this.space,
-            equipmentOrders: Object.values(this.equipments),
-            serviceOrders: Object.values(this.services)
+            equipmentOrders: <Array<EquipmentOrderModel>>Object.values(this.equipments),
+            serviceOrders: <Array<ServiceOrderModel>>Object.values(this.services)
         };
 
         console.log("making reservation: ", reservation);
