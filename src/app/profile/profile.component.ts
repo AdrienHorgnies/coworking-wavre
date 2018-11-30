@@ -17,12 +17,12 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'cow-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css']
+    selector: 'cow-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css']
 })
 
-export class ProfilComponent {
+export class ProfileComponent {
 @ViewChild('modalContent')
     modalContent: TemplateRef<any>;
 

@@ -17,7 +17,7 @@ import { SpacesListComponent } from './spaces-list/spaces-list.component';
 import { HomeComponent } from './home/home.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
-import { ProfilComponent } from './profil/profil.component';
+import { ProfileComponent } from './profile/profile.component';
 import { TabModule } from 'angular-tabs-component';
 import { FullCalendarModule } from "ng-fullcalendar";
 import { CommonModule } from "@angular/common";
@@ -35,7 +35,7 @@ import { FactureComponent } from './facture/facture.component';
         HomeComponent,
         SpaceDetailComponent,
         ReservationFormComponent,
-        ProfilComponent,
+        ProfileComponent,
         FactureComponent,
     ],
     imports: [
