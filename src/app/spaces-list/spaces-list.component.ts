@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ImageService } from "../image.service";
 import { LabelType, Options } from "ng5-slider";
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'cow-spaces-list',
@@ -17,6 +18,8 @@ export class SpacesListComponent implements OnInit, OnDestroy {
 
     searchSubscription: Subscription;
     subscriptions: Array<Subscription> = new Array<Subscription>();
+
+    $queryEmitter = new EventEmitter<string>();
 
     filters = {
         priceMin: {
@@ -66,16 +69,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
 
 
     onFilterFormChanges() {
-        this.ngOnDestroy();
-
-        const query = this.buildQuery();
-
-        if (query) {
-            console.log("Querying :", this.buildQuery());
-            this.searchSubscription = this.spaceService.search(query).subscribe(spaces => this.spaces = spaces);
-        } else {
-            this.spacesSubscription = this.spaceService.list().subscribe(spaces => this.spaces = spaces);
-        }
+        this.$queryEmitter.emit(this.buildQuery());
     }
 
     ngOnInit() {
@@ -88,12 +82,18 @@ export class SpacesListComponent implements OnInit, OnDestroy {
             this.filters.priceMax.value = value;
             this.options.ceil = value;
         }));
+        this.subscriptions.push(this.$queryEmitter.pipe(
+            filter(query => query.length > 0),
+            debounceTime(400),
+            switchMap(query => this.spaceService.search(query))
+        ).subscribe(
+            spaces => this.spaces = spaces
+        ));
     }
 
     ngOnDestroy() {
         this.subscriptions.forEach(sub => {
             sub.unsubscribe();
         });
-        this.subscriptions = new Array<Subscription>();
     }
 }
