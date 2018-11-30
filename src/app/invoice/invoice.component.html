@@ -1,0 +1,100 @@
+<div *ngIf="reservation">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>CoWorking Wavre</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet"
+              type="text/css"/>
+    </head>
+    <body>
+    <div>
+        <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+
+            <header>
+                <h1>FACTURE
+                    <h2>CoWorking Wavre − Location d'un espace de travail partagé</h2>
+                </h1>
+            </header>
+            <section class="flex">
+                <dl>
+                    <dt>Facture</dt>
+                    <dd>{{reservation.id}}</dd>
+                    <dt>Date</dt>
+                    <dd>{{displayDate(reservation.orderDate)}}</dd>
+                </dl>
+            </section>
+            <section class="flex">
+                <dl class="bloc">
+                    <dt>Facturé à:</dt>
+                    <dd>
+                        UCB BioSciences GmbH<br>
+                        Alfred Nobel Strasse 10<br>
+                        40789 Manheim<br>
+                        Germany<br>
+                        Attn: {{reservation.user.firstName}} {{reservation.user.lastName}}<br>
+                        VAT: DE813201746<br>
+                    </dd>
+                </dl>
+                <dl class="bloc">
+                    <dt>Description de service:</dt>
+                    <dd>Location de l'espace {{reservation.space.type}} {{reservation.space.name}}</dd>
+                    <dt>Période totale:</dt>
+                    <dd>{{displayDate(reservation.startDate)}} au {{displayDate(reservation.endDate)}}
+                        pour {{invoiceService.calculateBusinessDays(reservation.endDate, reservation.startDate)}} jours
+                        ouvrables
+                    </dd>
+                </dl>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Desc.</th>
+                        <th>Qtt.</th>
+                        <th>prix HTVA (taux)</th>
+                        <th>Montant journalier HTVA</th>
+                        <th>Montant pour la période TVAC</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Bureau</td>
+                        <td>1</td>
+                        <td>{{reservation.space.price}} (.21)</td>
+                        <td>{{reservation.space.price}}</td>
+                        <td>{{invoiceService.spaceLocationPriceTVAC(reservation)}}</td>
+                    </tr>
+                    <tr *ngFor="let equipment of reservation.equipmentOrders">
+                        <td>{{equipment.equipmentType.name}}</td>
+                        <td>{{equipment.quantity}}</td>
+                        <td>{{equipment.unitPricePerDay}} (.21)</td>
+                        <td>{{invoiceService.equipmentOrderPricePerDayHTVA(equipment)}}</td>
+                        <td>{{invoiceService.equipmentOrderPeriodPriceTVAC(reservation, equipment)}}</td>
+                    </tr>
+                    <tr *ngFor="let service of reservation.serviceOrders">
+                        <td>{{service.serviceType.name}}</td>
+                        <td>{{reservation.peopleNumber}}</td>
+                        <td>{{service.unitPricePerDay}} (.21)</td>
+                        <td>{{invoiceService.serviceOrderPricePerDayHTVA(reservation, service)}}</td>
+                        <td>{{invoiceService.serviceOrderPeriodPriceTVAC(reservation, service)}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3  ">Total:</td>
+                        <td>{{invoiceService.totalPricePerDayHTVA(reservation)}}&#8202;€</td>
+                        <td>{{invoiceService.grandTotalPriceTVAC(reservation)}}&#8202;€</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </section>
+            <footer>
+                <p>CoWorking – Gestion d'Informatique | <a href="http://localhost:4200/">CoWorking Wavre</a></p>
+                <p>IFOSUP Wavre - 6, rue de la Limite - 1300 Wavre | Tél. 010/22.20.260</p>
+            </footer>
+
+        </kendo-pdf-export>
+        <button (click)="pdf.saveAs(invoiceService.invoicePDFName(reservation))" kendo-button>
+            Format PDF
+        </button>
+
+    </div>
+    </body>
+</div>

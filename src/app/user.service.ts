@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "../environments/environment";
 import { JwtInterceptorService } from "./jwt-interceptor.service";
+import { UserModel } from "./models/user.model";
 
 @Injectable({
     providedIn: 'root'
@@ -30,6 +31,10 @@ export class UserService {
         return this.http.post<HttpResponse<Object>>(`${environment.apiUrl}/authenticate`, body, {observe: 'response'}).pipe(
             tap(resp => this.storeAuthenticationToken(resp, rememberMe))
         );
+    }
+
+    getCurrentlyLoggedInUser() {
+        return this.http.get<UserModel>(`${environment.apiUrl}/users/self`);
     }
 
     storeAuthenticationToken(resp: HttpResponse<Object>, rememberMe) {

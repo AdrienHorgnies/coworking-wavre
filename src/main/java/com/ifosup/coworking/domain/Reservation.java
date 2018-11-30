@@ -1,7 +1,5 @@
 package com.ifosup.coworking.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
@@ -48,7 +46,6 @@ public class Reservation implements Serializable {
     private Space space;
 
     @ManyToOne(optional = false)
-    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)

@@ -2,9 +2,9 @@ package com.ifosup.coworking.api.resource;
 
 import com.ifosup.coworking.api.util.HeaderUtil;
 import com.ifosup.coworking.domain.Reservation;
+import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.MakeReservationDto;
 import com.ifosup.coworking.repository.ReservationRepository;
-import com.ifosup.coworking.repository.UserRepository;
 import com.ifosup.coworking.service.ReservationService;
 import com.ifosup.coworking.service.UserService;
 import org.slf4j.Logger;
@@ -31,13 +31,11 @@ public class ReservationResource {
 
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
-    private final UserRepository userRepository;
     private final UserService userService;
 
-    public ReservationResource(ReservationService reservationService, ReservationRepository reservationRepository, UserRepository userRepository, UserService userService) {
+    public ReservationResource(ReservationService reservationService, ReservationRepository reservationRepository, UserService userService) {
         this.reservationService = reservationService;
         this.reservationRepository = reservationRepository;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
@@ -78,5 +76,25 @@ public class ReservationResource {
         log.debug("REST request to get authenticated user reservations");
 
         return ResponseEntity.ok(reservationRepository.getAllByUser(userService.getCurrentUser()));
+    }
+
+    /**
+     * GET /reservations/{id}
+     *
+     * @param id the id of the reservation we are looking for
+     * @return the ResponseEntity with status 200 (Ok) and with body the reservation if the authenticated user owns it
+     */
+    @GetMapping("{id}")
+    public ResponseEntity<Reservation> getReservation(@PathVariable Long id) {
+        log.debug("REST request to get reservation {}", id);
+
+        Reservation reservation = reservationRepository.findOne(id);
+        User currentUser = userService.getCurrentUser();
+
+        if (!currentUser.id.equals(reservation.getUser().id)) {
+            return ResponseEntity.notFound().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "notFoundForCurrentUser", "No reservation with such id has been found for current user")).build();
+        }
+
+        return ResponseEntity.ok(reservation);
     }
 }

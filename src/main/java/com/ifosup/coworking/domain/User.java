@@ -1,5 +1,7 @@
 package com.ifosup.coworking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,6 +33,7 @@ public class User {
     public Set<Authority> authorities = new HashSet<>();
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private Set<Reservation> reservations = new HashSet<>();
 
     public Set<Reservation> getReservations() {

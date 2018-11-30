@@ -3,8 +3,16 @@
     <button type="button" class="navbar-toggler navbar-toggler-right" (click)="toggleNavbar()">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div id="navbar" class="navbar-collapse" [class.collapse]="navbarCollapsed">
+    <div [class.collapse]="navbarCollapsed" class="nav navbar-collapse" id="navbar">
+        <div class="nav navbar">
+            <a class="nav-item nav-link" routerLink="/spaces">Recherche un espace</a>
+        </div>
+        <div *ngIf="!isUserLoggedIn" class="nav navbar">
+            <a class="nav-item nav-link" routerLink="/login">Se connecter</a>
+            <a class="nav-item nav-link" routerLink="/register">S'inscrire</a>
+        </div>
         <div *ngIf="isUserLoggedIn" class="nav navbar-nav">
+            <a class="nav-item nav-link" routerLink="/profile">Profil</a>
             <a class="nav-item nav-link" (click)="logout($event)">
                 Se déconnecter
                 <span class="fa fa-power-off"></span>
