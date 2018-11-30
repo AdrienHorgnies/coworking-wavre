@@ -48,7 +48,8 @@
                                         <div class="col-md-6">
                                             <div class="card" style="margin:50px 0">
 
-                                                <div class="card-header">Equipements en option</div>
+                                                <div class="card-header">Equipements en option <p>€ / unité / jour</p>
+                                                </div>
 
                                                 <ul class="list-group list-group-flush">
                                                     <li *ngFor="let equipment of space.equipmentTypes"
@@ -72,7 +73,8 @@
                                             <div class="card" style="margin:50px 0">
 
                                                 <!-- Default panel contents -->
-                                                <div class="card-header">Services en option</div>
+                                                <div class="card-header">Services en option <p>€ / pers. / jour</p>
+                                                </div>
 
                                                 <ul class="list-group list-group-flush">
                                                     <li *ngFor="let serviceType of space.building.serviceTypes"
