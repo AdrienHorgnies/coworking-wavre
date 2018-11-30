@@ -56,10 +56,8 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    submitReservation() {
-        console.log("equipments", Object.values(this.equipments));
-        console.log("services", Object.values(this.services));
-        let reservation = {
+    buildReservation() {
+        return {
             // todo take title from input
             title: "TITLE",
             startDate: this.startDate,
@@ -69,10 +67,10 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
             equipmentOrders: <Array<EquipmentOrderModel>>Object.values(this.equipments),
             serviceOrders: <Array<ServiceOrderModel>>Object.values(this.services)
         };
+    }
 
-        console.log("making reservation: ", reservation);
-
-        this.reservationSubscription = this.reservationService.make(reservation).subscribe(resp => console.log(resp));
+    submitReservation() {
+        this.reservationSubscription = this.reservationService.make(this.buildReservation()).subscribe(resp => console.log(resp));
     }
 
     ngOnInit() {
