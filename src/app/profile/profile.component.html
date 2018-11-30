@@ -56,9 +56,9 @@
                                         </thead>
                                         <tbody id="items">
                                         <tr *ngFor="let reservation of reservations">
-                                            <td>{{reservation.orderDate}}</td>
-                                            <td>{{reservation.startDate}}</td>
-                                            <td>{{reservation.endDate}}</td>
+                                            <td>{{displayDate(reservation.orderDate)}}</td>
+                                            <td>{{displayDate(reservation.startDate)}}</td>
+                                            <td>{{displayDate(reservation.endDate)}}</td>
                                             <td>{{reservation.peopleNumber}}</td>
                                         </tr>
                                         </tbody>

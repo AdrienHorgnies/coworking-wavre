@@ -5,6 +5,7 @@ import { UserModel } from "../models/user.model";
 import { Subscription } from 'rxjs';
 import { ReservationService } from "../reservation.service";
 import { ReservationModel } from "../models/reservation.model";
+import * as moment from 'moment';
 
 @Component({
     selector: 'cow-profile',
@@ -23,6 +24,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     reservationsSubscription: Subscription;
 
     constructor(private userService: UserService, private reservationService: ReservationService, private modal: NgbModal) {
+        moment.locale('fr')
+    }
+
+    displayDate(date: Date) {
+        return moment(date).format("DD-MM-YYYY");
     }
 
     ngOnInit() {
