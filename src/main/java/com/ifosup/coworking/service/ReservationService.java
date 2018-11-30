@@ -47,11 +47,11 @@ public class ReservationService {
         reservation.setUser(userService.getCurrentUser());
         reservation.setSpace(trustedSpace);
 
-        for (EquipmentOrderDto equipmentOrderDto : makeReservationDto.getEquipmentOrderDtos()) {
+        for (EquipmentOrderDto equipmentOrderDto : makeReservationDto.getEquipmentOrders()) {
             EquipmentOrder trustedEquipmentOrder = trustedEquipmentOrder(trustedSpace, equipmentOrderDto);
             reservation.addEquipmentOrder(trustedEquipmentOrder);
         }
-        for (ServiceOrderDto serviceOrderDto : makeReservationDto.getServiceOrderDtos()) {
+        for (ServiceOrderDto serviceOrderDto : makeReservationDto.getServiceOrders()) {
             ServiceOrder trustedServiceOrder = trustedServiceOrder(trustedSpace, serviceOrderDto);
             reservation.addServiceOrder(trustedServiceOrder);
         }

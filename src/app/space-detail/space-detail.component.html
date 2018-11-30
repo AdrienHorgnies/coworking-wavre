@@ -22,6 +22,7 @@
 
                         </div>
 
+                        <img [alt]="space.imageCredit" [src]="imageService.get(space.imageUrl)" class="img-fluid">
 
                         <div class="tab-content">
                             <div id="details">
@@ -64,10 +65,10 @@
                                 </button>
                             </div>
                             <div *ngIf="isUserLoggedIn" class="pull-right">
-                                <input (click)="displayReservationForm = ! displayReservationForm"
-                                       [value]='displayReservationForm ? "Cacher" : "Réserver"'
-                                       class='btn btn-next btn-fill btn-danger btn-wd'
-                                       type='button'/>
+                                <button routerLink="/spaces/{{space.id}}//reservation"
+                                        class='btn btn-next btn-fill btn-danger btn-wd'
+                                        type='button'>"Réserver"
+                                </button>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -76,6 +77,4 @@
             </div>
         </div> <!-- row -->
     </div> <!--  big container -->
-    <cow-reservation-form *ngIf="displayReservationForm"
-                          [space]="space"></cow-reservation-form>
 </div>

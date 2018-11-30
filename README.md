@@ -1,7 +1,7 @@
-# coworking-wavres
+# coworking-wavre
 > For a business view of this project, please consult the [wiki] of this Github repository.
 
-Responsive web application to manage renting of coworking spaces at Wavres.
+Responsive web application to manage renting of coworking spaces at Wavre.
 Conducted as part of the "Integration and Development Project" and "E-Business" courses at IFOSUP Wavres, academic year 2018-19.
 
 ## Stakeholders

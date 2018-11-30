@@ -26,9 +26,9 @@ public class MakeReservationDto {
     @NotNull
     private Space space;
 
-    private Set<ServiceOrderDto> serviceOrderDtos;
+    private Set<ServiceOrderDto> serviceOrders;
 
-    private Set<EquipmentOrderDto> equipmentOrderDtos;
+    private Set<EquipmentOrderDto> equipmentOrders;
 
     public String getTitle() {
         return title;
@@ -70,19 +70,19 @@ public class MakeReservationDto {
         this.space = space;
     }
 
-    public Set<ServiceOrderDto> getServiceOrderDtos() {
-        return serviceOrderDtos;
+    public Set<ServiceOrderDto> getServiceOrders() {
+        return serviceOrders;
     }
 
-    public void setServiceOrderDtos(Set<ServiceOrderDto> serviceOrderDtos) {
-        this.serviceOrderDtos = serviceOrderDtos;
+    public void setServiceOrders(Set<ServiceOrderDto> serviceOrders) {
+        this.serviceOrders = serviceOrders;
     }
 
-    public Set<EquipmentOrderDto> getEquipmentOrderDtos() {
-        return equipmentOrderDtos;
+    public Set<EquipmentOrderDto> getEquipmentOrders() {
+        return equipmentOrders;
     }
 
-    public void setEquipmentOrderDtos(Set<EquipmentOrderDto> equipmentOrderDtos) {
-        this.equipmentOrderDtos = equipmentOrderDtos;
+    public void setEquipmentOrders(Set<EquipmentOrderDto> equipmentOrders) {
+        this.equipmentOrders = equipmentOrders;
     }
 }

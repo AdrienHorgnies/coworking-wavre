@@ -1,5 +1,5 @@
 <!--   Big container   -->
-<div class="container">
+<div *ngIf="space" class="container">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <!-- Wizard container -->
@@ -8,10 +8,9 @@
                     <!--Formulaire-->
                     <form action="" method="">
 
-                        <!--todo: Récupère le nom de la salle et sa catégorie préalablement sélectionnés -->
                         <div>
-                            <h3 class="info-text" style="color: darkblue;">NOM DE LA SALLE</h3>
-                            <h4 class="info-text" style="color: #9c27b0;">BUREAU PRIVATIF</h4>
+                            <h3 class="info-text" style="color: darkblue;">{{space.name}}</h3>
+                            <h4 class="info-text" style="color: #9c27b0;">{{space.type}}</h4>
                         </div>
 
                         <div class="tab-content">
@@ -23,56 +22,48 @@
                                 <!--todo: format date et valeurs par défaut date début (date du jour) et date de fin (1 mois plus tard)-->
 
                                 <span class="form-label">Date de début</span>
-                                <input [(ngModel)]="date1" [ngModelOptions]="{standalone: true}" class="form-control "
-                                       required type="date" value="{{date1}}">
+                                <input [(ngModel)]="startDate" [ngModelOptions]="{standalone: true}"
+                                       class="form-control "
+                                       required type="date" useValueAsDate>
 
                                 <span class="form-label">Date de fin</span>
-                                <input [(ngModel)]="date2" [ngModelOptions]="{standalone: true}" class="form-control"
-                                       required type="date">
-
-                                <!--todo: déterminer le nombre max de personnes à la capacité ax du bureau (récupérer valeur de la db)-->
+                                <input [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}" class="form-control"
+                                       required type="date" useValueAsDate>
 
                                 <span class="form-label">Nombre de personnes</span>
                                 <div>
-                                    <input [(ngModel)]="content" [ngModelOptions]="{standalone: true}"
-                                           class="form-control" max="10" min="1" required type="number" value="1">
+                                    <input [(ngModel)]="peopleNumber" [max]="space.peopleCapacity"
+                                           [ngModelOptions]="{standalone: true}" class="form-control"
+                                           max={{space.peopleCapacity}}
+                                           min="1" required type="number">
                                 </div>
-                                <!--todo: récupérer le prix de la db-->
-                                <!--todo: prix forfaitaire = prix de la db*nbre de jours-->
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Prix forfaitaire : {{total("30,00")}} €</span>
-                                <br><span class="form-label">Du {{date1}} au {{date2}}</span>
+                                          style="color: darkblue;">Prix par jour : {{space.price}}
+                                €</span>
+                                <br><span class="form-label">{{calculateBusinessDays(startDate, endDate)}} jours ouvrables</span>
 
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="card" style="margin:50px 0">
 
-                                                <!-- todo: Récupère dans la db les équipements en option -->
-                                                <!-- Ne peut pas dépasser la valeur de l'input: nombre de personnes-->
-                                                <!--todo: Le prix est affiché si valeur > 0 : Le champ est calculé en fct du nombre sélectionné dans l'input-->
-                                                <!--todo: si switch = true: afficher le prix-->
-
-                                                <div class="card-header">Equipement en option</div>
+                                                <div class="card-header">Equipements en option <p>€ / unité / jour</p>
+                                                </div>
 
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                                        <input max="{{content}}" min="0" type="number"
-                                                               value="{{content}}">
-                                                        &nbsp; téléphone(s) - 0,00 €
+                                                    <li *ngFor="let equipment of space.equipmentTypes"
+                                                        class="list-group-item">
+                                                        <input (ngModelChange)="updateEquipmentOrder(equipment, $event)"
+                                                               [ngModelOptions]="{standalone: true}"
+                                                               [max]="peopleNumber" min="0" ngModel="0"
+                                                               type="number">
+                                                        &nbsp; {{equipment.name}}
+                                                        - {{equipment.price}} €
+
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        <input max="{{content}}" min="0" type="number"
-                                                               value="{{content}}">
-                                                        &nbsp; armoire(s) - 0,00 €
-                                                    </li>
-                                                    <div class="card-header">Inclus dans le prix</div>
-                                                    <li class="list-group-item">
-                                                        &nbsp; {{content}} bureau(x)
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        &nbsp; {{content}} Chaise(s)
+                                                    <li *ngIf="space.equipmentTypes.length === 0">
+                                                        Pas d'équipement disponible pour cet espace.
                                                     </li>
                                                 </ul>
                                             </div>
@@ -81,52 +72,34 @@
                                             <div class="card" style="margin:50px 0">
 
                                                 <!-- Default panel contents -->
-                                                <!--todo: si switch = true: afficher le prix-->
-                                                <div class="card-header">Services en option</div>
+                                                <div class="card-header">Services en option <p>€ / pers. / jour</p>
+                                                </div>
 
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                                        Courrier <span *ngIf="!display"> - 5,00 €</span>
+                                                    <li *ngFor="let serviceType of space.building.serviceTypes"
+                                                        class="list-group-item">
+                                                        {{serviceType.name}} <span> - {{serviceType.price}} €</span>
                                                         <label class="switch">
-                                                            <input (click)="display = !display" class="default"
+                                                            <input (click)="updateServiceOrder(serviceType)"
+                                                                   class="default"
                                                                    type="checkbox">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        Café - 0,00 €
-                                                        <label class="switch">
-                                                            <input class="primary" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        Scanner - 0,00 €
-                                                        <label class="switch ">
-                                                            <input class="success" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        Photocopieuse - 0,00 €
-                                                        <label class="switch ">
-                                                            <input class="info" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-
                                                 </ul>
                                             </div>
                                             <!--todo: total: champ calculé-->
                                             <span class="form-label"
-                                                  style="float:right;">TOTAL : total("30,00") €</span><br><br>
+                                                  style="float:right;">TOTAL : {{space.price}} €</span><br><br>
                                         </div>
 
                                     </div>
                                 </div>
                                 <!--todo: route-->
-                                <a class="btn btn-info" href="#" style="float:left;">Back</a>
-                                <a class="btn btn-primary" href="#" style="float:right;">Réserver</a>
+                                <button class="btn btn-info" routerLink="/spaces" style="float:left;">Back</button>
+                                <button (click)="submitReservation()" class="btn btn-primary" style="float:right;">
+                                    Réserver
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -135,3 +108,4 @@
         </div>
     </div> <!-- row -->
 </div> <!--  big container -->
+<!--  big container -->

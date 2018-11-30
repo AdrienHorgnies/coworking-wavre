@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
 import { Ng5SliderModule } from 'ng5-slider';
+import { DateValueAccessorModule } from "angular-date-value-accessor";
 
 import { ROUTES } from "./app.routes";
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { ReservationFormComponent } from './reservation-form/reservation-form.co
         ReactiveFormsModule,
         FormsModule,
         RouterModule.forRoot(ROUTES),
-        Ng5SliderModule
+        Ng5SliderModule,
+        DateValueAccessorModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}
