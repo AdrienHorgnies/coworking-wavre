@@ -2,7 +2,7 @@ import { SpaceModel } from "./space.model";
 import { EquipmentOrderModel } from "./equipmentOrder.model";
 import { ServiceOrderModel } from "./serviceOrder.model";
 
-export interface ReservationModel {
+export interface MakeReservationModel {
     title: string,
     startDate: Date;
     endDate: Date;

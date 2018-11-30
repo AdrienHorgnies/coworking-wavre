@@ -56,8 +56,7 @@
                                                         class="list-group-item">
                                                         <input (ngModelChange)="updateEquipmentOrder(equipment, $event)"
                                                                [ngModelOptions]="{standalone: true}"
-                                                               [value]="0"
-                                                               max="{{peopleNumber}}" min="0" ngModel="0"
+                                                               [max]="peopleNumber" min="0" ngModel="0"
                                                                type="number">
                                                         &nbsp; {{equipment.name}}
                                                         - {{equipment.price}} €
@@ -97,8 +96,10 @@
                                     </div>
                                 </div>
                                 <!--todo: route-->
-                                <a class="btn btn-info" href="#" style="float:left;">Back</a>
-                                <a class="btn btn-primary" href="#" style="float:right;">Réserver</a>
+                                <button class="btn btn-info" routerLink="/spaces" style="float:left;">Back</button>
+                                <button (click)="submitReservation()" class="btn btn-primary" style="float:right;">
+                                    Réserver
+                                </button>
                             </div>
                         </div>
                     </form>

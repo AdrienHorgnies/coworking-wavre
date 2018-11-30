@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { EquipmentTypeModel } from "../models/equipmentType.model";
 import { ServiceTypeModel } from "../models/serviceType.model";
+import { ReservationService } from "../reservation.service";
 
 
 @Component({
@@ -15,8 +16,8 @@ import { ServiceTypeModel } from "../models/serviceType.model";
 })
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
-    startDate: Date = moment().startOf('day').toDate();
-    endDate: Date = moment().add(7, 'days').toDate();
+    startDate: Date = moment().add(1, 'day').startOf('day').toDate();
+    endDate: Date = moment().add(8, 'days').startOf('day').toDate();
     peopleNumber: number = 1;
     equipments = {};
     services = {};
@@ -24,7 +25,9 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
     space: SpaceModel;
     spaceSubscription: Subscription;
 
-    constructor(private spaceService: SpaceService, private route: ActivatedRoute) {
+    reservationSubscription: Subscription;
+
+    constructor(private spaceService: SpaceService, private route: ActivatedRoute, private reservationService: ReservationService) {
         moment.locale("fr");
     }
 
@@ -98,6 +101,25 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
         }
 
         return day2.diff(day1, 'days') + adjust;
+    }
+
+    submitReservation() {
+        console.log("equipments", Object.values(this.equipments));
+        console.log("services", Object.values(this.services));
+        let reservation = {
+            // todo take title from input
+            title: "TITLE",
+            startDate: this.startDate,
+            endDate: this.endDate,
+            peopleNumber: this.peopleNumber,
+            space: this.space,
+            equipmentOrders: Object.values(this.equipments),
+            serviceOrders: Object.values(this.services)
+        };
+
+        console.log("making reservation: ", reservation);
+
+        this.reservationSubscription = this.reservationService.make(reservation).subscribe(resp => console.log(resp));
     }
 
     ngOnInit() {
