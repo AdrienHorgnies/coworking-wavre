@@ -42,40 +42,24 @@
                     </tab>
 
                     <tab tabTitle="Facturation">
-                        <div class="tab-content">
+                        <div *ngIf="reservations" class="tab-content">
                             <div class="tab-pane active" id="home">
-                                <div class="table-responsive">
+                                <div *ngIf="reservations.length > 0" class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Facture</th>
-                                            <th>N°</th>
-                                            <th>Détail</th>
+                                            <th>Prise</th>
+                                            <th>Début</th>
+                                            <th>Fin</th>
+                                            <th>Pers.</th>
                                         </tr>
                                         </thead>
                                         <tbody id="items">
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href=""></a>Salle privé</td>
-                                            <td>1</td>
-                                            <td>
-                                                <button class="btn btn-primary" routerLink="facture"> Consulter
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Salle Bubble</td>
-                                            <td>2</td>
-                                            <td>
-                                                <button class="btn btn-primary" routerLink="facture"> Consulter
-                                                </button>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-
+                                        <tr *ngFor="let reservation of reservations">
+                                            <td>{{reservation.orderDate}}</td>
+                                            <td>{{reservation.startDate}}</td>
+                                            <td>{{reservation.endDate}}</td>
+                                            <td>{{reservation.peopleNumber}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -86,6 +70,7 @@
                                         </div>
                                     </div>
                                 </div><!--/table-resp-->
+                                <p *ngIf="reservations.length === 0">Vous n'avez pas encore effectué de réservation</p>
                             </div><!--/tab-pane-->
                         </div>
                     </tab>
