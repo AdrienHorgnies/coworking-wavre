@@ -6,6 +6,8 @@ import { RouterModule } from "@angular/router";
 import { Ng5SliderModule } from 'ng5-slider';
 import { DateValueAccessorModule } from "angular-date-value-accessor";
 import { PDFExportModule } from "@progress/kendo-angular-pdf-export";
+import { GoTopButtonModule } from 'ng2-go-top-button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
@@ -50,7 +52,9 @@ import { InvoiceComponent } from './invoice/invoice.component';
         PDFExportModule,
         FullCalendarModule,
         CommonModule,
-        NgbModalModule
+        NgbModalModule,
+        GoTopButtonModule,
+        BrowserAnimationsModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useExisting: JwtInterceptorService, multi: true}

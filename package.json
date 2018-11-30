@@ -32,6 +32,7 @@
         "moment": "^2.22.2",
         "ng-bootstrap-modal": "^1.1.19",
         "ng-fullcalendar": "^1.7.1",
+        "ng2-go-top-button": "^6.0.0",
         "ng5-slider": "^1.1.7",
         "popper.js": "^1.14.3",
         "rxjs": "^6.0.0",
