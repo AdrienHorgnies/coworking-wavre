@@ -77,12 +77,10 @@
             </footer>
 
         </kendo-pdf-export>
+        <button (click)="pdf.saveAs(invoiceService.invoicePDFName(reservation))" kendo-button>
+            Format PDF
+        </button>
 
     </div>
     </body>
-</div>
-<div class="example-config">
-    <button kendo-button (click)="pdf.saveAs('PhirumChan.pdf')">
-        Format PDF
-    </button>
 </div>

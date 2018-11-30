@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
+import { ReservationModel } from "./models/reservation.model";
 
 @Injectable({
     providedIn: 'root'
@@ -59,4 +60,7 @@ export class InvoiceService {
         return day2.diff(day1, 'days') + adjust;
     }
 
+    invoicePDFName(reservation: ReservationModel) {
+        return `invoice-${reservation.id}-${reservation.user.lastName}-${moment(reservation.orderDate).format("YYYY-MM-DD")}.pdf`;
+    }
 }
