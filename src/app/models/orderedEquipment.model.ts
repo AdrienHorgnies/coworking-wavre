@@ -2,7 +2,7 @@ import { EquipmentTypeModel } from "./equipmentType.model";
 
 export interface OrderedEquipmentModel {
     id: number;
-    price: number;
+    unitPricePerDay: number;
     quantity: number;
     equipmentType: EquipmentTypeModel;
 }

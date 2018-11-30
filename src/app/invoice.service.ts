@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { ReservationModel } from "./models/reservation.model";
+import { OrderedEquipmentModel } from "./models/orderedEquipment.model";
+import { OrderedServiceModel } from "./models/orderedService.model";
 
 @Injectable({
     providedIn: 'root'
@@ -62,5 +64,49 @@ export class InvoiceService {
 
     invoicePDFName(reservation: ReservationModel) {
         return `invoice-${reservation.id}-${reservation.user.lastName}-${moment(reservation.orderDate).format("YYYY-MM-DD")}.pdf`;
+    }
+
+    equipmentOrderPricePerDayHTVA(equipmentOrder: OrderedEquipmentModel) {
+        return equipmentOrder.quantity * equipmentOrder.unitPricePerDay;
+    }
+
+    serviceOrderPricePerDayHTVA(reservation: ReservationModel, serviceOrder: OrderedServiceModel) {
+        return reservation.peopleNumber * serviceOrder.unitPricePerDay;
+    }
+
+    equipmentOrderPeriodPriceTVAC(reservation: ReservationModel, equipmentOrder: OrderedEquipmentModel) {
+        return this.equipmentOrderPricePerDayHTVA(equipmentOrder) * 1.21 * this.calculateBusinessDays(reservation.startDate, reservation.endDate);
+    }
+
+    serviceOrderPeriodPriceTVAC(reservation: ReservationModel, serviceOrder: OrderedServiceModel) {
+        return this.serviceOrderPricePerDayHTVA(reservation, serviceOrder) * 1.21 * this.calculateBusinessDays(reservation.startDate, reservation.endDate);
+    }
+
+    spaceLocationPriceTVAC(reservation: ReservationModel) {
+        return reservation.spacePricePerDay * 1.21 * this.calculateBusinessDays(reservation.startDate, reservation.endDate);
+    }
+
+    totalPricePerDayHTVA(reservation: ReservationModel) {
+        const equipmentsPriceTVAC = reservation.equipmentOrders
+            .map(orderedEquipment => this.equipmentOrderPricePerDayHTVA(orderedEquipment))
+            .reduce((a, b) => a + b, 0);
+        const servicesPriceTVAC = reservation.serviceOrders
+            .map(orderedService => this.serviceOrderPricePerDayHTVA(reservation, orderedService))
+            .reduce((a, b) => a + b, 0);
+
+        return reservation.spacePricePerDay + equipmentsPriceTVAC + servicesPriceTVAC;
+    }
+
+    grandTotalPriceTVAC(reservation: ReservationModel) {
+        const businessDays = this.calculateBusinessDays(reservation.startDate, reservation.endDate);
+        const locationPriceTVAC = businessDays * reservation.spacePricePerDay * 1.21;
+        const equipmentsPriceTVAC = reservation.equipmentOrders
+            .map(orderedEquipment => this.equipmentOrderPeriodPriceTVAC(reservation, orderedEquipment))
+            .reduce((a, b) => a + b, 0);
+        const servicesPriceTVAC = reservation.serviceOrders
+            .map(orderedService => this.serviceOrderPeriodPriceTVAC(reservation, orderedService))
+            .reduce((a, b) => a + b, 0);
+
+        return locationPriceTVAC + equipmentsPriceTVAC + servicesPriceTVAC;
     }
 }

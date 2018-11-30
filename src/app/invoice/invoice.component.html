@@ -46,27 +46,41 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Période</th>
-                        <th>Description</th>
-                        <th>Heures</th>
-                        <th>Taux</th>
-                        <th>Montant</th>
+                        <th>Desc.</th>
+                        <th>Qtt.</th>
+                        <th>prix HTVA (taux)</th>
+                        <th>Montant journalier HTVA</th>
+                        <th>Montant pour la période TVAC</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td> 30 Novembre au 7 Décembre</td>
-                        <td>Réservation de salle</td>
-                        <td>24&#8202;h</td>
-                        <td>20&#8202;€/h</td>
-                        <td>480&#8202;€</td>
+                        <td>Bureau</td>
+                        <td>1</td>
+                        <td>{{reservation.space.price}} (.21)</td>
+                        <td>{{reservation.space.price}}</td>
+                        <td>{{invoiceService.spaceLocationPriceTVAC(reservation)}}</td>
+                    </tr>
+                    <tr *ngFor="let equipment of reservation.equipmentOrders">
+                        <td>{{equipment.equipmentType.name}}</td>
+                        <td>{{equipment.quantity}}</td>
+                        <td>{{equipment.unitPricePerDay}} (.21)</td>
+                        <td>{{invoiceService.equipmentOrderPricePerDayHTVA(equipment)}}</td>
+                        <td>{{invoiceService.equipmentOrderPeriodPriceTVAC(reservation, equipment)}}</td>
+                    </tr>
+                    <tr *ngFor="let service of reservation.serviceOrders">
+                        <td>{{service.serviceType.name}}</td>
+                        <td>{{reservation.peopleNumber}}</td>
+                        <td>{{service.unitPricePerDay}} (.21)</td>
+                        <td>{{invoiceService.serviceOrderPricePerDayHTVA(reservation, service)}}</td>
+                        <td>{{invoiceService.serviceOrderPeriodPriceTVAC(reservation, service)}}</td>
                     </tr>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="3">− Faire les chèques payable au nom de moi −</td>
-                        <td>Total:</td>
-                        <td>480&#8202;€</td>
+                        <td colspan="3  ">Total:</td>
+                        <td>{{invoiceService.totalPricePerDayHTVA(reservation)}}&#8202;€</td>
+                        <td>{{invoiceService.grandTotalPriceTVAC(reservation)}}&#8202;€</td>
                     </tr>
                     </tfoot>
                 </table>
