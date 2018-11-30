@@ -4,6 +4,7 @@ import { ReservationModel } from "../models/reservation.model";
 import { Subscription } from 'rxjs';
 import { ReservationService } from "../reservation.service";
 import * as moment from 'moment';
+import { InvoiceService } from "../invoice.service";
 
 @Component({
     selector: 'cow-invoice',
@@ -15,7 +16,7 @@ export class InvoiceComponent implements OnInit {
     reservation: ReservationModel;
     reservationSubscription: Subscription;
 
-    constructor(private route: ActivatedRoute, private reservationService: ReservationService) {
+    constructor(private route: ActivatedRoute, private reservationService: ReservationService, public invoiceService: InvoiceService) {
         moment.locale('fr');
     }
 

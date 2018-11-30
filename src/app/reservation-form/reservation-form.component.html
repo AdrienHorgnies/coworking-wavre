@@ -41,7 +41,8 @@
                                 <br><span class="form-label"
                                           style="color: darkblue;">Prix par jour : {{space.price}}
                                 €</span>
-                                <br><span class="form-label">{{calculateBusinessDays(startDate, endDate)}} jours ouvrables</span>
+                                <br><span
+                                class="form-label">{{invoiceService.calculateBusinessDays(startDate, endDate)}} jours ouvrables</span>
 
                                 <div class="container">
                                     <div class="row">

@@ -17,7 +17,7 @@
                 <dl>
                     <dt>Facture</dt>
                     <dd>{{reservation.id}}</dd>
-                    <dt>Date de facturation</dt>
+                    <dt>Date</dt>
                     <dd>{{displayDate(reservation.orderDate)}}</dd>
                 </dl>
             </section>
@@ -25,24 +25,22 @@
                 <dl class="bloc">
                     <dt>Facturé à:</dt>
                     <dd>
-                        {{reservation.user.firstName}} {{reservation.user.lastName}}<br>
-                        Rue Ernest Cosse 1<br>
-                        1490 Court-Saint-Etienne, Belgique
-                        <dl>
-                            <dt>Attn</dt>
-                            <dd>Chan</dd>
-                            <dt>Téléphone</dt>
-                            <dd>0472/42.66.16</dd>
-                            <dt>Courriel</dt>
-                            <dd>chan.1804.student@ifosupwavre.be</dd>
-                        </dl>
+                        UCB BioSciences GmbH<br>
+                        Alfred Nobel Strasse 10<br>
+                        40789 Manheim<br>
+                        Germany<br>
+                        Attn: {{reservation.user.firstName}} {{reservation.user.lastName}}<br>
+                        VAT: DE813201746<br>
                     </dd>
                 </dl>
                 <dl class="bloc">
                     <dt>Description de service:</dt>
-                    <dd>Développement AIR</dd>
+                    <dd>Location de l'espace {{reservation.space.type}} {{reservation.space.name}}</dd>
                     <dt>Période totale:</dt>
-                    <dd>24 Mai au 2 Juin 2014</dd>
+                    <dd>{{displayDate(reservation.startDate)}} au {{displayDate(reservation.endDate)}}
+                        pour {{invoiceService.calculateBusinessDays(reservation.endDate, reservation.startDate)}} jours
+                        ouvrables
+                    </dd>
                 </dl>
             </section>
             <table>
