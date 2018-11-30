@@ -1,121 +1,95 @@
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        Phirum Chan
-                    </h5>
-                    <h6>
-                        Web Developer and Designer
-                    </h6>
+<div *ngIf="user" class="container emp-profile">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="profile-head">
+                <h5>
+                    {{user.firstName}} {{user.lastName}}
+                </h5>
 
-                    <tabs>
-                        <tab tabTitle="Infos">
-                            <div class="col-md-8">
-                                <div class="tab-content profile-tab" id="myTabContent">
-                                    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
+                <tabs>
+                    <tab tabTitle="Infos">
+                        <div class="col-md-8">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div aria-labelledby="home-tab" class="tab-pane fade show active" role="tabpanel">
+                                    <div class="row">
 
-                                            <div class="col-md-6">
-                                                <label>User Id</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Phirum</p>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <label>Email</label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Chan</p>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <p>{{user.email}}</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Phirumch18@hotmail.com</p>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nom de famille</label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Phone</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>0472/42.66.16</p>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <p>{{user.lastName}}</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Profession</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Prénom</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{user.firstName}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </tab>
+                        </div>
+                    </tab>
 
-                        <tab tabTitle="Facturation">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="home">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Facture</th>
-                                                <th>N°</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="items">
-                                            <tr>
-                                                <td>1</td>
-                                                <td><a href=""></a>Salle privé</td>
-                                                <td>1</td>
-                                                <td>
-                                                    <button class="btn btn-primary" routerLink="facture"> Consulter
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Salle Bubble</td>
-                                                <td>2</td>
-                                                <td>
-                                                    <button class="btn btn-primary" routerLink="facture"> Consulter
-                                                    </button>
-                                                </td>
+                    <tab tabTitle="Facturation">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Facture</th>
+                                            <th>N°</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="items">
+                                        <tr>
+                                            <td>1</td>
+                                            <td><a href=""></a>Salle privé</td>
+                                            <td>1</td>
+                                            <td>
+                                                <button class="btn btn-primary" routerLink="facture"> Consulter
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Salle Bubble</td>
+                                            <td>2</td>
+                                            <td>
+                                                <button class="btn btn-primary" routerLink="facture"> Consulter
+                                                </button>
+                                            </td>
 
-                                            </tr>
-                                            <tr>
+                                        </tr>
+                                        <tr>
 
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-4 col-md-offset-4 text-center">
-                                                <ul class="pagination" id="myPager"></ul>
-                                            </div>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-offset-4 text-center">
+                                            <ul class="pagination" id="myPager"></ul>
                                         </div>
-                                    </div><!--/table-resp-->
-                                </div><!--/tab-pane-->
-                            </div>
-                        </tab>
-                        <tabs>
-
-                        </tabs>
-                    </tabs>
-
-                </div>
+                                    </div>
+                                </div><!--/table-resp-->
+                            </div><!--/tab-pane-->
+                        </div>
+                    </tab>
+                </tabs>
             </div>
-
         </div>
-    </form>
+    </div>
 </div>
