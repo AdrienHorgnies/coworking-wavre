@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { ReservationModel } from "./models/reservation.model";
 import { OrderedEquipmentModel } from "./models/orderedEquipment.model";
 import { OrderedServiceModel } from "./models/orderedService.model";
+import { MakeReservationModel } from "./models/makeReservationModel";
 
 @Injectable({
     providedIn: 'root'
@@ -108,5 +109,18 @@ export class InvoiceService {
             .reduce((a, b) => a + b, 0);
 
         return locationPriceTVAC + equipmentsPriceTVAC + servicesPriceTVAC;
+    }
+
+    quotationTotalPriceHTVA(reservation: MakeReservationModel) {
+        const businessDays = this.calculateBusinessDays(reservation.startDate, reservation.endDate);
+        const locationPriceHTVA = businessDays * reservation.space.price;
+        const servicePriceHTVA = reservation.serviceOrders
+            .map(serviceOrder => reservation.peopleNumber * businessDays * serviceOrder.serviceType.price)
+            .reduce((a, b) => a + b, 0);
+        const equipmentPriceHTVA = reservation.equipmentOrders
+            .map(equipmentOrder => equipmentOrder.quantity * businessDays * equipmentOrder.equipmentType.price)
+            .reduce((a, b) => a + b, 0);
+
+        return locationPriceHTVA + servicePriceHTVA + equipmentPriceHTVA;
     }
 }

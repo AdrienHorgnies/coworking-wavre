@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { EquipmentTypeModel } from "../models/equipmentType.model";
 import { ServiceTypeModel } from "../models/serviceType.model";
@@ -19,6 +19,9 @@ import { InvoiceService } from "../invoice.service";
 })
 export class ReservationFormComponent implements OnInit, OnDestroy {
 
+    hasErrored = false;
+    hasSucceeded = false;
+
     startDate: Date = moment().add(1, 'day').startOf('day').toDate();
     endDate: Date = moment().add(8, 'days').startOf('day').toDate();
     peopleNumber: number = 1;
@@ -30,9 +33,10 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     reservationSubscription: Subscription;
 
-    constructor(private spaceService: SpaceService, private route: ActivatedRoute, private reservationService: ReservationService, public invoiceService: InvoiceService) {
+    constructor(private spaceService: SpaceService, private route: ActivatedRoute, private reservationService: ReservationService, public invoiceService: InvoiceService, private router: Router) {
         moment.locale("fr");
     }
+
 
     updateEquipmentOrder(equipmentType: EquipmentTypeModel, quantity: number) {
         if (quantity === 0 && this.equipments[equipmentType.name]) {
@@ -56,10 +60,8 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
         }
     }
 
-    submitReservation() {
-        console.log("equipments", Object.values(this.equipments));
-        console.log("services", Object.values(this.services));
-        let reservation = {
+    buildReservation() {
+        return {
             // todo take title from input
             title: "TITLE",
             startDate: this.startDate,
@@ -69,10 +71,14 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
             equipmentOrders: <Array<EquipmentOrderModel>>Object.values(this.equipments),
             serviceOrders: <Array<ServiceOrderModel>>Object.values(this.services)
         };
+    }
 
-        console.log("making reservation: ", reservation);
-
-        this.reservationSubscription = this.reservationService.make(reservation).subscribe(resp => console.log(resp));
+    submitReservation() {
+        this.reservationSubscription = this.reservationService.make(this.buildReservation()).subscribe(() => {
+                this.hasSucceeded = true;
+                setTimeout(() => this.router.navigate(["home"]), 2000);
+            },
+            () => this.hasErrored = true);
     }
 
     ngOnInit() {

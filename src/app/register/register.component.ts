@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../user.service";
 
 @Component({
@@ -9,6 +9,8 @@ import { UserService } from "../user.service";
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+    returnUrl: string;
 
     registrationFailed: boolean;
     loginCtrl: FormControl;
@@ -20,7 +22,7 @@ export class RegisterComponent implements OnInit {
     userForm: FormGroup;
     passwordForm: FormGroup;
 
-    constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+    constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private route: ActivatedRoute) {
     }
 
     static passwordMatch(control: FormGroup) {
@@ -30,10 +32,12 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
         this.loginCtrl = this.fb.control('', Validators.required);
         this.firstNameCtrl = this.fb.control('', Validators.required);
         this.lastNameCtrl = this.fb.control('', Validators.required);
-        this.passwordCtrl = this.fb.control('', Validators.required);
+        this.passwordCtrl = this.fb.control('', [Validators.required, Validators.minLength(8)]);
         this.passwordTestCtrl = this.fb.control('', Validators.required);
         this.passwordForm = this.fb.group
         (
@@ -65,7 +69,7 @@ export class RegisterComponent implements OnInit {
             this.userForm.value.passwordForm.password,
             this.userForm.value.rememberMe
         ).subscribe(
-            () => this.router.navigate(['/']),
+            () => this.router.navigateByUrl(this.returnUrl),
             () => this.registrationFailed = true,
         );
     }
