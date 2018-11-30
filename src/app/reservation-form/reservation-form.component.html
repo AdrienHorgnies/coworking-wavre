@@ -56,7 +56,7 @@
                                                         <input (ngModelChange)="updateEquipmentOrder(equipment, $event)"
                                                                [ngModelOptions]="{standalone: true}"
                                                                [value]="0"
-                                                               max="{{peopleNumber}}" min="0" ngModel
+                                                               max="{{peopleNumber}}" min="0" ngModel="0"
                                                                type="number">
                                                         &nbsp; {{equipment.name}}
                                                         - {{equipment.price}} €
@@ -72,40 +72,19 @@
                                             <div class="card" style="margin:50px 0">
 
                                                 <!-- Default panel contents -->
-                                                <!--todo: si switch = true: afficher le prix-->
                                                 <div class="card-header">Services en option</div>
 
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">
-                                                        Courrier <span *ngIf="!display"> - 5,00 €</span>
+                                                    <li *ngFor="let serviceType of space.building.serviceTypes"
+                                                        class="list-group-item">
+                                                        {{serviceType.name}} <span> - {{serviceType.price}} €</span>
                                                         <label class="switch">
-                                                            <input (click)="display = !display" class="default"
+                                                            <input (click)="updateServiceOrder(serviceType)"
+                                                                   class="default"
                                                                    type="checkbox">
                                                             <span class="slider round"></span>
                                                         </label>
                                                     </li>
-                                                    <li class="list-group-item">
-                                                        Café - 0,00 €
-                                                        <label class="switch">
-                                                            <input class="primary" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        Scanner - 0,00 €
-                                                        <label class="switch ">
-                                                            <input class="success" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        Photocopieuse - 0,00 €
-                                                        <label class="switch ">
-                                                            <input class="info" type="checkbox">
-                                                            <span class="slider round"></span>
-                                                        </label>
-                                                    </li>
-
                                                 </ul>
                                             </div>
                                             <!--todo: total: champ calculé-->
