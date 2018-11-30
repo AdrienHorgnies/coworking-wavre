@@ -4,6 +4,7 @@ import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
+import { EquipmentTypeModel } from "../models/equipmentType.model";
 
 
 @Component({
@@ -16,9 +17,8 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
     startDate: Date = moment().startOf('day').toDate();
     endDate: Date = moment().add(7, 'days').toDate();
     peopleNumber: number = 1;
+    equiments = {};
 
-    equipementNumber: number = 1;
-    equipementNumberUpdate: number = 1;
     display: boolean = true;
 
     space: SpaceModel;
@@ -26,6 +26,18 @@ export class ReservationFormComponent implements OnInit, OnDestroy {
 
     constructor(private spaceService: SpaceService, private route: ActivatedRoute) {
         moment.locale("fr");
+    }
+
+    updateEquipmentOrder(equipmentType: EquipmentTypeModel, quantity: number) {
+        if (quantity === 0 && this.equiments[equipmentType.name]) {
+            delete this.equiments[equipmentType.name];
+        } else if (quantity > 0) {
+            this.equiments[equipmentType.name] = {
+                quantity,
+                equipmentType
+            };
+        }
+        console.log(this.equiments);
     }
 
     // kudo to https://gist.github.com/icemilo/a0b98a1508aab82853eb

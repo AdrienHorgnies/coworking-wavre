@@ -39,7 +39,7 @@
                                 </div>
 
                                 <br><span class="form-label"
-                                          style="color: darkblue;">Location de l'espace : {{space.price * peopleNumber * calculateBusinessDays(startDate, endDate)}}
+                                          style="color: darkblue;">Prix par jour : {{space.price}}
                                 €</span>
                                 <br><span class="form-label">{{calculateBusinessDays(startDate, endDate)}} jours ouvrables</span>
 
@@ -48,23 +48,23 @@
                                         <div class="col-md-6">
                                             <div class="card" style="margin:50px 0">
 
-                                                <!-- Ne peut pas dépasser la valeur de l'input: nombre de personnes-->
-                                                <!--todo: Le prix est affiché si valeur > 0 : Le champ est calculé en fct du nombre sélectionné dans l'input-->
-
-                                                <div class="card-header">Equipement en option</div>
+                                                <div class="card-header">Equipements en option</div>
 
                                                 <ul class="list-group list-group-flush">
-                                                    <div *ngFor="let equipment of space.equipmentTypes">
-                                                        <li class="list-group-item">
-                                                            <input [(ngModel)]="equipementNumberUpdate"
-                                                                   [ngModelOptions]="{standalone: true}"
-                                                                   max="{{equipementNumber}}" min="0" type="number"
-                                                                   value="{{equipementNumberUpdate}}">
-                                                            &nbsp; {{equipment.name}}
-                                                            - {{equipment.price * equipementNumberUpdate}} €
+                                                    <li *ngFor="let equipment of space.equipmentTypes"
+                                                        class="list-group-item">
+                                                        <input (ngModelChange)="updateEquipmentOrder(equipment, $event)"
+                                                               [ngModelOptions]="{standalone: true}"
+                                                               [value]="0"
+                                                               max="{{peopleNumber}}" min="0" ngModel
+                                                               type="number">
+                                                        &nbsp; {{equipment.name}}
+                                                        - {{equipment.price}} €
 
-                                                        </li>
-                                                    </div>
+                                                    </li>
+                                                    <li *ngIf="space.equipmentTypes.length === 0">
+                                                        Pas d'équipement disponible pour cet espace.
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
