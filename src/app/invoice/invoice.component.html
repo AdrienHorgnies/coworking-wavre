@@ -1,5 +1,4 @@
-<div>
-
+<div *ngIf="reservation">
     <head>
         <meta charset="UTF-8"/>
         <title>CoWorking Wavre</title>
@@ -11,22 +10,22 @@
 
             <header>
                 <h1>FACTURE
-                    <h2>CoWorking Wavre − Réservation salle</h2>
+                    <h2>CoWorking Wavre − Location d'un espace de travail partagé</h2>
                 </h1>
             </header>
             <section class="flex">
                 <dl>
-                    <dt>Facture #</dt>
-                    <dd>1</dd>
+                    <dt>Facture</dt>
+                    <dd>{{reservation.id}}</dd>
                     <dt>Date de facturation</dt>
-                    <dd>29.11.2018</dd>
+                    <dd>{{displayDate(reservation.orderDate)}}</dd>
                 </dl>
             </section>
             <section class="flex">
                 <dl class="bloc">
                     <dt>Facturé à:</dt>
                     <dd>
-                        Phirum Chan<br>
+                        {{reservation.user.firstName}} {{reservation.user.lastName}}<br>
                         Rue Ernest Cosse 1<br>
                         1490 Court-Saint-Etienne, Belgique
                         <dl>

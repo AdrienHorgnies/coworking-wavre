@@ -5,7 +5,6 @@ import com.ifosup.coworking.domain.Reservation;
 import com.ifosup.coworking.domain.User;
 import com.ifosup.coworking.dto.MakeReservationDto;
 import com.ifosup.coworking.repository.ReservationRepository;
-import com.ifosup.coworking.repository.UserRepository;
 import com.ifosup.coworking.service.ReservationService;
 import com.ifosup.coworking.service.UserService;
 import org.slf4j.Logger;
@@ -32,13 +31,11 @@ public class ReservationResource {
 
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
-    private final UserRepository userRepository;
     private final UserService userService;
 
-    public ReservationResource(ReservationService reservationService, ReservationRepository reservationRepository, UserRepository userRepository, UserService userService) {
+    public ReservationResource(ReservationService reservationService, ReservationRepository reservationRepository, UserService userService) {
         this.reservationService = reservationService;
         this.reservationRepository = reservationRepository;
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
