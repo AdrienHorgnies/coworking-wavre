@@ -63,4 +63,4 @@ After the database has boot up, you can start the spring-boot application:
 
     mvn spring-boot:run
 
-[wiki]: https://github.com/AdrienHorgnies/coworking-wavres/wiki
+[wiki]: https://github.com/AdrienHorgnies/coworking-wavre/wiki
