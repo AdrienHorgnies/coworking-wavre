@@ -27,7 +27,7 @@ import static com.ifosup.coworking.security.AuthoritiesConstants.USER;
 public class ReservationResource {
 
     private static final String ENTITY_NAME = "serviceType";
-    private final Logger log = LoggerFactory.getLogger(ServiceTypeResource.class);
+    private final Logger log = LoggerFactory.getLogger(ReservationResource.class);
 
     private final ReservationService reservationService;
     private final ReservationRepository reservationRepository;
