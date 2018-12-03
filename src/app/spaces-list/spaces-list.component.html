@@ -1,20 +1,29 @@
 <!-- Recherche/Filtre -->
 
-<form action="">
-    <div class="form-group">
+<form action="" class="row">
+    <div class="form-group col-md-6">
+        <label for="space-type-filter">Type d'espace</label>
         <select (ngModelChange)="filters.type.value = $event; onFilterFormChanges()" [(ngModel)]="filters.type.value"
                 class="form-control"
                 id="space-type-filter" name="space-type">
-            <option disabled selected value="BUBBLE">Type d'espace:</option>
-            <option [value]="null">Tous</option>
             <option value="BUBBLE">Bubble</option>
             <option value="PRIVATE">Private</option>
             <option value="OPEN">Open</option>
         </select>
     </div>
 
+    <div class="form-group col-md-6">
+        <label for="zip-code-filter">Code postal</label>
+        <select (ngModelChange)="filters.zipCode.value = $event; onFilterFormChanges()"
+                [(ngModel)]="filters.zipCode.value"
+                class="form-control"
+                id="zip-code-filter" name="space-type">
+            <option *ngFor="let zipCode of zipCodes" [value]="zipCode">{{zipCode}}</option>
+        </select>
+    </div>
+
     <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
-                [(value)]="filters.priceMin.value" [options]="options"></ng5-slider>
+                [(value)]="filters.priceMin.value" [options]="options" class="col-md-6"></ng5-slider>
 </form>
 
 

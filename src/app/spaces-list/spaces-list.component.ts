@@ -5,6 +5,7 @@ import { SpaceModel } from "../models/space.model";
 import { ImageService } from "../image.service";
 import { LabelType, Options } from "ng5-slider";
 import { debounceTime, filter, switchMap } from 'rxjs/operators';
+import { CityService } from "../city.service";
 
 @Component({
     selector: 'cow-spaces-list',
@@ -14,9 +15,7 @@ import { debounceTime, filter, switchMap } from 'rxjs/operators';
 export class SpacesListComponent implements OnInit, OnDestroy {
 
     spaces: Array<SpaceModel>;
-    spacesSubscription: Subscription;
 
-    searchSubscription: Subscription;
     subscriptions: Array<Subscription> = new Array<Subscription>();
 
     $queryEmitter = new EventEmitter<string>();
@@ -32,6 +31,10 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         },
         type: {
             key: 'type.equals',
+            value: null
+        },
+        zipCode: {
+            key: "building.city.zipCode.equals",
             value: null
         }
     };
@@ -52,7 +55,9 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         }
     };
 
-    constructor(private spaceService: SpaceService, public imageService: ImageService) {
+    zipCodes: Array<number> = new Array<number>();
+
+    constructor(private spaceService: SpaceService, public imageService: ImageService, public cityService: CityService) {
         // hack to correctly update slider options as Angular doesn't see the difference unless it's a different object
         setTimeout(() => {
             this.options = Object.assign({}, this.options);
@@ -82,6 +87,7 @@ export class SpacesListComponent implements OnInit, OnDestroy {
             this.filters.priceMax.value = value;
             this.options.ceil = value;
         }));
+        this.subscriptions.push(this.cityService.zipCodesWithSpaces().subscribe(value => this.zipCodes = value));
         this.subscriptions.push(this.$queryEmitter.pipe(
             filter(query => query.length > 0),
             debounceTime(400),
