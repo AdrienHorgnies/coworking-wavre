@@ -6,6 +6,7 @@
         <select (ngModelChange)="filters.type.value = $event; onFilterFormChanges()" [(ngModel)]="filters.type.value"
                 class="form-control"
                 id="space-type-filter" name="space-type">
+            <option [value]="null" selected>Tous</option>
             <option value="BUBBLE">Bubble</option>
             <option value="PRIVATE">Private</option>
             <option value="OPEN">Open</option>
@@ -18,6 +19,7 @@
                 [(ngModel)]="filters.zipCode.value"
                 class="form-control"
                 id="zip-code-filter" name="space-type">
+            <option [value]="null" selected>Tous</option>
             <option *ngFor="let zipCode of zipCodes" [value]="zipCode">{{zipCode}}</option>
         </select>
     </div>
