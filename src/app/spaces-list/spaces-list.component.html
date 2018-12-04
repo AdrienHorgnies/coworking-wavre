@@ -25,7 +25,12 @@
     </div>
 
     <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
-                [(value)]="filters.priceMin.value" [options]="options" class="col-md-6"></ng5-slider>
+                [(value)]="filters.priceMin.value" [options]="{
+        floor: minPrice | async,
+        ceil: maxPrice | async,
+        step: 10,
+        translate: sliderText
+    }" class="col-md-6"></ng5-slider>
 </form>
 
 

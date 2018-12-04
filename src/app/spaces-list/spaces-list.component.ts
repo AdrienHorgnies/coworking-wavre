@@ -3,9 +3,10 @@ import { Observable, Subscription } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ImageService } from "../image.service";
-import { LabelType, Options } from "ng5-slider";
-import { debounceTime, filter, switchMap } from 'rxjs/operators';
+import { LabelType } from "ng5-slider";
+import { debounceTime, filter, switchMap, tap } from 'rxjs/operators';
 import { CityService } from "../city.service";
+import { startWith } from 'rxjs/internal/operators/startWith';
 
 @Component({
     selector: 'cow-spaces-list',
@@ -39,29 +40,11 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         }
     };
 
-    options: Options = {
-        floor: 0,
-        ceil: 2000,
-        step: 10,
-        translate: (value: number, label: LabelType): string => {
-            switch (label) {
-                case LabelType.Low:
-                    return '<b>Min price:</b> ' + value + ' €';
-                case LabelType.High:
-                    return '<b>Max price:</b> ' + value + ' €';
-                default:
-                    return value + ' €';
-            }
-        }
-    };
-
     zipCodes: Observable<Array<number>>;
+    minPrice: Observable<number>;
+    maxPrice: Observable<number>;
 
     constructor(private spaceService: SpaceService, public imageService: ImageService, public cityService: CityService) {
-        // hack to correctly update slider options as Angular doesn't see the difference unless it's a different object
-        setTimeout(() => {
-            this.options = Object.assign({}, this.options);
-        }, 500);
     }
 
     buildQuery(): string {
@@ -77,16 +60,27 @@ export class SpacesListComponent implements OnInit, OnDestroy {
         this.$queryEmitter.emit(this.buildQuery());
     }
 
+    sliderText(value: number, label: LabelType): string {
+        switch (label) {
+            case LabelType.Low:
+                return '<b>Min price:</b> ' + value + ' €';
+            case LabelType.High:
+                return '<b>Max price:</b> ' + value + ' €';
+            default:
+                return value + ' €';
+        }
+    }
+
     ngOnInit() {
         this.subscriptions.push(this.spaceService.list().subscribe(spaces => this.spaces = spaces));
-        this.subscriptions.push(this.spaceService.minPrice().subscribe(value => {
-            this.filters.priceMin.value = value;
-            this.options.floor = value;
-        }));
-        this.subscriptions.push(this.spaceService.maxPrice().subscribe(value => {
-            this.filters.priceMax.value = value;
-            this.options.ceil = value;
-        }));
+        this.minPrice = this.spaceService.minPrice().pipe(
+            tap(value => this.filters.priceMin.value = value),
+            startWith(20)
+        );
+        this.maxPrice = this.spaceService.maxPrice().pipe(
+            tap(value => this.filters.priceMax.value = value),
+            startWith(2900)
+        );
         this.zipCodes = this.cityService.zipCodesWithSpaces();
         this.subscriptions.push(this.$queryEmitter.pipe(
             filter(query => query.length > 0),
