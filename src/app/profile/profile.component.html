@@ -42,38 +42,33 @@
                     </tab>
 
                     <tab tabTitle="Facturation">
-                        <div *ngIf="reservations" class="tab-content">
-                            <div class="tab-pane active" id="home">
-                                <div *ngIf="reservations.length > 0" class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>Prise</th>
-                                            <th>Début</th>
-                                            <th>Fin</th>
-                                            <th>Pers.</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="items">
-                                        <tr *ngFor="let reservation of reservations"
-                                            routerLink="/reservations/{{reservation.id}}/invoice">
-                                            <td>{{displayDate(reservation.orderDate)}}</td>
-                                            <td>{{displayDate(reservation.startDate)}}</td>
-                                            <td>{{displayDate(reservation.endDate)}}</td>
-                                            <td>{{reservation.peopleNumber}}</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <hr>
-                                    <div class="row">
-                                        <div class="col-md-4 col-md-offset-4 text-center">
-                                            <ul class="pagination" id="myPager"></ul>
-                                        </div>
-                                    </div>
-                                </div><!--/table-resp-->
-                                <p *ngIf="reservations.length === 0">Vous n'avez pas encore effectué de réservation</p>
-                            </div><!--/tab-pane-->
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Prise</th>
+                                    <th>Début</th>
+                                    <th>Fin</th>
+                                    <th>Pers.</th>
+                                    <th>Détail</th>
+                                </tr>
+                                </thead>
+                                <tbody id="items">
+                                <tr *ngFor="let reservation of reservations"
+                                    routerLink="/reservations/{{reservation.id}}/invoice">
+                                    <td>{{displayDate(reservation.orderDate)}}</td>
+                                    <td>{{displayDate(reservation.startDate)}}</td>
+                                    <td>{{displayDate(reservation.endDate)}}</td>
+                                    <td>{{reservation.peopleNumber}}</td>
+                                    <td>
+                                        <button class="btn btn-primary">Consulter</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
+                        <hr>
+                        <p *ngIf="reservations?.length == 0">Vous n'avez pas encore effectué de réservation</p>
                     </tab>
                 </tabs>
             </div>
