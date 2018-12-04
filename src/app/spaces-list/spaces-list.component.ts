@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { concat, Observable } from 'rxjs';
 import { SpaceService } from "../space.service";
 import { SpaceModel } from "../models/space.model";
 import { ImageService } from "../image.service";
@@ -13,11 +13,9 @@ import { startWith } from 'rxjs/internal/operators/startWith';
     templateUrl: './spaces-list.component.html',
     styleUrls: ['./spaces-list.component.css']
 })
-export class SpacesListComponent implements OnInit, OnDestroy {
+export class SpacesListComponent implements OnInit {
 
-    spaces: Array<SpaceModel>;
-
-    subscriptions: Array<Subscription> = new Array<Subscription>();
+    spaces: Observable<Array<SpaceModel>>;
 
     $queryEmitter = new EventEmitter<string>();
 
@@ -72,7 +70,14 @@ export class SpacesListComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.subscriptions.push(this.spaceService.list().subscribe(spaces => this.spaces = spaces));
+        const search = this.$queryEmitter.pipe(
+            filter(query => query.length > 0),
+            debounceTime(400),
+            switchMap(query => this.spaceService.search(query))
+        );
+        this.spaces = concat(this.spaceService.list(),
+            search);
+
         this.minPrice = this.spaceService.minPrice().pipe(
             tap(value => this.filters.priceMin.value = value),
             startWith(20)
@@ -82,18 +87,5 @@ export class SpacesListComponent implements OnInit, OnDestroy {
             startWith(2900)
         );
         this.zipCodes = this.cityService.zipCodesWithSpaces();
-        this.subscriptions.push(this.$queryEmitter.pipe(
-            filter(query => query.length > 0),
-            debounceTime(400),
-            switchMap(query => this.spaceService.search(query))
-        ).subscribe(
-            spaces => this.spaces = spaces
-        ));
-    }
-
-    ngOnDestroy() {
-        this.subscriptions.forEach(sub => {
-            sub.unsubscribe();
-        });
     }
 }
