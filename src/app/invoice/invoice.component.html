@@ -2,16 +2,14 @@
     <head>
         <meta charset="UTF-8"/>
         <title>CoWorking Wavre</title>
-        <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet"
-              type="text/css"/>
     </head>
     <body>
     <div>
-        <kendo-pdf-export #pdf paperSize="A4" margin="2cm">
+        <kendo-pdf-export #pdf [margin]="{top: 27, bottom: 50, right: 27, left: 27}" paperSize="A4">
 
             <header>
                 <h1>FACTURE
-                    <h2>CoWorking Wavre − Location d'un espace de travail partagé</h2>
+                    <h2>CoWorking Wavre</h2>
                 </h1>
             </header>
             <section class="flex">
