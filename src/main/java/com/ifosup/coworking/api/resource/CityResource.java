@@ -115,6 +115,7 @@ public class CityResource {
      */
     @GetMapping("/cities/zip-codes-with-spaces")
     public ResponseEntity<List<Integer>> getActiveZipCodes() {
+        log.debug("REST request to get zip codes linked to at least one space");
         return ResponseEntity.ok(cityRepository.findZipCodesWithSpaces());
     }
 }

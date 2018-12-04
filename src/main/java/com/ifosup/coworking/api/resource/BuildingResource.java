@@ -106,4 +106,15 @@ public class BuildingResource {
         buildingRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET /buildings/with-spaces : get buildings which are linked to at least one Space
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the list of found buildings
+     */
+    @GetMapping("with-spaces")
+    public ResponseEntity<List<Building>> getBuildingsWithSpaces() {
+        log.debug("REST request to get buildings linked to at least one space");
+        return ResponseEntity.ok(buildingRepository.findWithSpaces());
+    }
 }
