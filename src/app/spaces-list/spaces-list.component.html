@@ -73,8 +73,8 @@
         </div>
 
     </div>
-    <!--<p class="col-md-12" *ngIf="spaces && spaces.length === 0"><strong>Aucun bureau ne correspond à votre-->
-    <!--recherche.</strong></p>-->
+    <p class="col-md-12" *ngIf="(spaces | async)?.length == 0"><strong>Aucun bureau ne correspond à votre
+        recherche.</strong></p>
     <go-top-button [animate]="true"
                    [speed]="50"
                    [acceleration]="2">
