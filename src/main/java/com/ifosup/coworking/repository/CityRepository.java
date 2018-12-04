@@ -2,7 +2,10 @@ package com.ifosup.coworking.repository;
 
 import com.ifosup.coworking.domain.City;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -12,4 +15,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
 
+    @Query("select distinct city.zipCode from City city join city.buildings building join building.spaces space")
+    List<Integer> findZipCodesWithSpaces();
 }

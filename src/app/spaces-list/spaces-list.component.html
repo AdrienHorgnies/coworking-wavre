@@ -1,26 +1,44 @@
 <!-- Recherche/Filtre -->
 
-<form action="">
-    <div class="form-group">
+<form action="" class="row">
+    <div class="form-group col-md-3">
+        <label for="space-type-filter">Type d'espace</label>
         <select (ngModelChange)="filters.type.value = $event; onFilterFormChanges()" [(ngModel)]="filters.type.value"
                 class="form-control"
                 id="space-type-filter" name="space-type">
-            <option disabled selected value="BUBBLE">Type d'espace:</option>
-            <option [value]="null">Tous</option>
+            <option [value]="null" selected>Tous</option>
             <option value="BUBBLE">Bubble</option>
             <option value="PRIVATE">Private</option>
             <option value="OPEN">Open</option>
         </select>
     </div>
 
-    <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
-                [(value)]="filters.priceMin.value" [options]="options"></ng5-slider>
+    <div class="form-group col-md-3">
+        <label for="zip-code-filter">Code postal</label>
+        <select (ngModelChange)="filters.zipCode.value = $event; onFilterFormChanges()"
+                [(ngModel)]="filters.zipCode.value"
+                class="form-control"
+                id="zip-code-filter" name="space-type">
+            <option [value]="null" selected>Tous</option>
+            <option *ngFor="let zipCode of zipCodes | async" [value]="zipCode">{{zipCode}}</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-6">
+        <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
+                    [(value)]="filters.priceMin.value" [options]="{
+        floor: minPrice | async,
+        ceil: maxPrice | async,
+        step: 10,
+        translate: sliderText
+    }"></ng5-slider>
+    </div>
 </form>
 
 
 <!-- Liste des espaces de coworking -->
 <div class="row">
-    <div *ngFor="let space of spaces" routerLink='/spaces/{{space.id}}' class="col-md-4">
+    <div *ngFor="let space of spaces | async" routerLink='/spaces/{{space.id}}' class="col-md-4">
         <div style="margin-top: 70px;" id="ads">
 
             <!-- CAffiche le prix de base -->
@@ -57,7 +75,7 @@
         </div>
 
     </div>
-    <p class="col-md-12" *ngIf="spaces && spaces.length === 0"><strong>Aucun bureau ne correspond à votre
+    <p class="col-md-12" *ngIf="(spaces | async)?.length == 0"><strong>Aucun bureau ne correspond à votre
         recherche.</strong></p>
     <go-top-button [animate]="true"
                    [speed]="50"

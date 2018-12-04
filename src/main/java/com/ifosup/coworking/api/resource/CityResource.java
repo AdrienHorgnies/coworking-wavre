@@ -106,4 +106,15 @@ public class CityResource {
         cityRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    /**
+     * GET /cities/zip-codes-with-spaces
+     *
+     * @return the ResponseEntity with status 200 (OK) and body a list of zipCode owned by cities linked to spaces
+     */
+    @GetMapping("/cities/zip-codes-with-spaces")
+    public ResponseEntity<List<Integer>> getActiveZipCodes() {
+        return ResponseEntity.ok(cityRepository.findZipCodesWithSpaces());
+    }
 }
