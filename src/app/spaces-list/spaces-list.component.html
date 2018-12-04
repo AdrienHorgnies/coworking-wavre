@@ -20,7 +20,7 @@
                 class="form-control"
                 id="zip-code-filter" name="space-type">
             <option [value]="null" selected>Tous</option>
-            <option *ngFor="let zipCode of zipCodes" [value]="zipCode">{{zipCode}}</option>
+            <option *ngFor="let zipCode of zipCodes | async" [value]="zipCode">{{zipCode}}</option>
         </select>
     </div>
 
