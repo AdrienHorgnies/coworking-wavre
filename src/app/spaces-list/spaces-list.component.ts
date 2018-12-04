@@ -7,6 +7,8 @@ import { LabelType } from "ng5-slider";
 import { debounceTime, filter, switchMap, tap } from 'rxjs/operators';
 import { CityService } from "../city.service";
 import { startWith } from 'rxjs/internal/operators/startWith';
+import { BuildingModel } from "../models/building.model";
+import { BuildingService } from "../building.service";
 
 @Component({
     selector: 'cow-spaces-list',
@@ -35,14 +37,19 @@ export class SpacesListComponent implements OnInit {
         zipCode: {
             key: "building.city.zipCode.equals",
             value: null
+        },
+        building: {
+            key: "building.id.equals",
+            value: null
         }
     };
 
     zipCodes: Observable<Array<number>>;
     minPrice: Observable<number>;
     maxPrice: Observable<number>;
+    buildings: Observable<Array<BuildingModel>>;
 
-    constructor(private spaceService: SpaceService, public imageService: ImageService, public cityService: CityService) {
+    constructor(private spaceService: SpaceService, public imageService: ImageService, public cityService: CityService, private buildingService: BuildingService) {
     }
 
     buildQuery(): string {
@@ -87,5 +94,6 @@ export class SpacesListComponent implements OnInit {
             startWith(2900)
         );
         this.zipCodes = this.cityService.zipCodesWithSpaces();
+        this.buildings = this.buildingService.buildingsWithSpaces();
     }
 }
