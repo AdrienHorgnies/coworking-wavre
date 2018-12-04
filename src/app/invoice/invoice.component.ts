@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReservationModel } from "../models/reservation.model";
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { InvoiceService } from "../invoice.service";
     templateUrl: './invoice.component.html',
     styleUrls: ['./invoice.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceComponent implements OnInit, OnDestroy {
 
     reservation: ReservationModel;
     reservationSubscription: Subscription;
@@ -28,4 +28,9 @@ export class InvoiceComponent implements OnInit {
         this.reservationSubscription = this.reservationService.get(+this.route.snapshot.paramMap.get('id')).subscribe(reservation => this.reservation = reservation);
     }
 
+    ngOnDestroy() {
+        if (this.reservationSubscription) {
+            this.reservationSubscription.unsubscribe();
+        }
+    }
 }
