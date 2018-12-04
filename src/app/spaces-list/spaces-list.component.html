@@ -25,6 +25,18 @@
     </div>
 
     <div class="form-group col-md-6">
+        <label for="building-filter">Building</label>
+        <select (ngModelChange)="filters.building.value = $event; onFilterFormChanges()"
+                [(ngModel)]="filters.building.value"
+                class="form-control"
+                id="building-filter" name="space-type">
+            <option [value]="null" selected>Tous</option>
+            <option *ngFor="let building of buildings | async" [value]="building.id">{{building.name}}
+                - {{building.city.name}} {{building.city.zipCode}}, {{building.address}}</option>
+        </select>
+    </div>
+
+    <div class="form-group col-md-6">
         <ng5-slider (userChange)="onFilterFormChanges()" [(highValue)]="filters.priceMax.value"
                     [(value)]="filters.priceMin.value" [options]="{
         floor: minPrice | async,
