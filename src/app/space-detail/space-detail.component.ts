@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SpaceService } from "../space.service";
-import { SpaceModel } from "../models/space.model";
+import { SpaceService } from '../space.service';
+import { SpaceModel } from '../models/space.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from "../user.service";
-import { ImageService } from "../image.service";
+import { UserService } from '../user.service';
+import { ImageService } from '../image.service';
 
 @Component({
     selector: 'cow-space-detail',
@@ -23,8 +23,8 @@ export class SpaceDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.spaceSubscription = this.spaceService.get(+this.route.snapshot.paramMap.get('id')).subscribe(space => this.space = space);
-        this.isUserLoggedInSubscription = this.userService.$isUserLoggedIn.subscribe(isUserLoggedIn => this.isUserLoggedIn = isUserLoggedIn);
+        this.spaceSubscription = this.spaceService.get(+this.route.snapshot.paramMap.get('id')).subscribe(space => this.space = <SpaceModel>space);
+this.isUserLoggedInSubscription = this.userService.$isUserLoggedIn.subscribe(isUserLoggedIn => this.isUserLoggedIn = isUserLoggedIn);
     }
 
     ngOnDestroy() {
