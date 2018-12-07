@@ -15,6 +15,6 @@ pma:
     links:
     - mysql-coworking
     ports:
-    - 80:80
+        - 81:80
     environment:
         PMA_HOST: mysql-coworking
